@@ -1,0 +1,6 @@
+{
+  "name": "textly",
+  "description": "A secure personal text editor with a customizable tab interface and file metadata vault helper powered by Firestore.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

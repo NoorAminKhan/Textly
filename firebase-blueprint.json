@@ -1,0 +1,146 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User credential profiles",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "passwordHash": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["username", "passwordHash", "createdAt"]
+    },
+    "Tab": {
+      "title": "Note Tab",
+      "description": "A tabbed note document item",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["title", "content"]
+    },
+    "File": {
+      "title": "Vault File",
+      "description": "An indexed vault resource item",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "size": { "type": "number" },
+        "base64": { "type": "string" },
+        "externalLink": { "type": "string" },
+        "notes": { "type": "string" },
+        "category": { "type": "string" },
+        "priority": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "type", "size", "createdAt"]
+    },
+    "FileChunk": {
+      "title": "File Base64 Chunk",
+      "description": "Base64 data segment for large files",
+      "type": "object",
+      "properties": {
+        "index": { "type": "number" },
+        "data": { "type": "string" }
+      },
+      "required": ["index", "data"]
+    },
+    "Task": {
+      "title": "Productivity Task",
+      "description": "Tasks within the productivity hub",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"] },
+        "status": { "type": "string", "enum": ["Pending", "In Progress", "Completed", "Archived"] },
+        "dueDate": { "type": "string" },
+        "reminder": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "linkedTabId": { "type": "string" },
+        "linkedFileId": { "type": "string" },
+        "linkedProjectId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "priority", "status", "createdAt", "updatedAt"]
+    },
+    "Project": {
+      "title": "Productivity Project",
+      "description": "Projects managed inside the productivity hub",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"] },
+        "status": { "type": "string", "enum": ["Pending", "In Progress", "Completed", "Archived"] },
+        "deadline": { "type": "string" },
+        "linkedTabs": { "type": "array", "items": { "type": "string" } },
+        "linkedFiles": { "type": "array", "items": { "type": "string" } },
+        "linkedTasks": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "priority", "status", "createdAt"]
+    },
+    "Goal": {
+      "title": "Goal Target",
+      "description": "Short-term or long-term goals tracker items",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["Daily", "Weekly", "Monthly", "Yearly"] },
+        "status": { "type": "string", "enum": ["In Progress", "Completed"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": { "type": "string" },
+              "completed": { "type": "boolean" }
+            },
+            "required": ["text", "completed"]
+          }
+        }
+      },
+      "required": ["title", "type", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{username}": {
+      "schema": "User",
+      "description": "User credential profiles"
+    },
+    "/userData/{username}/tabs/{tabId}": {
+      "schema": "Tab",
+      "description": "User notes tab documents"
+    },
+    "/userData/{username}/files/{fileId}": {
+      "schema": "File",
+      "description": "User secure vault file records"
+    },
+    "/userData/{username}/files/{fileId}/chunks/{chunkId}": {
+      "schema": "FileChunk",
+      "description": "Subcollection holding base64 segments of large files"
+    },
+    "/userData/{username}/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Productivity hub individual task items"
+    },
+    "/userData/{username}/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Productivity hub individual projects"
+    },
+    "/userData/{username}/goals/{goalId}": {
+      "schema": "Goal",
+      "description": "Productivity hub individual goals"
+    }
+  }
+}

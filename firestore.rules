@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Test connection document
+    match /test/connection {
+      allow read: if true;
+    }
+
+    // User authentication registry
+    match /users/{username} {
+      allow read, write: if true;
+    }
+
+    // User structured contents
+    match /userData/{username}/tabs/{tabId} {
+      allow read, write: if true;
+    }
+
+    match /userData/{username}/files/{fileId} {
+      allow read, write: if true;
+
+      match /chunks/{chunkId} {
+        allow read, write: if true;
+      }
+    }
+
+    // New productivity components
+    match /userData/{username}/tasks/{taskId} {
+      allow read, write: if true;
+    }
+
+    match /userData/{username}/projects/{projectId} {
+      allow read, write: if true;
+    }
+
+    match /userData/{username}/goals/{goalId} {
+      allow read, write: if true;
+    }
+  }
+}
