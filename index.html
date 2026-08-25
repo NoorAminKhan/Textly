@@ -284,11 +284,11 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        font-family: var(--font-display);
-        font-weight: 700;
-        font-size: 19px;
+        font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', Georgia, serif;
+        font-weight: 800;
+        font-size: 30px;
         color: var(--accent-color);
-        margin-bottom: 30px;
+        margin-bottom: 28px;
         padding-bottom: 4px;
         flex-shrink: 0;
       }
@@ -1960,8 +1960,8 @@
         <!-- Left Sidebar Navigation menu -->
         <aside class="sidebar">
           <div>
-            <div class="sidebar-brand" style="display: flex; align-items: center; gap: 10px;">
-              <svg width="32" height="32" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
+            <div class="sidebar-brand" style="display: flex; align-items: center; gap: 12px; margin-bottom: 28px;">
+              <svg width="48" height="48" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2)); flex-shrink: 0;">
                 <defs>
                   <linearGradient id="bluePurpleGradientSmall" x1="120" y1="150" x2="380" y2="400" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stop-color="#2563eb" />
@@ -1979,7 +1979,7 @@
                 <line x1="274" y1="290" x2="314" y2="290" stroke="#2563eb" stroke-width="12" stroke-linecap="round" />
                 <path d="M 252 300 L 380 180 C 400 160, 420 180, 400 210 L 300 370 C 290 385, 275 360, 260 340 Z" fill="url(#innerFoldGradientSmall)" />
               </svg>
-              <span style="font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', Georgia, serif; font-weight: 800; font-size: 20px; display: flex; align-items: center; letter-spacing: -0.01em;">
+              <span style="font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', Georgia, serif; font-weight: 800; font-size: 30px; display: flex; align-items: center; letter-spacing: -0.01em;">
                 <span style="background: linear-gradient(135deg, #2563eb, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">T</span><span style="color: var(--text-primary); margin-left: 1px;">extly</span>
               </span>
             </div>
@@ -3989,7 +3989,6 @@
             content: val,
             updatedAt: new Date().toISOString()
           });
-          showToast("All changes synced safely", "success");
         }, 800);
       };
 
