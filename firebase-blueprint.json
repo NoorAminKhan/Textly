@@ -37,7 +37,11 @@
         "category": { "type": "string" },
         "priority": { "type": "string" },
         "tags": { "type": "array", "items": { "type": "string" } },
-        "createdAt": { "type": "string", "format": "date-time" }
+        "isFolder": { "type": "boolean" },
+        "parentId": { "type": "string" },
+        "shared": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
       },
       "required": ["name", "type", "size", "createdAt"]
     },

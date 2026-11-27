@@ -37,6 +37,32 @@
         --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
         --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         --sidebar-width: 250px;
+
+        /* File Vault Cloud Drive Theme Tokens (Dark) */
+        --vd-canvas: #0b0e14;
+        --vd-surface: #141923;
+        --vd-surface-hover: #1b2230;
+        --vd-card-bg: #161b26;
+        --vd-card-hover: #1d2433;
+        --vd-border: rgba(148, 163, 184, 0.14);
+        --vd-border-strong: rgba(148, 163, 184, 0.24);
+        --vd-btn-primary-bg: #f8fafc;
+        --vd-btn-primary-text: #0b0e14;
+        --vd-btn-primary-hover: #e2e8f0;
+        --vd-btn-sec-bg: #1c2230;
+        --vd-btn-sec-hover: #252d3f;
+        --vd-btn-sec-text: #f1f5f9;
+        --vd-search-bg: #11151f;
+        --vd-chip-bg: #1e2536;
+        --vd-select-accent: #e11d48;
+        --vd-select-tint: rgba(225, 29, 72, 0.16);
+        --vd-select-text: #fecdd3;
+        --vd-folder-main: #f5a600;
+        --vd-folder-light: #fbbf24;
+        --vd-drop-border: rgba(148, 163, 184, 0.22);
+        --vd-drop-bg: rgba(255, 255, 255, 0.015);
+        --vd-menu-bg: #161c28;
+        --vd-check-bg: rgba(15, 23, 42, 0.72);
       }
 
       [data-theme="light"] {
@@ -54,6 +80,32 @@
         --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
         --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05);
         --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05);
+
+        /* File Vault Cloud Drive Theme Tokens (Light) */
+        --vd-canvas: #f8fafc;
+        --vd-surface: #ffffff;
+        --vd-surface-hover: #f1f5f9;
+        --vd-card-bg: #ffffff;
+        --vd-card-hover: #f8fafc;
+        --vd-border: #e2e8f0;
+        --vd-border-strong: #cbd5e1;
+        --vd-btn-primary-bg: #0f172a;
+        --vd-btn-primary-text: #ffffff;
+        --vd-btn-primary-hover: #1e293b;
+        --vd-btn-sec-bg: #ffffff;
+        --vd-btn-sec-hover: #f1f5f9;
+        --vd-btn-sec-text: #0f172a;
+        --vd-search-bg: #ffffff;
+        --vd-chip-bg: #f1f5f9;
+        --vd-select-accent: #dc2626;
+        --vd-select-tint: rgba(220, 38, 38, 0.1);
+        --vd-select-text: #b91c1c;
+        --vd-folder-main: #f59e0b;
+        --vd-folder-light: #fbbf24;
+        --vd-drop-border: #cbd5e1;
+        --vd-drop-bg: #ffffff;
+        --vd-menu-bg: #ffffff;
+        --vd-check-bg: rgba(255, 255, 255, 0.92);
       }
 
       * {
@@ -739,115 +791,1036 @@
         box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
       }
 
-      /* File Vault Panel CSS */
+      /* File Vault Cloud Drive Redesign CSS */
       #section-vault {
         overflow: hidden !important;
         height: 100%;
         min-height: 0;
+        position: relative;
       }
-      .vault-header-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 14px;
-        margin-bottom: 4px;
-        flex-wrap: wrap;
-        gap: 12px;
-        padding-right: 115px; /* Prevent overlap with fixed global utility buttons */
-      }
-      @media (max-width: 768px) {
-        .vault-header-row {
-          padding-right: 0; /* Let it flow on mobile where content naturally stacks */
-        }
-      }
-      .vault-container {
+      .vd-shell {
         display: flex;
         flex-direction: column;
-        gap: 24px;
-        flex: 1;
         height: 100%;
-        max-height: 100%;
         min-height: 0;
+        gap: 16px;
+        position: relative;
+      }
+
+      /* Top Search Bar */
+      .vd-top-search-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-right: 112px; /* Reserve space for fixed top-right theme/reload controls */
+        flex-shrink: 0;
+      }
+      .vd-search-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+        max-width: 560px;
+        height: 44px;
+        padding: 0 14px;
+        background-color: var(--vd-search-bg);
+        border: 1px solid var(--vd-border-strong);
+        border-radius: 10px;
+        transition: border-color 0.16s ease, box-shadow 0.16s ease;
+      }
+      .vd-search-box:focus-within {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px var(--accent-light);
+      }
+      .vd-search-icon {
+        color: var(--text-muted);
+        width: 17px;
+        height: 17px;
+        flex-shrink: 0;
+      }
+      .vd-scope-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background-color: var(--vd-chip-bg);
+        color: var(--text-secondary);
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        flex-shrink: 0;
+        border: 1px solid var(--vd-border);
+      }
+      .vd-scope-chip button {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        padding: 0;
+        transition: color 0.15s ease;
+      }
+      .vd-scope-chip button:hover {
+        color: var(--text-primary);
+      }
+      .vd-search-input {
+        flex: 1;
+        min-width: 80px;
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        font-size: 14px;
+        font-weight: 400;
+      }
+      .vd-search-input::placeholder {
+        color: var(--text-muted);
+      }
+      .vd-search-clear {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        transition: background-color 0.15s ease, color 0.15s ease;
+      }
+      .vd-search-clear:hover {
+        background-color: var(--vd-surface-hover);
+        color: var(--text-primary);
+      }
+
+      /* Action Buttons Row (Upload, New folder, Share) */
+      .vd-actions-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+      }
+      .vd-btn-group {
+        position: relative;
+        display: inline-flex;
+        align-items: stretch;
+      }
+      .vd-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: 40px;
+        padding: 0 20px;
+        background-color: var(--vd-btn-primary-bg);
+        color: var(--vd-btn-primary-text);
+        border: 1px solid transparent;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: background-color 0.16s ease, transform 0.15s ease;
+      }
+      .vd-btn-primary:hover {
+        background-color: var(--vd-btn-primary-hover);
+      }
+      .vd-btn-primary:active {
+        transform: scale(0.985);
+      }
+      .vd-btn-primary-split-main {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-right: 14px;
+      }
+      .vd-btn-primary-split-caret {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 40px;
+        background-color: var(--vd-btn-primary-bg);
+        color: var(--vd-btn-primary-text);
+        border: none;
+        border-left: 1px solid rgba(128, 128, 128, 0.25);
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.16s ease;
+      }
+      .vd-btn-primary-split-caret:hover {
+        background-color: var(--vd-btn-primary-hover);
+      }
+
+      .vd-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: 40px;
+        padding: 0 18px;
+        background-color: var(--vd-btn-sec-bg);
+        color: var(--vd-btn-sec-text);
+        border: 1px solid var(--vd-border);
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.15s ease;
+      }
+      .vd-btn-secondary:hover {
+        background-color: var(--vd-btn-sec-hover);
+        border-color: var(--vd-border-strong);
+      }
+      .vd-btn-secondary:active {
+        transform: scale(0.985);
+      }
+
+      /* Dropdown Menu */
+      .vd-dropdown-menu {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        min-width: 204px;
+        background-color: var(--vd-menu-bg);
+        border: 1px solid var(--vd-border-strong);
+        border-radius: 10px;
+        padding: 6px;
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+        z-index: 2500;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .vd-dropdown-menu.align-right {
+        left: auto;
+        right: 0;
+      }
+      .vd-dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 9px 12px;
+        background: transparent;
+        border: none;
+        border-radius: 7px;
+        color: var(--text-primary);
+        font-size: 13px;
+        font-weight: 500;
+        text-align: left;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background-color 0.14s ease;
+      }
+      .vd-dropdown-item:hover {
+        background-color: var(--vd-surface-hover);
+      }
+      .vd-dropdown-item.danger {
+        color: #ef4444;
+      }
+      .vd-dropdown-item.danger:hover {
+        background-color: rgba(239, 68, 68, 0.12);
+      }
+      .vd-dropdown-divider {
+        height: 1px;
+        background-color: var(--vd-border);
+        margin: 4px 6px;
+      }
+
+      /* Breadcrumb Row */
+      .vd-breadcrumb-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 28px;
+        flex-shrink: 0;
+      }
+      .vd-breadcrumbs {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+        font-size: 15px;
+      }
+      .vd-crumb-btn {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 3px 6px;
+        margin: -3px -6px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: background-color 0.14s ease, color 0.14s ease;
+      }
+      .vd-crumb-btn:hover {
+        background-color: var(--vd-surface-hover);
+        color: var(--text-primary);
+      }
+      .vd-crumb-btn.active {
+        color: var(--text-primary);
+        font-weight: 700;
+      }
+      .vd-crumb-sep {
+        color: var(--text-muted);
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+      .vd-sync-meta {
+        font-size: 12px;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+
+      /* Contextual Selection & Controls Bar */
+      .vd-toolbar-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 36px;
+        flex-shrink: 0;
+        flex-wrap: wrap;
+      }
+      .vd-toolbar-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .vd-toolbar-right {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+      }
+      .vd-selection-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .vd-selection-summary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        height: 32px;
+        padding: 0 12px;
+        border-radius: 6px;
+        background-color: var(--vd-select-tint);
+        color: var(--vd-select-text);
+        font-size: 13px;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        border: 1px solid rgba(225, 29, 72, 0.28);
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+      }
+      .vd-selection-summary:hover {
+        background-color: rgba(225, 29, 72, 0.24);
+      }
+      .vd-toolbar-divider {
+        width: 1px;
+        height: 22px;
+        background-color: var(--vd-border-strong);
+        margin: 0 6px;
+      }
+      .vd-icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      }
+      .vd-icon-btn:hover {
+        background-color: var(--vd-surface-hover);
+        color: var(--text-primary);
+      }
+      .vd-icon-btn.active {
+        background-color: var(--vd-surface-hover);
+        color: var(--text-primary);
+        border-color: var(--vd-border-strong);
+      }
+      .vd-icon-btn.danger:hover {
+        background-color: rgba(239, 68, 68, 0.14);
+        color: #ef4444;
+      }
+      .vd-summary-text {
+        font-size: 13px;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Select-All & Sort Row */
+      .vd-sort-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 4px 2px 6px 2px;
+        border-bottom: 1px solid var(--vd-border);
+        flex-shrink: 0;
+        flex-wrap: wrap;
+      }
+      .vd-sort-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .vd-master-check {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        border: 1.5px solid var(--vd-border-strong);
+        background: transparent;
+        color: var(--vd-btn-primary-text);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.14s ease, border-color 0.14s ease;
+        flex-shrink: 0;
+      }
+      .vd-master-check:hover {
+        border-color: var(--text-primary);
+      }
+      .vd-master-check.checked,
+      .vd-master-check.indeterminate {
+        background-color: var(--vd-btn-primary-bg);
+        border-color: var(--vd-btn-primary-bg);
+        color: var(--vd-btn-primary-text);
+      }
+      .vd-sort-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 13px;
+        font-weight: 500;
+        padding: 4px 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.14s ease, color 0.14s ease;
+      }
+      .vd-sort-trigger:hover {
+        background-color: var(--vd-surface-hover);
+        color: var(--text-primary);
+      }
+      .vd-filter-tabs {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .vd-filter-tab {
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-size: 12.5px;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background-color 0.14s ease, color 0.14s ease;
+      }
+      .vd-filter-tab:hover {
+        color: var(--text-primary);
+        background-color: var(--vd-surface-hover);
+      }
+      .vd-filter-tab.active {
+        color: var(--text-primary);
+        background-color: var(--vd-chip-bg);
+        font-weight: 600;
+      }
+
+      /* Upload Progress Strip */
+      .vd-upload-progress {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        background-color: var(--vd-surface);
+        border: 1px solid var(--vd-border-strong);
+        font-size: 13px;
+        color: var(--text-primary);
+        flex-shrink: 0;
+      }
+      .vd-upload-bar-track {
+        flex: 1;
+        height: 6px;
+        border-radius: 3px;
+        background-color: var(--vd-chip-bg);
         overflow: hidden;
       }
-      .vault-scroll-area {
+      .vd-upload-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3b82f6, #6366f1);
+        width: 0%;
+        transition: width 0.2s ease;
+      }
+
+      /* Main Workspace Body (Grid/List + Details Inspector) */
+      .vd-body-split {
+        display: flex;
         flex: 1;
-        overflow-y: auto;
         min-height: 0;
-        padding-bottom: 40px;
+        gap: 20px;
+        overflow: hidden;
+        position: relative;
+      }
+      .vd-main-canvas {
+        flex: 1;
+        min-width: 0;
+        min-height: 0;
+        overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        padding: 4px 4px 28px 2px;
+        position: relative;
       }
-      .vault-top-grid {
+
+      /* Grid View (Screenshot 1 Inspired) */
+      .vd-grid {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+        gap: 20px;
+        align-content: start;
       }
-      @media(min-width: 768px) {
-        .vault-top-grid { grid-template-columns: 1.5fr 1fr; }
-      }
-      
-      /* Dropzone CSS */
-      .file-dropzone-panel {
-        background: var(--bg-secondary);
-        border: 2px dashed var(--border-color);
-        border-radius: 16px;
-        padding: 40px;
-        text-align: center;
+      .vd-card {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         cursor: pointer;
+        user-select: none;
+        position: relative;
+        transition: transform 0.16s ease;
+      }
+      .vd-card-stage {
+        position: relative;
+        aspect-ratio: 1 / 0.92;
+        border-radius: 8px;
+        background-color: var(--vd-card-bg);
+        border: 1px solid var(--vd-border);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+      }
+      .vd-card:hover .vd-card-stage {
+        background-color: var(--vd-card-hover);
+        border-color: var(--vd-border-strong);
+      }
+      .vd-card.selected .vd-card-stage {
+        border-color: var(--vd-select-accent);
+        box-shadow: 0 0 0 1px var(--vd-select-accent);
+      }
+      .vd-card.drag-target .vd-card-stage {
+        border-color: #f59e0b;
+        box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.35);
+        background-color: rgba(245, 158, 11, 0.08);
+      }
+      .vd-card-check {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        border: 1.5px solid var(--vd-border-strong);
+        background-color: var(--vd-check-bg);
+        color: var(--vd-btn-primary-text);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 4;
+        opacity: 0;
+        transition: opacity 0.14s ease, background-color 0.14s ease, border-color 0.14s ease;
+      }
+      .vd-card:hover .vd-card-check,
+      .vd-card.selected .vd-card-check,
+      .vd-grid.has-selection .vd-card-check {
+        opacity: 1;
+      }
+      .vd-card.selected .vd-card-check {
+        background-color: var(--vd-btn-primary-bg);
+        border-color: var(--vd-btn-primary-bg);
+        color: var(--vd-btn-primary-text);
+      }
+      .vd-card-share-indicator {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 26px;
+        height: 24px;
+        border-radius: 5px;
+        background-color: rgba(15, 23, 42, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: #e2e8f0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+      }
+      .vd-card-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .vd-card-file-graphic {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 10px;
+        padding: 16px;
+      }
+      .vd-file-ext-tag {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+      }
+      .vd-folder-count-hint {
+        position: absolute;
+        bottom: 8px;
+        right: 10px;
+        font-size: 11px;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+      }
+      .vd-card:hover .vd-folder-count-hint {
+        opacity: 1;
+      }
+      .vd-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        padding: 0 2px;
+      }
+      .vd-card-name-wrap {
+        min-width: 0;
+        flex: 1;
+      }
+      .vd-card-name {
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.3;
+      }
+      .vd-card-sub {
+        font-size: 11.5px;
+        color: var(--text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-variant-numeric: tabular-nums;
+        margin-top: 2px;
+      }
+      .vd-card-more {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background-color 0.14s ease, color 0.14s ease;
+      }
+      .vd-card-more:hover {
+        background-color: var(--vd-surface-hover);
+        color: var(--text-primary);
+      }
+
+      /* List View Table */
+      .vd-list-wrap {
+        width: 100%;
+        border: 1px solid var(--vd-border);
+        border-radius: 10px;
+        background-color: var(--vd-surface);
+        overflow: hidden;
+      }
+      .vd-list-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13.5px;
+      }
+      .vd-list-table th {
+        text-align: left;
+        padding: 10px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--vd-border);
+        background-color: var(--vd-card-bg);
+        white-space: nowrap;
+      }
+      .vd-list-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--vd-border);
+        color: var(--text-primary);
+        vertical-align: middle;
+        height: 46px;
+      }
+      .vd-list-table tbody tr {
+        cursor: pointer;
+        transition: background-color 0.12s ease;
+      }
+      .vd-list-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+      .vd-list-table tbody tr:hover {
+        background-color: var(--vd-surface-hover);
+      }
+      .vd-list-table tbody tr.selected {
+        background-color: var(--vd-select-tint);
+      }
+      .vd-list-name-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+      .vd-list-name-text {
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 340px;
+      }
+      .vd-num-col {
+        font-variant-numeric: tabular-nums;
+        color: var(--text-secondary);
+        white-space: nowrap;
+      }
+
+      /* Empty Folder Dropzone (Screenshot 2 Inspired) */
+      .vd-empty-dropzone {
+        flex: 1;
+        min-height: 390px;
+        border: 1.5px dashed var(--vd-drop-border);
+        border-radius: 14px;
+        background-color: var(--vd-drop-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px 24px;
         gap: 14px;
-        transition: var(--transition);
-        position: relative;
-        box-shadow: var(--shadow-sm);
+        transition: border-color 0.18s ease, background-color 0.18s ease;
       }
-      .file-dropzone-panel:hover {
-        border-color: var(--accent-color);
-        background-color: rgba(99, 102, 241, 0.02);
-      }
-      .file-dropzone-panel.dragover {
+      .vd-empty-dropzone.dragover {
         border-color: var(--accent-color);
         background-color: var(--accent-light);
       }
-      .file-dropzone-panel i {
-        color: var(--accent-color);
-        transition: var(--transition);
-      }
-      .file-dropzone-panel:hover i {
-        transform: translateY(-4px);
-      }
-      .dropzone-text h3 {
-        font-size: 16px;
-        margin-bottom: 6px;
+      .vd-empty-title {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 700;
         color: var(--text-primary);
-        font-weight: 600;
+        margin-top: 6px;
+        text-wrap: balance;
       }
-      .dropzone-text p {
-        font-size: 13px;
+      .vd-empty-desc {
+        font-size: 13.5px;
         color: var(--text-secondary);
+        max-width: 420px;
+        line-height: 1.5;
       }
 
-      /* File Details Form Component */
-      .file-details-form-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: var(--shadow-lg);
-        display: none;
-        animation: fadeIn 0.3s ease-out;
-      }
-      .form-actions-row {
+      /* Drag-Over Overlay when folder already has items */
+      .vd-drag-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 40;
+        background-color: rgba(15, 23, 42, 0.78);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 2px dashed var(--accent-color);
+        border-radius: 14px;
         display: flex;
-        gap: 12px;
-        justify-content: flex-end;
-        margin-top: 14px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #f8fafc;
+        pointer-events: none;
       }
+
+      /* Details Inspector Drawer */
+      .vd-inspector {
+        width: 312px;
+        flex-shrink: 0;
+        background-color: var(--vd-surface);
+        border: 1px solid var(--vd-border);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .vd-inspector-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--vd-border);
+      }
+      .vd-inspector-head h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .vd-inspector-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .vd-inspector-preview {
+        height: 148px;
+        border-radius: 10px;
+        background-color: var(--vd-card-bg);
+        border: 1px solid var(--vd-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .vd-inspector-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .vd-inspector-meta-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 12.5px;
+      }
+      .vd-inspector-meta-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .vd-inspector-meta-label {
+        color: var(--text-muted);
+      }
+      .vd-inspector-meta-val {
+        color: var(--text-primary);
+        font-weight: 500;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .vd-inspector-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-top: 1px solid var(--vd-border);
+        padding-top: 14px;
+      }
+      .vd-field-label {
+        display: block;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 4px;
+      }
+      .vd-input {
+        width: 100%;
+        padding: 8px 11px;
+        border-radius: 8px;
+        border: 1px solid var(--vd-border-strong);
+        background-color: var(--vd-search-bg);
+        color: var(--text-primary);
+        font-size: 13px;
+        transition: border-color 0.15s ease;
+      }
+      .vd-input:focus {
+        border-color: var(--accent-color);
+      }
+
+      /* Floating Context Menu */
+      .vd-context-menu {
+        position: fixed;
+        min-width: 196px;
+        background-color: var(--vd-menu-bg);
+        border: 1px solid var(--vd-border-strong);
+        border-radius: 10px;
+        padding: 6px;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+        z-index: 12000;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      /* Move Folder Picker List */
+      .vd-move-list {
+        max-height: 260px;
+        overflow-y: auto;
+        border: 1px solid var(--vd-border);
+        border-radius: 10px;
+        background-color: var(--vd-search-bg);
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .vd-move-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 9px 10px;
+        border-radius: 7px;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--text-primary);
+        font-size: 13px;
+        font-weight: 500;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color 0.14s ease, border-color 0.14s ease;
+      }
+      .vd-move-option:hover:not(:disabled) {
+        background-color: var(--vd-surface-hover);
+      }
+      .vd-move-option.selected {
+        background-color: var(--accent-light);
+        border-color: var(--accent-color);
+      }
+      .vd-move-option:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      /* File Preview Modal */
+      .vd-preview-box {
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        width: 100%;
+        max-width: 860px;
+        max-height: 88vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+      }
+      .vd-preview-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .vd-preview-body {
+        flex: 1;
+        min-height: 280px;
+        overflow: auto;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--vd-canvas);
+      }
+      .vd-preview-body img {
+        max-width: 100%;
+        max-height: 68vh;
+        border-radius: 8px;
+        object-fit: contain;
+      }
+      .vd-preview-text {
+        width: 100%;
+        max-height: 65vh;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background-color: var(--vd-surface);
+        border: 1px solid var(--vd-border);
+        border-radius: 10px;
+        padding: 18px;
+        margin: 0;
+      }
+
+      @media (max-width: 960px) {
+        .vd-inspector {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 30;
+          box-shadow: -8px 0 28px rgba(0, 0, 0, 0.35);
+        }
+      }
+      @media (max-width: 768px) {
+        .vd-top-search-row {
+          padding-right: 0;
+        }
+        .vd-grid {
+          grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+          gap: 14px;
+        }
+        .vd-list-name-text {
+          max-width: 160px;
+        }
+      }
+
+      /* Shared utility buttons & metadata helpers preserved for other sections */
       .btn-secondary {
         background: none;
         border: 1px solid var(--border-color);
@@ -876,300 +1849,15 @@
         background-color: var(--accent-hover);
         box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
       }
-
-      /* Visual Size Warning Alert */
-      .size-warning-box {
-        background-color: rgba(245, 158, 11, 0.08);
-        border: 1px solid var(--priority-medium);
-        border-radius: 8px;
-        padding: 12px 16px;
-        font-size: 13px;
-        color: var(--priority-medium);
-        margin-bottom: 16px;
-        display: flex;
-        gap: 12px;
-        align-items: flex-start;
-      }
-
-      /* Filters & Sorting Panel */
-      .filters-action-panel {
-        background-color: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 14px;
-        padding: 12px 18px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-        box-shadow: var(--shadow-sm);
-        transition: var(--transition);
-      }
-      .filters-action-panel:hover {
-        box-shadow: var(--shadow-md);
-        border-color: rgba(99, 102, 241, 0.2);
-      }
-      .search-control-wrapper {
-        flex: 2;
-        min-width: 250px;
-        position: relative;
-      }
-      .search-control-input {
-        width: 100%;
-        padding: 10px 12px 10px 40px;
-        border-radius: 10px;
-        border: 1px solid var(--border-color);
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-        font-size: 13px;
-        font-weight: 500;
-        transition: var(--transition);
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
-      }
-      .search-control-input::placeholder {
-        color: var(--text-muted);
-        opacity: 0.8;
-      }
-      .search-control-input:hover {
-        border-color: rgba(99, 102, 241, 0.4);
-      }
-      .search-control-input:focus {
-        border-color: var(--accent-color);
-        background-color: var(--bg-secondary);
-        box-shadow: 0 0 0 3px var(--accent-light);
-        outline: none;
-      }
-      .search-icon-pos {
-        position: absolute;
-        left: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--accent-color);
-        opacity: 0.8;
-        pointer-events: none;
-        transition: var(--transition);
-      }
-      .search-control-input:focus + .search-icon-pos {
-        color: var(--accent-color);
-        opacity: 1;
-      }
-      .filter-dropdown {
-        padding: 10px 36px 10px 14px;
-        border-radius: 10px;
-        border: 1px solid var(--border-color);
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-        font-size: 13px;
-        font-weight: 500;
-        min-width: 150px;
-        flex: 1;
-        cursor: pointer;
-        transition: var(--transition);
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236366f1' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 12px center;
-        background-size: 11px;
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
-      }
-      .filter-dropdown:hover {
-        border-color: rgba(99, 102, 241, 0.4);
-        background-color: var(--bg-tertiary);
-      }
-      .filter-dropdown:focus {
-        border-color: var(--accent-color);
-        background-color: var(--bg-secondary);
-        box-shadow: 0 0 0 3px var(--accent-light);
-        outline: none;
-      }
-
-      /* Vault Info Bar Stats */
-      .vault-stats-bar {
-        display: flex;
-        gap: 12px;
-        overflow-x: auto;
-      }
-      .vault-stat-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 18px;
-        background-color: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--text-secondary);
-        box-shadow: var(--shadow-sm);
-      }
-
-      /* Files Cards Grid View */
-      .files-bento-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
-        flex: 1;
-      }
-
-      .file-vault-card {
-        background-color: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 16px;
-        box-shadow: var(--shadow-sm);
-        transition: var(--transition);
-        animation: slideIn 0.3s ease-out;
-        position: relative;
-        overflow: hidden;
-      }
-      .file-vault-card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(99, 102, 241, 0.4);
-        box-shadow: var(--shadow-lg);
-      }
-      .priority-indicator-bar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-      }
-      .priority-indicator-bar.priority-high { background-color: var(--priority-high); }
-      .priority-indicator-bar.priority-medium { background-color: var(--priority-medium); }
-      .priority-indicator-bar.priority-low { background-color: var(--priority-low); }
-
-      .card-file-identity {
-        display: flex;
-        gap: 14px;
-        align-items: center;
-        margin-top: 4px;
-      }
-      .file-class-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        background-color: var(--accent-light);
-        color: var(--accent-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        transition: var(--transition);
-      }
-      .file-vault-card:hover .file-class-icon {
-        background-color: var(--accent-color);
-        color: #ffffff;
-      }
-      .file-name-meta {
-        flex: 1;
-        overflow: hidden;
-      }
-      .file-title-text {
-        font-weight: 700;
-        font-size: 14px;
-        color: var(--text-primary);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
       .file-spec-sub {
         font-size: 12px;
         color: var(--text-muted);
         margin-top: 3px;
       }
-
       .metadata-badges-strip {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-      }
-      .badge {
-        font-size: 11px;
-        padding: 4px 10px;
-        border-radius: 12px;
-        font-weight: 600;
-      }
-      .badge-category {
-        background-color: var(--bg-tertiary);
-        color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-      }
-      .badge-priority {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-      }
-      .badge-priority.high { background-color: rgba(239, 68, 68, 0.08); color: var(--priority-high); }
-      .badge-priority.medium { background-color: rgba(245, 158, 11, 0.08); color: var(--priority-medium); }
-      .badge-priority.low { background-color: rgba(16, 185, 129, 0.08); color: var(--priority-low); }
-
-      .file-notes-section {
-        background-color: var(--bg-primary);
-        padding: 10px 14px;
-        border-radius: 8px;
-        font-size: 12px;
-        color: var(--text-secondary);
-        line-height: 1.5;
-        max-height: 100px;
-        overflow-y: auto;
-        border: 1px solid var(--border-color);
-      }
-      .file-tags-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-      }
-      .tag-bubble {
-        background-color: var(--accent-light);
-        color: var(--accent-color);
-        font-size: 10px;
-        padding: 3px 8px;
-        border-radius: 6px;
-        font-weight: 600;
-        border: 1px solid rgba(99, 102, 241, 0.1);
-      }
-
-      .file-card-actions {
-        display: flex;
-        gap: 8px;
-        margin-top: 4px;
-        border-top: 1px solid var(--border-color);
-        padding-top: 12px;
-      }
-
-      .file-action-trigger {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        padding: 8px 12px;
-        font-size: 12px;
-        border-radius: 8px;
-        background-color: var(--bg-tertiary);
-        color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-        cursor: pointer;
-        font-weight: 600;
-        transition: var(--transition);
-      }
-      .file-action-trigger:hover {
-        background-color: var(--accent-color);
-        color: #ffffff;
-        border-color: var(--accent-color);
-      }
-      .file-delete-trigger {
-        color: var(--priority-high);
-      }
-      .file-delete-trigger:hover {
-        background-color: var(--priority-high);
-        color: #ffffff;
-        border-color: var(--priority-high);
       }
 
       /* Illustrated Empty States */
@@ -2084,185 +2772,328 @@
             </div>
           </section>
 
-          <!-- Standard metadata list vault section view -->
+          <!-- Redesigned Secure File Vault (Cloud Drive Workspace) -->
           <section id="section-vault" class="app-section hidden">
-            <div class="vault-container">
-              
-              <!-- Vault Title and Real-time Status Header Bar -->
-              <div class="vault-header-row">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent-color);">
-                    <i data-lucide="shield-check" style="width: 22px; height: 22px;"></i>
-                  </div>
-                  <div>
-                    <h2 style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-primary); margin: 0; letter-spacing: -0.02em;">Secure File Vault</h2>
-                    <p style="font-size: 11px; color: var(--text-muted); margin: 2px 0 0 0; line-height: 1.2;">Secure client-side document reference index & metadata storage</p>
-                  </div>
-                </div>
-                <!-- Interactive Action badges -->
-                <div class="vault-stats-bar" style="display: flex; gap: 10px; align-items: center;">
-                  <div class="vault-stat-pill" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; background-color: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-secondary); box-shadow: var(--shadow-sm);">
-                    <i data-lucide="folder-git" style="width: 14px; height: 14px; color: var(--accent-color);"></i>
-                    <span id="stat-vault-files-count">0 Items</span>
-                  </div>
-                  <div class="vault-stat-pill" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; background-color: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-secondary); box-shadow: var(--shadow-sm);">
-                    <i data-lucide="unplug" style="width: 14px; height: 14px; color: var(--priority-medium);"></i>
-                    <span id="stat-vault-quota-badge">Offline Mode</span>
-                  </div>
-                </div>
-              </div>
+            <div class="vd-shell" id="vd-drop-root">
+              <!-- Hidden file & folder inputs -->
+              <input type="file" id="file-uploader" class="hidden" style="display: none;" multiple onchange="handleSystemFileSelected(event)" />
+              <input type="file" id="folder-uploader" class="hidden" style="display: none;" webkitdirectory directory multiple onchange="handleSystemFolderSelected(event)" />
 
-              <!-- Top split segment: drag block and metadata details form -->
-              <div class="vault-top-grid">
-                
-                <!-- Main drag drop visual boundary zone -->
-                <div id="file-dropzone" class="file-dropzone-panel" onclick="triggerPlatformFileDiag()">
-                  <i data-lucide="cloud-upload" style="width: 48px; height: 48px;"></i>
-                  <div class="dropzone-text">
-                    <h3>Drag files here or click to select</h3>
-                    <p>File records are tracked inside your Firestore folder context.</p>
-                  </div>
-                </div>
-                <!-- Hidden platform file diagnostic trigger -->
-                <input type="file" id="file-uploader" class="hidden" style="display: none;" multiple onchange="handleSystemFileSelected(event)" />
-
-                <!-- Floating upload metadata configurations detail card -->
-                <div id="upload-details-panel" class="file-details-form-card">
-                  <h3 id="panel-step-headline" style="font-size: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
-                    <i data-lucide="file-plus" style="width: 18px; color: var(--accent-color);"></i> Catalog File Resource
-                  </h3>
-                  
-                  <!-- Conditional Large file warning panel -->
-                  <div id="large-file-warning" class="size-warning-box hidden">
-                    <i data-lucide="alert-triangle" style="width: 18px; height: 18px; min-width: 18px;"></i>
-                    <div>
-                      <strong>Large file constraint (>10MB):</strong> Binary files larger than 10MB cannot reside in the sandbox. Provide external link reference below!
-                    </div>
-                  </div>
-
-                  <div class="form-group" id="up-filename-group">
-                    <label class="form-label" style="font-size: 11px;">Filename Reference</label>
-                    <input type="text" id="up-filename" class="form-control" style="padding: 6px 10px; font-size:12px;" />
-                  </div>
-
-                  <div class="form-group" id="up-multi-files-section" style="display: none; margin-bottom: 12px;">
-                    <label class="form-label" style="font-size: 11px; display: flex; align-items: center; justify-content: space-between;">
-                      <span>Selected Files for Bulk Add</span>
-                      <strong id="up-multi-files-count" style="color: var(--accent-color);">0 files</strong>
-                    </label>
-                    <div id="up-multi-files-list" style="max-height: 120px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; background: rgba(0,0,0,0.15); margin-top: 4px; display: flex; flex-direction: column; gap: 6px;">
-                      <!-- File list items will render here dynamically -->
-                    </div>
-                  </div>
-
-                  <!-- External reference placeholder link link -->
-                  <div class="form-group hidden" id="external-link-group">
-                    <label class="form-label" style="font-size: 11px; color: var(--priority-medium)">External Link URL (Google Drive, Dropbox, etc.)</label>
-                    <input type="url" id="up-externallink" class="form-control" style="padding: 6px 10px; font-size:12px;" placeholder="https://drive.google.com/your-file-link" />
-                  </div>
-
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <div class="form-group">
-                      <label class="form-label" style="font-size: 11px;">Classification Category</label>
-                      <select id="up-category" class="form-control" style="padding: 6px 10px; font-size:12px;" onchange="handleCategoryDropdown(event)">
-                        <option value="Work">Work</option>
-                        <option value="Personal" selected>Personal</option>
-                        <option value="Study">Study</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Health">Health</option>
-                        <option value="Other">Other (Custom)</option>
-                      </select>
-                      <input type="text" id="up-category-custom" class="form-control hidden" style="padding: 6px 10px; font-size:12px; margin-top:6px;" placeholder="Type custom label" />
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label" style="font-size: 11px;">Priority Badge</label>
-                      <select id="up-priority" class="form-control" style="padding: 6px 10px; font-size:12px;">
-                        <option value="Low">🟢 Low</option>
-                        <option value="Medium">🟡 Medium</option>
-                        <option value="High">🔴 High</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="form-label" style="font-size: 11px;">Search Keywords (Comma-separated Tags)</label>
-                    <input type="text" id="up-tags" class="form-control" style="padding: 6px 10px; font-size:12px;" placeholder="tag1, tag2, tag3" />
-                  </div>
-
-                  <div class="form-group">
-                    <label class="form-label" style="font-size: 11px;">Explanatory Notes</label>
-                    <input type="text" id="up-notes" class="form-control" style="padding: 6px 10px; font-size:12px;" placeholder="Additional explanatory comments..." />
-                  </div>
-
-                  <div class="form-actions-row">
-                    <button class="btn-secondary" onclick="dismissDetailsFormPanel()" style="padding: 6px 12px; font-size: 12px;">Reset</button>
-                    <button class="btn-primary" onclick="submitDetailedFileReference()" style="padding: 6px 12px; font-size: 12px;">Complete Cataloging</button>
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- Search and Filters list bar component -->
-              <div class="filters-action-panel">
-                <div class="search-control-wrapper">
-                  <i data-lucide="search" class="search-icon-pos"></i>
-                  <input type="text" id="search-filter-input" class="search-control-input" placeholder="Search references by title, labels or tags..." oninput="handleFilterGridTrigger()" />
-                </div>
-                
-                <select id="filter-category" class="filter-dropdown" onchange="handleFilterGridTrigger()">
-                  <option value="all">📁 All Categories</option>
-                  <option value="Work">💼 Work</option>
-                  <option value="Personal">🏡 Personal</option>
-                  <option value="Study">🎓 Study</option>
-                  <option value="Finance">💰 Finance</option>
-                  <option value="Health">❤️ Health</option>
-                  <option value="Other">🏷️ Other</option>
-                </select>
-
-                <select id="filter-priority" class="filter-dropdown" onchange="handleFilterGridTrigger()">
-                  <option value="all">⚡ All Priorities</option>
-                  <option value="High">🔴 High</option>
-                  <option value="Medium">🟡 Medium</option>
-                  <option value="Low">🟢 Low</option>
-                </select>
-
-                <select id="sort-order" class="filter-dropdown" onchange="handleFilterGridTrigger()">
-                  <option value="newest">📅 Newest Uploaded</option>
-                  <option value="oldest">📅 Oldest Uploaded</option>
-                  <option value="name-asc">🔤 Name A-Z</option>
-                  <option value="name-desc">🔤 Name Z-A</option>
-                  <option value="size-desc">💾 Size Largest</option>
-                </select>
-              </div>
-
-              <!-- Scrollable files content area -->
-              <div class="vault-scroll-area">
-                <!-- Loading Skeleton UI element structure -->
-                <div id="vault-skeleton" class="skeleton-view hidden">
-                  <div class="skeleton-row" style="width: 40%"></div>
-                  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
-                    <div class="skeleton-card"></div>
-                    <div class="skeleton-card"></div>
-                    <div class="skeleton-card"></div>
-                  </div>
-                </div>
-
-                <!-- Files list grid cards display -->
-                <div id="files-grid" class="files-bento-grid">
-                  <!-- Injected elements -->
-                </div>
-
-                <!-- Dynamic container if file vault is totally empty -->
-                <div id="vault-empty-state" class="empty-state-view hidden">
-                  <i data-lucide="folder-open" style="width: 64px; height: 64px;"></i>
-                  <h3>Empty Storage Compartment</h3>
-                  <p>Register documents or upload small notes secure references directly to your user storage space.</p>
-                  <button class="btn-primary" onclick="triggerPlatformFileDiag()">
-                    <i data-lucide="plus" style="display:inline-block; vertical-align:middle; width: 16px;"></i> Index File Now
+              <!-- 1. Top Search Row -->
+              <div class="vd-top-search-row">
+                <div class="vd-search-box">
+                  <i data-lucide="search" class="vd-search-icon"></i>
+                  <span id="vd-scope-chip" class="vd-scope-chip">
+                    <i data-lucide="cloud" style="width: 13px; height: 13px;"></i>
+                    <span id="vd-scope-label">File Vault</span>
+                    <button type="button" id="vd-scope-toggle-btn" onclick="toggleVaultSearchScope()" title="Toggle search scope (Current folder vs All Vault)">
+                      <i data-lucide="x" style="width: 12px; height: 12px;"></i>
+                    </button>
+                  </span>
+                  <input type="text" id="vd-search-input" class="vd-search-input" placeholder="Search File Vault" oninput="handleVaultSearchInput()" />
+                  <button type="button" id="vd-search-clear-btn" class="vd-search-clear hidden" onclick="clearVaultSearch()" title="Clear search">
+                    <i data-lucide="x" style="width: 15px; height: 15px;"></i>
                   </button>
                 </div>
               </div>
 
+              <!-- 2. Primary Action Buttons Row -->
+              <div class="vd-actions-row">
+                <div class="vd-btn-group">
+                  <button type="button" class="vd-btn-primary vd-btn-primary-split-main" onclick="triggerPlatformFileDiag()">
+                    <i data-lucide="arrow-up-from-line" style="width: 16px; height: 16px;"></i>
+                    <span>Upload</span>
+                  </button>
+                  <button type="button" class="vd-btn-primary-split-caret" onclick="toggleVaultDropdown('vd-upload-menu', event)" aria-label="More upload options" title="More upload options">
+                    <i data-lucide="chevron-down" style="width: 15px; height: 15px;"></i>
+                  </button>
+                  <div id="vd-upload-menu" class="vd-dropdown-menu hidden">
+                    <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); triggerPlatformFileDiag()">
+                      <i data-lucide="file-up" style="width: 15px; height: 15px;"></i>
+                      <span>Upload files</span>
+                    </button>
+                    <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); triggerVaultFolderUpload()">
+                      <i data-lucide="folder-up" style="width: 15px; height: 15px;"></i>
+                      <span>Upload folder</span>
+                    </button>
+                    <div class="vd-dropdown-divider"></div>
+                    <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); openVaultLinkModal()">
+                      <i data-lucide="link-2" style="width: 15px; height: 15px;"></i>
+                      <span>Add external link</span>
+                    </button>
+                  </div>
+                </div>
+
+                <button type="button" class="vd-btn-secondary" onclick="openVaultFolderModal()">
+                  <i data-lucide="folder-plus" style="width: 16px; height: 16px;"></i>
+                  <span>New folder</span>
+                </button>
+
+                <button type="button" id="vd-header-share-btn" class="vd-btn-secondary hidden" onclick="triggerVaultShareCurrentOrSelected()">
+                  <i data-lucide="share" style="width: 16px; height: 16px;"></i>
+                  <span>Share</span>
+                </button>
+              </div>
+
+              <!-- 3. Breadcrumb Location Header -->
+              <div class="vd-breadcrumb-row">
+                <div id="vd-breadcrumbs" class="vd-breadcrumbs">
+                  <!-- Rendered dynamically -->
+                </div>
+                <span id="stat-vault-quota-badge" class="vd-sync-meta">Cloud Sync</span>
+              </div>
+
+              <!-- 4. Contextual Selection Action Bar & View Controls -->
+              <div class="vd-toolbar-row">
+                <div class="vd-toolbar-left">
+                  <!-- Active Selection Bar -->
+                  <div id="vd-selection-bar" class="vd-selection-bar hidden">
+                    <button type="button" id="vd-selection-summary" class="vd-selection-summary" onclick="clearVaultSelection()" title="Click to clear selection">
+                      0 selected · 0 Bytes
+                    </button>
+                    <span class="vd-toolbar-divider"></span>
+                    <button type="button" class="vd-icon-btn" onclick="downloadSelectedVaultItems()" title="Download selected">
+                      <i data-lucide="arrow-down-circle" style="width: 18px; height: 18px;"></i>
+                    </button>
+                    <button type="button" class="vd-icon-btn" onclick="shareSelectedVaultItems()" title="Toggle share link">
+                      <i data-lucide="link-2" style="width: 18px; height: 18px;"></i>
+                    </button>
+                    <button type="button" class="vd-icon-btn" onclick="openVaultMoveModalForSelected()" title="Move selected">
+                      <i data-lucide="move" style="width: 18px; height: 18px;"></i>
+                    </button>
+                    <button type="button" class="vd-icon-btn danger" onclick="deleteSelectedVaultItems()" title="Delete selected">
+                      <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
+                    </button>
+                    <div class="vd-btn-group">
+                      <button type="button" class="vd-icon-btn" onclick="toggleVaultDropdown('vd-batch-more-menu', event)" title="More actions">
+                        <i data-lucide="more-vertical" style="width: 18px; height: 18px;"></i>
+                      </button>
+                      <div id="vd-batch-more-menu" class="vd-dropdown-menu hidden">
+                        <button type="button" id="vd-batch-rename-btn" class="vd-dropdown-item" onclick="closeVaultMenus(); renameSingleSelectedVaultItem()">
+                          <i data-lucide="pencil" style="width: 15px; height: 15px;"></i>
+                          <span>Rename</span>
+                        </button>
+                        <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); toggleVaultInspector(true)">
+                          <i data-lucide="info" style="width: 15px; height: 15px;"></i>
+                          <span>Details & Info</span>
+                        </button>
+                        <div class="vd-dropdown-divider"></div>
+                        <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); selectAllVisibleVaultItems()">
+                          <i data-lucide="check-square" style="width: 15px; height: 15px;"></i>
+                          <span>Select all</span>
+                        </button>
+                        <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); clearVaultSelection()">
+                          <i data-lucide="x-square" style="width: 15px; height: 15px;"></i>
+                          <span>Clear selection</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Quiet Summary when nothing is selected -->
+                  <div id="vd-quiet-summary" class="vd-summary-text">
+                    <span id="stat-vault-files-count">0 items</span>
+                  </div>
+                </div>
+
+                <!-- Right View/Inspector/Filter Controls -->
+                <div class="vd-toolbar-right">
+                  <button type="button" id="vd-view-toggle-btn" class="vd-icon-btn" onclick="toggleVaultViewMode()" title="Switch Grid / List view">
+                    <i id="vd-view-toggle-icon" data-lucide="layout-grid" style="width: 18px; height: 18px;"></i>
+                  </button>
+                  <button type="button" id="vd-inspector-toggle-btn" class="vd-icon-btn" onclick="toggleVaultInspector()" title="Toggle details panel">
+                    <i data-lucide="info" style="width: 18px; height: 18px;"></i>
+                  </button>
+                  <button type="button" id="vd-filterbar-toggle-btn" class="vd-icon-btn" onclick="toggleVaultSortRow()" title="Toggle sort & filter bar">
+                    <i id="vd-filterbar-toggle-icon" data-lucide="chevrons-up" style="width: 18px; height: 18px;"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 5. Master Checkbox + Sort + Quick Type Filter Bar -->
+              <div id="vd-sort-row" class="vd-sort-row">
+                <div class="vd-sort-left">
+                  <button type="button" id="vd-master-check" class="vd-master-check" onclick="toggleVaultMasterSelect()" aria-label="Select all items" title="Select all">
+                    <!-- Check / minus icon rendered dynamically -->
+                  </button>
+
+                  <div class="vd-btn-group">
+                    <button type="button" class="vd-sort-trigger" onclick="toggleVaultSortDirection()" title="Toggle ascending / descending">
+                      <i id="vd-sort-dir-icon" data-lucide="arrow-up" style="width: 14px; height: 14px;"></i>
+                      <span id="vd-sort-label">Name</span>
+                    </button>
+                    <button type="button" class="vd-sort-trigger" onclick="toggleVaultDropdown('vd-sort-menu', event)" title="Change sort field" style="padding: 4px 5px;">
+                      <i data-lucide="chevrons-up-down" style="width: 14px; height: 14px;"></i>
+                    </button>
+                    <div id="vd-sort-menu" class="vd-dropdown-menu hidden">
+                      <button type="button" class="vd-dropdown-item" onclick="setVaultSort('name')">Name</button>
+                      <button type="button" class="vd-dropdown-item" onclick="setVaultSort('date')">Date added</button>
+                      <button type="button" class="vd-dropdown-item" onclick="setVaultSort('size')">Size</button>
+                      <button type="button" class="vd-dropdown-item" onclick="setVaultSort('type')">Type</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vd-filter-tabs" role="tablist" aria-label="Filter items">
+                  <button type="button" class="vd-filter-tab active" data-vd-filter="all" onclick="setVaultTypeFilter('all')">All</button>
+                  <button type="button" class="vd-filter-tab" data-vd-filter="folders" onclick="setVaultTypeFilter('folders')">Folders</button>
+                  <button type="button" class="vd-filter-tab" data-vd-filter="files" onclick="setVaultTypeFilter('files')">Files</button>
+                  <button type="button" class="vd-filter-tab" data-vd-filter="shared" onclick="setVaultTypeFilter('shared')">Shared</button>
+                </div>
+              </div>
+
+              <!-- Upload Progress Bar -->
+              <div id="vd-upload-progress" class="vd-upload-progress hidden">
+                <i data-lucide="upload-cloud" style="width: 17px; height: 17px; color: var(--accent-color); flex-shrink: 0;"></i>
+                <span id="vd-upload-status-text" style="white-space: nowrap;">Uploading...</span>
+                <div class="vd-upload-bar-track">
+                  <div id="vd-upload-bar-fill" class="vd-upload-bar-fill"></div>
+                </div>
+                <span id="vd-upload-pct" style="font-variant-numeric: tabular-nums; font-size: 12px; color: var(--text-secondary);">0%</span>
+              </div>
+
+              <!-- 6. Main Content Split (Files Canvas + Optional Right Details Inspector) -->
+              <div class="vd-body-split">
+                <div id="vd-main-canvas" class="vd-main-canvas" onclick="handleVaultCanvasBackgroundClick(event)">
+                  <!-- Loading Skeleton -->
+                  <div id="vault-skeleton" class="skeleton-view hidden">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); gap: 20px;">
+                      <div class="skeleton-card"></div>
+                      <div class="skeleton-card"></div>
+                      <div class="skeleton-card"></div>
+                      <div class="skeleton-card"></div>
+                    </div>
+                  </div>
+
+                  <!-- Grid View Container -->
+                  <div id="files-grid" class="vd-grid"></div>
+
+                  <!-- List View Container -->
+                  <div id="vd-list-view" class="vd-list-wrap hidden">
+                    <table class="vd-list-table">
+                      <thead>
+                        <tr>
+                          <th style="width: 42px;"></th>
+                          <th>Name</th>
+                          <th>Type</th>
+                          <th style="text-align: right;">Size</th>
+                          <th>Added</th>
+                          <th style="width: 46px;"></th>
+                        </tr>
+                      </thead>
+                      <tbody id="vd-list-tbody"></tbody>
+                    </table>
+                  </div>
+
+                  <!-- Empty Folder / Empty Vault Drag-and-Drop Zone -->
+                  <div id="vault-empty-state" class="vd-empty-dropzone hidden">
+                    <!-- Custom Layered Safe / Vault Locker Illustration -->
+                    <svg width="136" height="136" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="filter: drop-shadow(0 16px 26px rgba(0,0,0,0.35));">
+                      <defs>
+                        <linearGradient id="safeBodyGrad" x1="36" y1="30" x2="118" y2="148" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stop-color="#f43f5e" />
+                          <stop offset="100%" stop-color="#dc2626" />
+                        </linearGradient>
+                        <linearGradient id="safeSideGrad" x1="34" y1="32" x2="60" y2="144" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stop-color="#fb7185" />
+                          <stop offset="100%" stop-color="#e11d48" />
+                        </linearGradient>
+                        <linearGradient id="safeInteriorGrad" x1="64" y1="40" x2="112" y2="136" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stop-color="#fef3c7" />
+                          <stop offset="55%" stop-color="#fde68a" />
+                          <stop offset="100%" stop-color="#f59e0b" />
+                        </linearGradient>
+                        <linearGradient id="safeDoorGrad" x1="112" y1="36" x2="152" y2="138" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stop-color="#ef4444" />
+                          <stop offset="100%" stop-color="#b91c1c" />
+                        </linearGradient>
+                      </defs>
+                      <!-- Ground shadow -->
+                      <ellipse cx="90" cy="154" rx="54" ry="8" fill="rgba(0,0,0,0.28)" />
+                      <!-- Safe legs -->
+                      <rect x="44" y="140" width="8" height="12" rx="2" fill="#334155" />
+                      <rect x="64" y="142" width="8" height="11" rx="2" fill="#1e293b" />
+                      <rect x="104" y="140" width="8" height="12" rx="2" fill="#334155" />
+                      <!-- Left 3D panel -->
+                      <path d="M36 42C36 37.5 39.5 34 44 34H62V142H44C39.5 142 36 138.5 36 134V42Z" fill="url(#safeSideGrad)" />
+                      <!-- Main cabinet body -->
+                      <rect x="58" y="34" width="60" height="108" rx="6" fill="url(#safeBodyGrad)" />
+                      <!-- Warm glowing interior -->
+                      <rect x="64" y="42" width="48" height="92" rx="3" fill="url(#safeInteriorGrad)" />
+                      <!-- Interior inner wall shadow -->
+                      <rect x="64" y="42" width="12" height="92" fill="rgba(217, 119, 6, 0.22)" />
+                      <!-- Open door -->
+                      <path d="M114 38L148 44C151.5 44.6 154 47.6 154 51.2V131.5C154 135 151.4 138 148 138.6L114 142V38Z" fill="url(#safeDoorGrad)" />
+                      <!-- Door handle & key -->
+                      <circle cx="143" cy="90" r="6" fill="#d97706" />
+                      <circle cx="143" cy="90" r="3" fill="#fef08a" />
+                      <rect x="145" y="88.5" width="12" height="3" rx="1.5" fill="#cbd5e1" />
+                      <circle cx="155" cy="96" r="4.5" stroke="#94a3b8" stroke-width="2" fill="none" />
+                      <path d="M155 101L159 107L155 113L151 107L155 101Z" fill="#60a5fa" />
+                      <!-- Cute sticker badge on side -->
+                      <ellipse cx="47" cy="64" rx="5.5" ry="9" transform="rotate(-10 47 64)" fill="#a855f7" />
+                      <path d="M46 60V68" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+                      <!-- Padlock charm on side -->
+                      <path d="M43 102V96C43 93.2 45.2 91 48 91C50.8 91 53 93.2 53 96V102" stroke="#eab308" stroke-width="2.5" stroke-linecap="round" />
+                      <rect x="41" y="101" width="14" height="16" rx="4" transform="rotate(-8 41 101)" fill="#facc15" />
+                      <circle cx="49" cy="109" r="2" fill="#1e293b" />
+                    </svg>
+
+                    <h3 id="vd-empty-title" class="vd-empty-title">Drag and drop your files here</h3>
+                    <p id="vd-empty-desc" class="vd-empty-desc">This folder is empty. Keep something safe inside your private encrypted vault.</p>
+
+                    <div id="vd-empty-actions" class="vd-btn-group" style="margin-top: 6px;">
+                      <button type="button" class="vd-btn-secondary" onclick="toggleVaultDropdown('vd-empty-upload-menu', event)">
+                        <span>Upload</span>
+                        <i data-lucide="chevron-down" style="width: 15px; height: 15px;"></i>
+                      </button>
+                      <div id="vd-empty-upload-menu" class="vd-dropdown-menu hidden" style="left: 50%; transform: translateX(-50%);">
+                        <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); triggerPlatformFileDiag()">
+                          <i data-lucide="file-up" style="width: 15px; height: 15px;"></i>
+                          <span>Upload files</span>
+                        </button>
+                        <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); triggerVaultFolderUpload()">
+                          <i data-lucide="folder-up" style="width: 15px; height: 15px;"></i>
+                          <span>Upload folder</span>
+                        </button>
+                        <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); openVaultFolderModal()">
+                          <i data-lucide="folder-plus" style="width: 15px; height: 15px;"></i>
+                          <span>New folder</span>
+                        </button>
+                        <div class="vd-dropdown-divider"></div>
+                        <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); openVaultLinkModal()">
+                          <i data-lucide="link-2" style="width: 15px; height: 15px;"></i>
+                          <span>Add external link</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <button type="button" id="vd-empty-clear-search-btn" class="vd-btn-secondary hidden" onclick="clearVaultSearch()">
+                      Clear search
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Optional Right-Side Details Inspector Drawer -->
+                <aside id="vd-inspector" class="vd-inspector hidden">
+                  <div class="vd-inspector-head">
+                    <h3 id="vd-inspector-title">Details</h3>
+                    <button type="button" class="vd-icon-btn" onclick="toggleVaultInspector(false)" title="Close details" style="width: 28px; height: 28px;">
+                      <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+                    </button>
+                  </div>
+                  <div id="vd-inspector-body" class="vd-inspector-body">
+                    <!-- Rendered dynamically -->
+                  </div>
+                </aside>
+              </div>
+
+              <!-- Global Drag Overlay for Non-Empty Folder -->
+              <div id="vd-drag-overlay" class="vd-drag-overlay hidden">
+                <i data-lucide="upload-cloud" style="width: 48px; height: 48px; color: var(--accent-color);"></i>
+                <h3 id="vd-drag-overlay-text" style="font-size: 18px; font-weight: 700;">Drop files to upload</h3>
+                <p style="font-size: 13px; color: #cbd5e1;">Files will be saved directly to the current folder</p>
+              </div>
             </div>
           </section>
 
@@ -2651,6 +3482,131 @@
       </div>
     </div>
 
+    <!-- Vault Modals & Context Menu -->
+    <div id="vd-context-menu" class="vd-context-menu hidden"></div>
+
+    <!-- New Folder Modal -->
+    <div id="vd-folder-modal" class="modal-fullscreen-overlay hidden" onclick="closeVaultFolderModal()">
+      <div class="overlay-modal-box" onclick="event.stopPropagation()">
+        <div class="modal-body-panel">
+          <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">New folder</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Create a folder inside the current vault location.</p>
+          <form onsubmit="submitVaultNewFolder(event)">
+            <label class="vd-field-label" for="vd-folder-name-input">Folder name</label>
+            <input type="text" id="vd-folder-name-input" class="vd-input" placeholder="e.g. Lab Reports, Design Assets" required maxlength="100" />
+            <div class="modal-footer-panel" style="margin: 20px -24px -24px -24px; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
+              <button type="button" class="btn-secondary" onclick="closeVaultFolderModal()">Cancel</button>
+              <button type="submit" class="btn-primary">Create folder</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rename Item Modal -->
+    <div id="vd-rename-modal" class="modal-fullscreen-overlay hidden" onclick="closeVaultRenameModal()">
+      <div class="overlay-modal-box" onclick="event.stopPropagation()">
+        <div class="modal-body-panel">
+          <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">Rename</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Enter a new name for this item.</p>
+          <form onsubmit="submitVaultRename(event)">
+            <label class="vd-field-label" for="vd-rename-input">Name</label>
+            <input type="text" id="vd-rename-input" class="vd-input" required maxlength="160" />
+            <div class="modal-footer-panel" style="margin: 20px -24px -24px -24px; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
+              <button type="button" class="btn-secondary" onclick="closeVaultRenameModal()">Cancel</button>
+              <button type="submit" class="btn-primary">Save name</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Move To Folder Modal -->
+    <div id="vd-move-modal" class="modal-fullscreen-overlay hidden" onclick="closeVaultMoveModal()">
+      <div class="overlay-modal-box" onclick="event.stopPropagation()">
+        <div class="modal-body-panel">
+          <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">Move to folder</h3>
+          <p id="vd-move-subtitle" style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">Choose a destination folder.</p>
+          <div id="vd-move-list" class="vd-move-list"></div>
+          <div class="modal-footer-panel" style="margin: 20px -24px -24px -24px; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
+            <button type="button" class="btn-secondary" onclick="closeVaultMoveModal()">Cancel</button>
+            <button type="button" class="btn-primary" onclick="confirmVaultMove()">Move here</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- External Link / Large File (>10MB) Reference Modal -->
+    <div id="vd-link-modal" class="modal-fullscreen-overlay hidden" onclick="closeVaultLinkModal()">
+      <div class="overlay-modal-box" onclick="event.stopPropagation()">
+        <div class="modal-body-panel">
+          <h3 id="vd-link-modal-title" style="font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">Add external link</h3>
+          <p id="vd-link-modal-desc" style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Save a cloud link (Google Drive, Dropbox, GitHub, etc.) inside the current folder.</p>
+          <form onsubmit="submitVaultExternalLink(event)" style="display: flex; flex-direction: column; gap: 12px;">
+            <div>
+              <label class="vd-field-label" for="vd-link-name">Resource name</label>
+              <input type="text" id="vd-link-name" class="vd-input" placeholder="e.g. Project Backup Archive" required maxlength="160" />
+            </div>
+            <div>
+              <label class="vd-field-label" for="vd-link-url">URL</label>
+              <input type="url" id="vd-link-url" class="vd-input" placeholder="https://drive.google.com/..." required />
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div>
+                <label class="vd-field-label" for="vd-link-category">Category</label>
+                <select id="vd-link-category" class="vd-input">
+                  <option value="Personal">Personal</option>
+                  <option value="Work">Work</option>
+                  <option value="Study">Study</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Health">Health</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label class="vd-field-label" for="vd-link-priority">Priority</label>
+                <select id="vd-link-priority" class="vd-input">
+                  <option value="Low">Low</option>
+                  <option value="Medium" selected>Medium</option>
+                  <option value="High">High</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="vd-field-label" for="vd-link-notes">Notes (optional)</label>
+              <input type="text" id="vd-link-notes" class="vd-input" placeholder="Short description..." />
+            </div>
+            <div class="modal-footer-panel" style="margin: 12px -24px -24px -24px; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
+              <button type="button" class="btn-secondary" onclick="closeVaultLinkModal()">Cancel</button>
+              <button type="submit" class="btn-primary">Save link</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- File Preview Lightbox Modal -->
+    <div id="vd-preview-modal" class="modal-fullscreen-overlay hidden" onclick="closeVaultPreviewModal()">
+      <div class="vd-preview-box" onclick="event.stopPropagation()">
+        <div class="vd-preview-head">
+          <div style="min-width: 0; flex: 1;">
+            <h3 id="vd-preview-title" style="font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Preview</h3>
+            <div id="vd-preview-meta" style="font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; margin-top: 2px;"></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
+            <button type="button" id="vd-preview-download-btn" class="vd-btn-secondary" style="height: 34px; padding: 0 12px; font-size: 13px;">
+              <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+              <span>Download</span>
+            </button>
+            <button type="button" class="vd-icon-btn" onclick="closeVaultPreviewModal()" title="Close preview">
+              <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+            </button>
+          </div>
+        </div>
+        <div id="vd-preview-body" class="vd-preview-body"></div>
+      </div>
+    </div>
+
     <!-- Toast notification system container panel -->
     <div id="toast-container" class="toast-notification-system"></div>
 
@@ -2960,18 +3916,37 @@
             const raw = JSON.parse(localStorage.getItem(storeKey) || "[]");
             const idx = raw.findIndex(f => f.id === fileId);
             
-            const storageData = { ...fileData };
+            const storageData = { id: fileId, ...fileData };
             // Empty base64 in localStorage to avoid QuotaExceededError
             if (storageData.size > 400 * 1024) {
               storageData.base64 = "HAS_CHUNKS";
             }
             
             if (idx !== -1) {
-              raw[idx] = storageData;
+              raw[idx] = { ...raw[idx], ...storageData };
             } else {
               raw.push(storageData);
             }
             localStorage.setItem(storeKey, JSON.stringify(raw));
+          }
+        },
+
+        async updateFileMeta(username, fileId, partialData) {
+          if (isFirebaseReady) {
+            try {
+              await setDoc(doc(db, `userData/${username}/files`, fileId), partialData, { merge: true });
+            } catch (e) {
+              console.error("updateFileMeta online error:", e);
+              throw e;
+            }
+          } else {
+            const storeKey = `tabnotes_files_${username}`;
+            const raw = JSON.parse(localStorage.getItem(storeKey) || "[]");
+            const idx = raw.findIndex(f => f.id === fileId);
+            if (idx !== -1) {
+              raw[idx] = { ...raw[idx], ...partialData };
+              localStorage.setItem(storeKey, JSON.stringify(raw));
+            }
           }
         },
 
@@ -3503,6 +4478,7 @@
         activeTabId = null;
         files = [];
         fileCandidate = null;
+        resetVaultUIState();
         tasks = [];
         projects = [];
         goals = [];
@@ -3547,6 +4523,7 @@
           activeTabId = null;
           files = [];
           fileCandidate = null;
+          resetVaultUIState();
           
           document.getElementById("auth-screen").classList.remove("hidden");
           document.getElementById("main-panel").classList.add("hidden");
@@ -4132,427 +5109,1947 @@
         window.print();
       };
 
-      // Vault storage systems 
+      // ==========================================
+      // SECURE FILE VAULT (CLOUD DRIVE ENGINE)
+      // ==========================================
+
+      const vaultState = {
+        currentFolderId: "",
+        selectedIds: new Set(),
+        viewMode: "grid", // "grid" | "list"
+        sortBy: "name", // "name" | "date" | "size" | "type"
+        sortDir: "asc", // "asc" | "desc"
+        typeFilter: "all", // "all" | "folders" | "files" | "shared"
+        searchQuery: "",
+        searchScopeCurrent: false,
+        inspectorOpen: false,
+        sortRowVisible: true,
+        renameTargetId: null,
+        moveTargetIds: [],
+        moveSelectedDest: "",
+        pendingLargeFile: null,
+        draggedItemIds: []
+      };
+
+      const vaultThumbCache = new Map();
+      let vaultDragDepth = 0;
+
+      function resetVaultUIState() {
+        vaultState.currentFolderId = "";
+        vaultState.selectedIds.clear();
+        vaultState.searchQuery = "";
+        vaultState.searchScopeCurrent = false;
+        vaultState.typeFilter = "all";
+        vaultState.inspectorOpen = false;
+        vaultThumbCache.clear();
+        const searchEl = document.getElementById("vd-search-input");
+        if (searchEl) searchEl.value = "";
+        const insp = document.getElementById("vd-inspector");
+        if (insp) insp.classList.add("hidden");
+      }
+
+      function escapeVaultHtml(str) {
+        return String(str ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function getVaultFolderIconSvg(size = 64) {
+        return `
+          <svg width="${size}" height="${Math.round(size * 0.82)}" viewBox="0 0 80 66" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 12C5 7.58172 8.58172 4 13 4H29.4C31.7 4 33.85 5.12 35.18 7L38.6 11.8C39.35 12.86 40.57 13.5 41.87 13.5H67C71.4183 13.5 75 17.0817 75 21.5V54C75 58.4183 71.4183 62 67 62H13C8.58172 62 5 58.4183 5 54V12Z" fill="#e59400"/>
+            <rect x="5" y="15" width="70" height="47" rx="8" fill="#f5a600"/>
+            <path d="M5 23C5 18.5817 8.58172 15 13 15H67C71.4183 15 75 18.5817 75 23V25.5H5V23Z" fill="#fbbf24" fill-opacity="0.45"/>
+          </svg>
+        `;
+      }
+
+      function getVaultItemParentId(item) {
+        return item && item.parentId ? item.parentId : "";
+      }
+
+      function getFolderAncestors(folderId) {
+        const chain = [];
+        let cursor = folderId;
+        const guard = new Set();
+        while (cursor && !guard.has(cursor)) {
+          guard.add(cursor);
+          const found = files.find(f => f.id === cursor && f.isFolder);
+          if (!found) break;
+          chain.unshift(found);
+          cursor = getVaultItemParentId(found);
+        }
+        return chain;
+      }
+
+      function getVaultLocationPath(parentId) {
+        if (!parentId) return "File Vault";
+        const ancestors = getFolderAncestors(parentId);
+        return ["File Vault", ...ancestors.map(a => a.name)].join(" / ");
+      }
+
+      function getVaultDescendantIds(folderId) {
+        const result = [];
+        const stack = [folderId];
+        const visited = new Set([folderId]);
+        while (stack.length > 0) {
+          const curr = stack.pop();
+          for (const item of files) {
+            if (getVaultItemParentId(item) === curr && !visited.has(item.id)) {
+              visited.add(item.id);
+              result.push(item.id);
+              if (item.isFolder) stack.push(item.id);
+            }
+          }
+        }
+        return result;
+      }
+
+      function getVaultFolderStats(folderId) {
+        const directChildren = files.filter(f => getVaultItemParentId(f) === folderId);
+        const descIds = getVaultDescendantIds(folderId);
+        let totalSize = 0;
+        let fileCount = 0;
+        let folderCount = 0;
+        for (const id of descIds) {
+          const it = files.find(f => f.id === id);
+          if (!it) continue;
+          if (it.isFolder) {
+            folderCount++;
+          } else {
+            fileCount++;
+            totalSize += Number(it.size) || 0;
+          }
+        }
+        return {
+          directCount: directChildren.length,
+          totalItems: descIds.length,
+          fileCount,
+          folderCount,
+          totalSize
+        };
+      }
+
+      function getItemEffectiveSize(item) {
+        if (!item) return 0;
+        if (item.isFolder) return getVaultFolderStats(item.id).totalSize;
+        return Number(item.size) || 0;
+      }
+
+      function getFileExtensionBadge(item) {
+        if (item.isFolder) return "FOLDER";
+        if (item.externalLink && !item.base64) return "LINK";
+        const parts = (item.name || "").split(".");
+        if (parts.length > 1) {
+          const ext = parts[parts.length - 1].trim().toUpperCase();
+          if (ext && ext.length <= 6) return ext;
+        }
+        if (item.type && item.type.includes("/")) {
+          return item.type.split("/")[1].substring(0, 6).toUpperCase();
+        }
+        return "FILE";
+      }
+
+      function getFileVisualAccent(item) {
+        if (item.externalLink && !item.base64) return { icon: "link-2", color: "#38bdf8" };
+        const mime = (item.type || "").toLowerCase();
+        const name = (item.name || "").toLowerCase();
+        if (mime.includes("image")) return { icon: "image", color: "#a855f7" };
+        if (mime.includes("pdf") || name.endsWith(".pdf")) return { icon: "file-text", color: "#ef4444" };
+        if (mime.includes("video")) return { icon: "film", color: "#f97316" };
+        if (mime.includes("audio")) return { icon: "music", color: "#ec4899" };
+        if (mime.includes("zip") || mime.includes("rar") || mime.includes("tar") || name.endsWith(".zip")) {
+          return { icon: "archive", color: "#eab308" };
+        }
+        if (mime.includes("sheet") || mime.includes("excel") || name.endsWith(".csv") || name.endsWith(".xlsx")) {
+          return { icon: "file-spreadsheet", color: "#10b981" };
+        }
+        if (mime.includes("json") || mime.includes("javascript") || mime.includes("html") || mime.includes("css") || name.match(/\.(js|ts|tsx|py|json|md|html|css)$/)) {
+          return { icon: "file-code", color: "#6366f1" };
+        }
+        if (mime.includes("text") || name.endsWith(".txt") || name.endsWith(".doc") || name.endsWith(".docx")) {
+          return { icon: "file-text", color: "#3b82f6" };
+        }
+        return { icon: "file", color: "#94a3b8" };
+      }
+
+      // ── Upload & File Ingestion ──
+
       window.triggerPlatformFileDiag = function() {
-        document.getElementById("file-uploader").click();
+        const input = document.getElementById("file-uploader");
+        if (input) {
+          input.value = "";
+          input.click();
+        }
+      };
+
+      window.triggerVaultFolderUpload = function() {
+        const input = document.getElementById("folder-uploader");
+        if (input) {
+          input.value = "";
+          input.click();
+        }
       };
 
       window.handleSystemFileSelected = function(e) {
-        const selectedFiles = Array.from(e.target.files);
+        const selectedFiles = Array.from(e.target.files || []);
         if (selectedFiles.length === 0) return;
-        processScannedVaultFiles(selectedFiles);
+        uploadFilesDirectToVault(selectedFiles, vaultState.currentFolderId);
       };
 
-      // Drag and drop Visual listeners
-      const dzone = document.getElementById("file-dropzone");
-      dzone.addEventListener("dragover", e => {
-        e.preventDefault();
-        dzone.classList.add("dragover");
-      });
-      dzone.addEventListener("dragleave", () => dzone.classList.remove("dragover"));
-      dzone.addEventListener("drop", e => {
-        e.preventDefault();
-        dzone.classList.remove("dragover");
-        const selectedFiles = Array.from(e.dataTransfer.files);
-        if (selectedFiles.length > 0) {
-          processScannedVaultFiles(selectedFiles);
-        }
-      });
+      window.handleSystemFolderSelected = async function(e) {
+        const selectedFiles = Array.from(e.target.files || []);
+        if (selectedFiles.length === 0) return;
+        await uploadFolderStructureToVault(selectedFiles, vaultState.currentFolderId);
+      };
 
-      // Clipboard Paste listener for files
+      function showVaultUploadProgress(label, pct) {
+        const bar = document.getElementById("vd-upload-progress");
+        const txt = document.getElementById("vd-upload-status-text");
+        const fill = document.getElementById("vd-upload-bar-fill");
+        const pctEl = document.getElementById("vd-upload-pct");
+        if (!bar) return;
+        bar.classList.remove("hidden");
+        if (txt) txt.textContent = label;
+        if (fill) fill.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+        if (pctEl) pctEl.textContent = `${Math.round(pct)}%`;
+      }
+
+      function hideVaultUploadProgress() {
+        const bar = document.getElementById("vd-upload-progress");
+        if (bar) bar.classList.add("hidden");
+      }
+
+      function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            const res = String(evt.target.result || "");
+            resolve(res.includes(",") ? res.split(",")[1] : res);
+          };
+          reader.onerror = () => reject(new Error("Could not read file: " + file.name));
+          reader.readAsDataURL(file);
+        });
+      }
+
+      async function ensureSubfolderPath(relativeFolderSegments, rootParentId) {
+        let parentId = rootParentId || "";
+        for (const seg of relativeFolderSegments) {
+          const cleanName = seg.trim();
+          if (!cleanName) continue;
+          let existing = files.find(f => f.isFolder && getVaultItemParentId(f) === parentId && f.name.toLowerCase() === cleanName.toLowerCase());
+          if (!existing) {
+            const fId = "folder-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7);
+            const now = new Date().toISOString();
+            const folderModel = {
+              name: cleanName,
+              type: "inode/directory",
+              size: 0,
+              base64: "",
+              externalLink: "",
+              notes: "",
+              category: "Personal",
+              priority: "Medium",
+              tags: [],
+              isFolder: true,
+              parentId,
+              shared: false,
+              createdAt: now,
+              updatedAt: now
+            };
+            await dbService.writeFile(currentUser, fId, folderModel);
+            existing = { id: fId, ...folderModel };
+            files.push(existing);
+          }
+          parentId = existing.id;
+        }
+        return parentId;
+      }
+
+      async function uploadFolderStructureToVault(fileList, rootParentId) {
+        const sizeLimit = 10 * 1024 * 1024;
+        let saved = 0;
+        let skippedLarge = 0;
+        const total = fileList.length;
+
+        showVaultUploadProgress(`Uploading folder (${total} files)...`, 5);
+
+        for (let i = 0; i < total; i++) {
+          const file = fileList[i];
+          const relPath = file.webkitRelativePath || file.name;
+          const parts = relPath.split("/").filter(Boolean);
+          const folderParts = parts.slice(0, -1);
+
+          let targetParent = rootParentId || "";
+          if (folderParts.length > 0) {
+            try {
+              targetParent = await ensureSubfolderPath(folderParts, rootParentId);
+            } catch (err) {
+              console.error("Failed creating subfolder path:", err);
+            }
+          }
+
+          if (file.size > sizeLimit) {
+            skippedLarge++;
+          } else {
+            try {
+              const base64 = await readFileAsBase64(file);
+              const fId = "file-" + Date.now() + "-" + i + "-" + Math.random().toString(36).slice(2, 6);
+              const now = new Date().toISOString();
+              const model = {
+                name: file.name,
+                type: file.type || "application/octet-stream",
+                size: file.size,
+                base64,
+                externalLink: "",
+                notes: "",
+                category: "Personal",
+                priority: "Medium",
+                tags: [],
+                isFolder: false,
+                parentId: targetParent,
+                shared: false,
+                createdAt: now,
+                updatedAt: now
+              };
+              const dbModel = { ...model };
+              await dbService.writeFile(currentUser, fId, dbModel);
+              if (file.type && file.type.startsWith("image/") && base64) {
+                vaultThumbCache.set(fId, `data:${file.type};base64,${base64}`);
+              }
+              files.push({ id: fId, ...dbModel });
+              saved++;
+            } catch (err) {
+              console.error("Folder file upload failed:", file.name, err);
+            }
+          }
+
+          showVaultUploadProgress(`Uploading ${i + 1} of ${total} files...`, ((i + 1) / total) * 100);
+        }
+
+        hideVaultUploadProgress();
+        renderVaultFilesComponent();
+        if (saved > 0) {
+          showToast(`Uploaded ${saved} file${saved !== 1 ? "s" : ""}${skippedLarge ? ` (${skippedLarge} over 10MB skipped)` : ""}`, "success");
+        } else if (skippedLarge > 0) {
+          showToast("Files larger than 10MB require an external link reference.", "warn");
+        }
+      }
+
+      async function uploadFilesDirectToVault(fileList, targetParentId) {
+        const sizeLimit = 10 * 1024 * 1024;
+        const smallFiles = [];
+        const largeFiles = [];
+
+        for (const file of fileList) {
+          if (file.size > sizeLimit) {
+            largeFiles.push(file);
+          } else {
+            smallFiles.push(file);
+          }
+        }
+
+        let savedCount = 0;
+        if (smallFiles.length > 0) {
+          showVaultUploadProgress(`Uploading ${smallFiles.length} file${smallFiles.length !== 1 ? "s" : ""}...`, 5);
+          for (let i = 0; i < smallFiles.length; i++) {
+            const file = smallFiles[i];
+            try {
+              const base64 = await readFileAsBase64(file);
+              const fId = "file-" + Date.now() + "-" + i + "-" + Math.random().toString(36).slice(2, 6);
+              const now = new Date().toISOString();
+              const model = {
+                name: file.name,
+                type: file.type || "application/octet-stream",
+                size: file.size,
+                base64,
+                externalLink: "",
+                notes: "",
+                category: "Personal",
+                priority: "Medium",
+                tags: [],
+                isFolder: false,
+                parentId: targetParentId || "",
+                shared: false,
+                createdAt: now,
+                updatedAt: now
+              };
+              const dbModel = { ...model };
+              await dbService.writeFile(currentUser, fId, dbModel);
+              if (file.type && file.type.startsWith("image/") && base64) {
+                vaultThumbCache.set(fId, `data:${file.type};base64,${base64}`);
+              }
+              files.push({ id: fId, ...dbModel });
+              savedCount++;
+            } catch (err) {
+              console.error("Upload failed for:", file.name, err);
+            }
+            showVaultUploadProgress(`Uploading ${i + 1} of ${smallFiles.length}...`, ((i + 1) / smallFiles.length) * 100);
+          }
+          hideVaultUploadProgress();
+          renderVaultFilesComponent();
+          if (savedCount > 0) {
+            showToast(`Uploaded ${savedCount} file${savedCount !== 1 ? "s" : ""} to vault`, "success");
+          }
+        }
+
+        if (largeFiles.length > 0) {
+          const lf = largeFiles[0];
+          openVaultLinkModal({
+            title: "Large file (>10MB) — Save External Link",
+            desc: `"${lf.name}" (${formatResourceSizeLabel(lf.size)}) exceeds the 10MB direct storage limit. Save a cloud link reference below.`,
+            name: lf.name,
+            size: lf.size,
+            mimeType: lf.type || "application/octet-stream"
+          });
+        }
+      }
+
+      // Global Drag-and-Drop listeners on Vault section
+      const vdDropRoot = document.getElementById("vd-drop-root");
+      if (vdDropRoot) {
+        vdDropRoot.addEventListener("dragenter", (e) => {
+          if (!e.dataTransfer || !Array.from(e.dataTransfer.types || []).includes("Files")) return;
+          e.preventDefault();
+          vaultDragDepth++;
+          const emptyEl = document.getElementById("vault-empty-state");
+          const overlay = document.getElementById("vd-drag-overlay");
+          if (emptyEl && !emptyEl.classList.contains("hidden")) {
+            emptyEl.classList.add("dragover");
+          } else if (overlay) {
+            const folderName = vaultState.currentFolderId
+              ? (files.find(f => f.id === vaultState.currentFolderId)?.name || "Current folder")
+              : "File Vault";
+            const txt = document.getElementById("vd-drag-overlay-text");
+            if (txt) txt.textContent = `Drop files to upload to "${folderName}"`;
+            overlay.classList.remove("hidden");
+          }
+        });
+        vdDropRoot.addEventListener("dragover", (e) => {
+          if (!e.dataTransfer || !Array.from(e.dataTransfer.types || []).includes("Files")) return;
+          e.preventDefault();
+        });
+        vdDropRoot.addEventListener("dragleave", (e) => {
+          if (!e.dataTransfer || !Array.from(e.dataTransfer.types || []).includes("Files")) return;
+          vaultDragDepth = Math.max(0, vaultDragDepth - 1);
+          if (vaultDragDepth === 0) {
+            const emptyEl = document.getElementById("vault-empty-state");
+            const overlay = document.getElementById("vd-drag-overlay");
+            if (emptyEl) emptyEl.classList.remove("dragover");
+            if (overlay) overlay.classList.add("hidden");
+          }
+        });
+        vdDropRoot.addEventListener("drop", (e) => {
+          if (!e.dataTransfer || !Array.from(e.dataTransfer.types || []).includes("Files")) return;
+          e.preventDefault();
+          vaultDragDepth = 0;
+          const emptyEl = document.getElementById("vault-empty-state");
+          const overlay = document.getElementById("vd-drag-overlay");
+          if (emptyEl) emptyEl.classList.remove("dragover");
+          if (overlay) overlay.classList.add("hidden");
+          const dropped = Array.from(e.dataTransfer.files || []);
+          if (dropped.length > 0) {
+            uploadFilesDirectToVault(dropped, vaultState.currentFolderId);
+          }
+        });
+      }
+
+      // Clipboard Paste listener for files in File Vault
       document.addEventListener("paste", function(e) {
         if (activeSection !== "vault") return;
-        
+        const tag = (document.activeElement?.tagName || "").toLowerCase();
+        if (tag === "input" || tag === "textarea") return;
+
         const items = (e.clipboardData || e.originalEvent?.clipboardData)?.items;
         if (!items) return;
-        
+
         const pastedFiles = [];
         for (let i = 0; i < items.length; i++) {
           if (items[i].kind === "file") {
             const file = items[i].getAsFile();
-            if (file) {
-              pastedFiles.push(file);
-            }
+            if (file) pastedFiles.push(file);
           }
         }
-        
         if (pastedFiles.length > 0) {
           e.preventDefault();
-          processScannedVaultFiles(pastedFiles);
-          showToast(`Detected ${pastedFiles.length} pasted file${pastedFiles.length !== 1 ? 's' : ''}! Staging...`, "info");
+          uploadFilesDirectToVault(pastedFiles, vaultState.currentFolderId);
         }
       });
 
-      async function processScannedVaultFiles(filesList) {
-        const warning = document.getElementById("large-file-warning");
-        const extLin = document.getElementById("external-link-group");
-        const multiFilesSection = document.getElementById("up-multi-files-section");
-        const filenameGroup = document.getElementById("up-filename-group");
-        const multiFilesList = document.getElementById("up-multi-files-list");
-        const multiFilesCount = document.getElementById("up-multi-files-count");
-        
-        fileCandidates = filesList.map(file => ({
-          fileInstance: file,
-          name: file.name,
-          size: file.size,
-          type: file.type || "application/octet-stream",
-          base64: ""
-        }));
+      // Global click & keyboard dismissal for Vault dropdowns / context menus
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".vd-btn-group") && !e.target.closest("#vd-context-menu") && !e.target.closest(".vd-card-more") && !e.target.closest(".vd-crumb-menu-trigger")) {
+          closeVaultMenus();
+        }
+      });
 
-        document.getElementById("upload-details-panel").style.display = "block";
-        
-        // Clean default staging fields
-        document.getElementById("up-externallink").value = "";
-        document.getElementById("up-notes").value = "";
-        document.getElementById("up-tags").value = "";
-        document.getElementById("up-category").value = "Personal";
-        document.getElementById("up-category-custom").classList.add("hidden");
-        document.getElementById("up-priority").value = "Medium";
+      document.addEventListener("keydown", (e) => {
+        if (activeSection !== "vault") return;
+        const tag = (document.activeElement?.tagName || "").toLowerCase();
+        const isTyping = tag === "input" || tag === "textarea" || tag === "select";
 
-        const isSingle = (fileCandidates.length === 1);
-        if (isSingle) {
-          filenameGroup.style.display = "block";
-          multiFilesSection.style.display = "none";
-          document.getElementById("up-filename").value = fileCandidates[0].name;
-          
-          const file = fileCandidates[0].fileInstance;
-          const sizeThreshold = 10 * 1024 * 1024; // 10MB limit
-          if (file.size > sizeThreshold) {
-            warning.classList.remove("hidden");
-            extLin.classList.remove("hidden");
-            document.getElementById("up-externallink").required = true;
-          } else {
-            warning.classList.add("hidden");
-            extLin.classList.add("hidden");
-            document.getElementById("up-externallink").required = false;
+        if (e.key === "Escape") {
+          closeVaultMenus();
+          closeVaultFolderModal();
+          closeVaultRenameModal();
+          closeVaultMoveModal();
+          closeVaultLinkModal();
+          closeVaultPreviewModal();
+          if (vaultState.selectedIds.size > 0 && !isTyping) {
+            clearVaultSelection();
           }
+        } else if (e.key === "Backspace" && !isTyping && vaultState.currentFolderId) {
+          const curr = files.find(f => f.id === vaultState.currentFolderId);
+          navigateVaultFolder(curr ? getVaultItemParentId(curr) : "");
+        }
+      });
+
+      window.closeVaultMenus = function() {
+        document.querySelectorAll(".vd-dropdown-menu").forEach(m => m.classList.add("hidden"));
+        const ctx = document.getElementById("vd-context-menu");
+        if (ctx) ctx.classList.add("hidden");
+      };
+
+      window.toggleVaultDropdown = function(menuId, evt) {
+        if (evt) evt.stopPropagation();
+        const menu = document.getElementById(menuId);
+        if (!menu) return;
+        const wasHidden = menu.classList.contains("hidden");
+        closeVaultMenus();
+        if (wasHidden) {
+          menu.classList.remove("hidden");
+          lucide.createIcons();
+        }
+      };
+
+      // ── Navigation, Search, Sort & Filter Controls ──
+
+      window.navigateVaultFolder = function(folderId) {
+        closeVaultMenus();
+        vaultState.currentFolderId = folderId || "";
+        vaultState.selectedIds.clear();
+        renderVaultFilesComponent();
+      };
+
+      window.handleVaultSearchInput = function() {
+        const input = document.getElementById("vd-search-input");
+        vaultState.searchQuery = input ? input.value.trim() : "";
+        const clearBtn = document.getElementById("vd-search-clear-btn");
+        if (clearBtn) clearBtn.classList.toggle("hidden", !vaultState.searchQuery);
+        renderVaultFilesComponent();
+      };
+
+      window.clearVaultSearch = function() {
+        const input = document.getElementById("vd-search-input");
+        if (input) input.value = "";
+        vaultState.searchQuery = "";
+        const clearBtn = document.getElementById("vd-search-clear-btn");
+        if (clearBtn) clearBtn.classList.add("hidden");
+        renderVaultFilesComponent();
+      };
+
+      window.toggleVaultSearchScope = function() {
+        if (!vaultState.currentFolderId) {
+          clearVaultSearch();
+          return;
+        }
+        vaultState.searchScopeCurrent = !vaultState.searchScopeCurrent;
+        renderVaultFilesComponent();
+      };
+
+      window.toggleVaultViewMode = function() {
+        vaultState.viewMode = vaultState.viewMode === "grid" ? "list" : "grid";
+        renderVaultFilesComponent();
+      };
+
+      window.toggleVaultInspector = function(forceState) {
+        vaultState.inspectorOpen = typeof forceState === "boolean" ? forceState : !vaultState.inspectorOpen;
+        const insp = document.getElementById("vd-inspector");
+        const btn = document.getElementById("vd-inspector-toggle-btn");
+        if (insp) insp.classList.toggle("hidden", !vaultState.inspectorOpen);
+        if (btn) btn.classList.toggle("active", vaultState.inspectorOpen);
+        if (vaultState.inspectorOpen) renderVaultInspector();
+      };
+
+      window.toggleVaultSortRow = function() {
+        vaultState.sortRowVisible = !vaultState.sortRowVisible;
+        const row = document.getElementById("vd-sort-row");
+        const icon = document.getElementById("vd-filterbar-toggle-icon");
+        if (row) row.classList.toggle("hidden", !vaultState.sortRowVisible);
+        if (icon) {
+          icon.setAttribute("data-lucide", vaultState.sortRowVisible ? "chevrons-up" : "chevrons-down");
+          lucide.createIcons();
+        }
+      };
+
+      window.setVaultSort = function(field) {
+        closeVaultMenus();
+        if (vaultState.sortBy === field) {
+          vaultState.sortDir = vaultState.sortDir === "asc" ? "desc" : "asc";
         } else {
-          filenameGroup.style.display = "none";
-          multiFilesSection.style.display = "block";
-          multiFilesCount.textContent = `${fileCandidates.length} files`;
-          
-          // List selected files in the container
-          multiFilesList.innerHTML = fileCandidates.map(f => {
-            const sizeLabel = formatResourceSizeLabel(f.size);
-            const isTooLarge = f.size > 10 * 1024 * 1024;
-            return `
-              <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11px; padding: 4px 6px; border-radius: 6px; background: rgba(255,255,255,0.03)">
-                <span class="text-truncate" style="max-width: 200px; font-weight: 500; color: var(--text-primary); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" title="${f.name}">${f.name}</span>
-                <span style="color: ${isTooLarge ? 'var(--priority-high)' : 'var(--text-secondary)'}; font-size: 10px;">
-                  ${sizeLabel} ${isTooLarge ? '(>10MB limit)' : ''}
-                </span>
-              </div>
-            `;
-          }).join("");
-          
-          const hasLargeFile = fileCandidates.some(f => f.size > 10 * 1024 * 1024);
-          if (hasLargeFile) {
-            warning.classList.remove("hidden");
-            extLin.classList.remove("hidden");
-            document.getElementById("up-externallink").required = false;
-          } else {
-            warning.classList.add("hidden");
-            extLin.classList.add("hidden");
-            document.getElementById("up-externallink").required = false;
-          }
+          vaultState.sortBy = field;
+          vaultState.sortDir = field === "date" || field === "size" ? "desc" : "asc";
         }
+        renderVaultFilesComponent();
+      };
 
-        const catalogBtn = document.querySelector("#upload-details-panel .btn-primary");
-        if (catalogBtn) {
-          catalogBtn.disabled = true;
-          catalogBtn.textContent = "Processing Files...";
-        }
+      window.toggleVaultSortDirection = function() {
+        vaultState.sortDir = vaultState.sortDir === "asc" ? "desc" : "asc";
+        renderVaultFilesComponent();
+      };
 
-        const promises = fileCandidates.map(candidate => {
-          if (candidate.size > 10 * 1024 * 1024) {
-             return Promise.resolve(); // Skip conversion on larger files
-          }
-          return new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-              candidate.base64 = evt.target.result.split(",")[1];
-              resolve();
-            };
-            reader.onerror = function() {
-              console.error("FileReader failed for file: " + candidate.name);
-              resolve();
-            };
-            reader.readAsDataURL(candidate.fileInstance);
-          });
+      window.setVaultTypeFilter = function(filter) {
+        vaultState.typeFilter = filter;
+        document.querySelectorAll(".vd-filter-tab").forEach(btn => {
+          btn.classList.toggle("active", btn.getAttribute("data-vd-filter") === filter);
         });
-
-        await Promise.all(promises);
-
-        if (catalogBtn) {
-          catalogBtn.disabled = false;
-          catalogBtn.textContent = "Complete Cataloging";
-        }
-      }
-
-      window.handleCategoryDropdown = function(e) {
-        const custom = document.getElementById("up-category-custom");
-        if (e.target.value === "Other") {
-          custom.classList.remove("hidden");
-        } else {
-          custom.classList.add("hidden");
-        }
+        renderVaultFilesComponent();
       };
 
-      window.dismissDetailsFormPanel = function() {
-        document.getElementById("upload-details-panel").style.display = "none";
-        fileCandidate = null;
-        fileCandidates = [];
-      };
+      // ── Visible Collection Query ──
 
-      window.submitDetailedFileReference = async function() {
-        if (!fileCandidates || fileCandidates.length === 0) return;
-        
-        const notes = document.getElementById("up-notes").value.trim();
-        const priority = document.getElementById("up-priority").value;
-        const customCat = document.getElementById("up-category-custom").value.trim();
-        const baseCat = document.getElementById("up-category").value;
-        const category = baseCat === "Other" ? (customCat || "Other") : baseCat;
-        
-        const tagsRaw = document.getElementById("up-tags").value;
-        const tags = tagsRaw ? tagsRaw.split(",").map(t => t.trim()).filter(Boolean) : [];
-        
-        const externalLink = document.getElementById("up-externallink").value.trim();
-        
-        if (fileCandidates.length === 1 && fileCandidates[0].size > 10 * 1024 * 1024 && !externalLink) {
-          showToast("A downloadable external anchor link matches size constraints. Please input URL", "warn");
-          return;
-        }
+      function getVisibleVaultItems() {
+        const q = vaultState.searchQuery.toLowerCase();
+        let list;
 
-        const catalogBtn = document.querySelector("#upload-details-panel .btn-primary");
-        if (catalogBtn) {
-          catalogBtn.disabled = true;
-          catalogBtn.textContent = "Cataloging...";
-        }
-
-        let savedCount = 0;
-        let failCount = 0;
-
-        for (let i = 0; i < fileCandidates.length; i++) {
-          const candidate = fileCandidates[i];
-          const fId = "file-" + (Date.now() + i);
-          const finalName = (fileCandidates.length === 1)
-            ? (document.getElementById("up-filename").value.trim() || candidate.name)
-            : candidate.name;
-
-          const finalModel = {
-            name: finalName,
-            type: candidate.type,
-            size: candidate.size,
-            base64: candidate.base64,
-            externalLink: externalLink,
-            notes,
-            category,
-            priority,
-            tags,
-            createdAt: new Date().toISOString()
-          };
-
-          try {
-            await dbService.writeFile(currentUser, fId, finalModel);
-            files.push({ id: fId, ...finalModel });
-            savedCount++;
-          } catch (e) {
-            console.error("Save file item failure: ", e);
-            failCount++;
-          }
-        }
-
-        if (savedCount > 0) {
-          if (fileCandidates.length === 1) {
-            showToast("Security record cataloged successfully!", "success");
-          } else {
-            showToast(`Successfully cataloged ${savedCount} files in batch!`, "success");
-          }
-          dismissDetailsFormPanel();
-          renderVaultFilesComponent();
-        } else {
-          showToast("Save resource operation failure.", "error");
-        }
-
-        if (catalogBtn) {
-          catalogBtn.disabled = false;
-          catalogBtn.textContent = "Complete Cataloging";
-        }
-      };
-
-      function renderVaultFilesComponent() {
-        const grid = document.getElementById("files-grid");
-        const empty = document.getElementById("vault-empty-state");
-        const counter = document.getElementById("stat-vault-files-count");
-        
-        grid.innerHTML = "";
-        
-        // Counter labels refresh
-        if (counter) {
-          counter.textContent = `${files.length} Item${files.length !== 1 ? "s" : ""} Cataloged`;
-        }
-        
-        const qBadge = document.getElementById("stat-vault-quota-badge");
-        if (qBadge) {
-          if (isFirebaseReady) {
-            qBadge.textContent = "Online Sync Active";
-          } else {
-            qBadge.textContent = "Sandbox Engine Mode";
-          }
-        }
-
-        if (files.length === 0) {
-          empty.classList.remove("hidden");
-          grid.classList.add("hidden");
-          return;
-        }
-
-        empty.classList.add("hidden");
-        grid.classList.remove("hidden");
-
-        // Parse search & filters
-        const q = document.getElementById("search-filter-input").value.trim().toLowerCase();
-        const categoryFilter = document.getElementById("filter-category").value;
-        const priorityFilter = document.getElementById("filter-priority").value;
-        const orderVal = document.getElementById("sort-order").value;
-
-        let collection = [...files];
-
-        // Filter constraints
         if (q) {
-          collection = collection.filter(f => 
-            f.name.toLowerCase().includes(q) || 
-            f.category.toLowerCase().includes(q) || 
-            (f.notes && f.notes.toLowerCase().includes(q)) ||
-            (f.tags && f.tags.some(t => t.toLowerCase().includes(q)))
+          let pool = files;
+          if (vaultState.searchScopeCurrent && vaultState.currentFolderId) {
+            const descSet = new Set(getVaultDescendantIds(vaultState.currentFolderId));
+            pool = files.filter(f => descSet.has(f.id));
+          }
+          list = pool.filter(f =>
+            (f.name || "").toLowerCase().includes(q) ||
+            (f.category || "").toLowerCase().includes(q) ||
+            (f.notes || "").toLowerCase().includes(q) ||
+            (Array.isArray(f.tags) && f.tags.some(t => String(t).toLowerCase().includes(q)))
           );
+        } else {
+          list = files.filter(f => getVaultItemParentId(f) === vaultState.currentFolderId);
         }
 
-        if (categoryFilter !== "all") {
-          collection = collection.filter(f => f.category === categoryFilter);
-        }
-        if (priorityFilter !== "all") {
-          collection = collection.filter(f => f.priority === priorityFilter);
+        if (vaultState.typeFilter === "folders") {
+          list = list.filter(f => !!f.isFolder);
+        } else if (vaultState.typeFilter === "files") {
+          list = list.filter(f => !f.isFolder);
+        } else if (vaultState.typeFilter === "shared") {
+          list = list.filter(f => !!f.shared || (!!f.externalLink && !f.base64));
         }
 
-        // Sorting definitions
-        collection.sort((a, b) => {
-          if (orderVal === "newest") return new Date(b.createdAt) - new Date(a.createdAt);
-          if (orderVal === "oldest") return new Date(a.createdAt) - new Date(b.createdAt);
-          if (orderVal === "name-asc") return a.name.localeCompare(b.name);
-          if (orderVal === "name-desc") return b.name.localeCompare(a.name);
-          if (orderVal === "size-desc") return b.size - a.size;
+        const dir = vaultState.sortDir === "asc" ? 1 : -1;
+        list = [...list].sort((a, b) => {
+          // Always keep folders grouped before files
+          if (!!a.isFolder !== !!b.isFolder) return a.isFolder ? -1 : 1;
+          if (vaultState.sortBy === "name") {
+            return (a.name || "").localeCompare(b.name || "", undefined, { numeric: true, sensitivity: "base" }) * dir;
+          }
+          if (vaultState.sortBy === "date") {
+            return (new Date(a.updatedAt || a.createdAt || 0) - new Date(b.updatedAt || b.createdAt || 0)) * dir;
+          }
+          if (vaultState.sortBy === "size") {
+            return (getItemEffectiveSize(a) - getItemEffectiveSize(b)) * dir;
+          }
+          if (vaultState.sortBy === "type") {
+            return getFileExtensionBadge(a).localeCompare(getFileExtensionBadge(b)) * dir;
+          }
           return 0;
         });
 
-        if (collection.length === 0) {
-          grid.innerHTML = `
-            <div style="grid-column: 1/-1; padding: 40px; text-align: center; color: var(--text-secondary)">
-              <i data-lucide="search-code" style="width: 48px; height: 48px; margin: 0 auto 12px; opacity:0.5;"></i>
-              <p>No results match your active search filters.</p>
+        return list;
+      }
+
+      // ── Selection Management ──
+
+      window.toggleVaultItemSelection = function(id, evt) {
+        if (evt) evt.stopPropagation();
+        if (vaultState.selectedIds.has(id)) {
+          vaultState.selectedIds.delete(id);
+        } else {
+          vaultState.selectedIds.add(id);
+        }
+        renderVaultFilesComponent();
+      };
+
+      window.handleVaultItemClick = function(id, evt) {
+        if (evt.ctrlKey || evt.metaKey || evt.shiftKey) {
+          toggleVaultItemSelection(id, evt);
+          return;
+        }
+        if (vaultState.selectedIds.size === 1 && vaultState.selectedIds.has(id)) {
+          return;
+        }
+        vaultState.selectedIds.clear();
+        vaultState.selectedIds.add(id);
+        renderVaultFilesComponent();
+      };
+
+      window.handleVaultItemDoubleClick = function(id) {
+        const item = files.find(f => f.id === id);
+        if (!item) return;
+        if (item.isFolder) {
+          navigateVaultFolder(item.id);
+        } else {
+          openVaultPreviewModal(item.id);
+        }
+      };
+
+      window.handleVaultCanvasBackgroundClick = function(evt) {
+        if (evt.target.id === "vd-main-canvas" || evt.target.id === "files-grid") {
+          if (vaultState.selectedIds.size > 0) {
+            clearVaultSelection();
+          }
+        }
+      };
+
+      window.clearVaultSelection = function() {
+        vaultState.selectedIds.clear();
+        renderVaultFilesComponent();
+      };
+
+      window.selectAllVisibleVaultItems = function() {
+        const visible = getVisibleVaultItems();
+        visible.forEach(v => vaultState.selectedIds.add(v.id));
+        renderVaultFilesComponent();
+      };
+
+      window.toggleVaultMasterSelect = function() {
+        const visible = getVisibleVaultItems();
+        if (visible.length === 0) return;
+        const allSelected = visible.every(v => vaultState.selectedIds.has(v.id));
+        if (allSelected) {
+          vaultState.selectedIds.clear();
+        } else {
+          visible.forEach(v => vaultState.selectedIds.add(v.id));
+        }
+        renderVaultFilesComponent();
+      };
+
+      // ── Thumbnail Hydration (Async from IndexedDB / Firestore) ──
+
+      async function resolveVaultFileBase64(match) {
+        if (!match || match.isFolder) return "";
+        let base64 = await idbService.get(match.id);
+        if (!base64) {
+          if (match.hasChunks) {
+            try {
+              const querySnapshot = await getDocs(collection(db, `userData/${currentUser}/files/${match.id}/chunks`));
+              const chunksArr = [];
+              querySnapshot.forEach(d => chunksArr.push(d.data()));
+              chunksArr.sort((a, b) => a.index - b.index);
+              base64 = chunksArr.map(c => c.data).join("");
+              if (base64) await idbService.save(match.id, base64);
+            } catch (err) {
+              console.warn("Chunk hydrate error:", err);
+              return "";
+            }
+          } else if (match.base64 && match.base64 !== "HAS_CHUNKS") {
+            base64 = match.base64;
+          }
+        }
+        return base64 || "";
+      }
+
+      async function hydrateVaultImageThumb(item, imgEl) {
+        if (!item || !imgEl) return;
+        if (vaultThumbCache.has(item.id)) {
+          imgEl.src = vaultThumbCache.get(item.id);
+          return;
+        }
+        if (item.base64 && item.base64 !== "HAS_CHUNKS") {
+          const uri = `data:${item.type};base64,${item.base64}`;
+          vaultThumbCache.set(item.id, uri);
+          imgEl.src = uri;
+          return;
+        }
+        const b64 = await idbService.get(item.id);
+        if (b64) {
+          const uri = `data:${item.type};base64,${b64}`;
+          vaultThumbCache.set(item.id, uri);
+          imgEl.src = uri;
+        }
+      }
+
+      // ── Main Vault Renderer ──
+
+      function renderVaultFilesComponent() {
+        // Prune selected IDs that no longer exist
+        for (const sid of Array.from(vaultState.selectedIds)) {
+          if (!files.some(f => f.id === sid)) vaultState.selectedIds.delete(sid);
+        }
+
+        // Sync badge
+        const qBadge = document.getElementById("stat-vault-quota-badge");
+        if (qBadge) {
+          qBadge.textContent = isFirebaseReady ? "Cloud Synced" : "Local Storage";
+        }
+
+        // Scope chip in search bar
+        const scopeLabel = document.getElementById("vd-scope-label");
+        const scopeChip = document.getElementById("vd-scope-chip");
+        const currentFolderObj = vaultState.currentFolderId
+          ? files.find(f => f.id === vaultState.currentFolderId && f.isFolder)
+          : null;
+        if (scopeLabel && scopeChip) {
+          if (currentFolderObj && vaultState.searchScopeCurrent) {
+            scopeLabel.textContent = currentFolderObj.name;
+          } else {
+            scopeLabel.textContent = "File Vault";
+          }
+        }
+
+        // Header Share button visibility (like Screenshot 2 when inside a folder or when selected)
+        const headerShareBtn = document.getElementById("vd-header-share-btn");
+        if (headerShareBtn) {
+          const showShare = Boolean(vaultState.currentFolderId) || vaultState.selectedIds.size > 0;
+          headerShareBtn.classList.toggle("hidden", !showShare);
+        }
+
+        // Breadcrumbs
+        renderVaultBreadcrumbs();
+
+        // Visible items
+        const visible = getVisibleVaultItems();
+
+        // Contextual selection bar vs quiet summary
+        const selBar = document.getElementById("vd-selection-bar");
+        const quietSum = document.getElementById("vd-quiet-summary");
+        const selSummaryBtn = document.getElementById("vd-selection-summary");
+        const batchRenameBtn = document.getElementById("vd-batch-rename-btn");
+
+        if (vaultState.selectedIds.size > 0) {
+          let selSize = 0;
+          vaultState.selectedIds.forEach(sid => {
+            const it = files.find(f => f.id === sid);
+            if (it) selSize += getItemEffectiveSize(it);
+          });
+          if (selBar) selBar.classList.remove("hidden");
+          if (quietSum) quietSum.classList.add("hidden");
+          if (selSummaryBtn) {
+            selSummaryBtn.textContent = `${vaultState.selectedIds.size} selected · ${formatResourceSizeLabel(selSize)}`;
+          }
+          if (batchRenameBtn) {
+            batchRenameBtn.classList.toggle("hidden", vaultState.selectedIds.size !== 1);
+          }
+        } else {
+          if (selBar) selBar.classList.add("hidden");
+          if (quietSum) quietSum.classList.remove("hidden");
+          const folderCount = visible.filter(v => v.isFolder).length;
+          const fileCount = visible.filter(v => !v.isFolder).length;
+          const totalBytes = visible.reduce((acc, v) => acc + getItemEffectiveSize(v), 0);
+          const counter = document.getElementById("stat-vault-files-count");
+          if (counter) {
+            const parts = [];
+            if (folderCount > 0) parts.push(`${folderCount} folder${folderCount !== 1 ? "s" : ""}`);
+            if (fileCount > 0) parts.push(`${fileCount} file${fileCount !== 1 ? "s" : ""}`);
+            if (parts.length === 0) {
+              counter.textContent = "0 items";
+            } else {
+              counter.textContent = `${parts.join(" · ")} · ${formatResourceSizeLabel(totalBytes)}`;
+            }
+          }
+        }
+
+        // View mode toggle icon
+        const viewIcon = document.getElementById("vd-view-toggle-icon");
+        if (viewIcon) {
+          viewIcon.setAttribute("data-lucide", vaultState.viewMode === "grid" ? "list" : "layout-grid");
+        }
+
+        // Sort indicator labels & master checkbox
+        const sortLabelEl = document.getElementById("vd-sort-label");
+        const sortDirIcon = document.getElementById("vd-sort-dir-icon");
+        const sortNames = { name: "Name", date: "Date added", size: "Size", type: "Type" };
+        if (sortLabelEl) sortLabelEl.textContent = sortNames[vaultState.sortBy] || "Name";
+        if (sortDirIcon) sortDirIcon.setAttribute("data-lucide", vaultState.sortDir === "asc" ? "arrow-up" : "arrow-down");
+
+        const masterCheck = document.getElementById("vd-master-check");
+        if (masterCheck) {
+          const selectedVisibleCount = visible.filter(v => vaultState.selectedIds.has(v.id)).length;
+          masterCheck.classList.remove("checked", "indeterminate");
+          if (visible.length > 0 && selectedVisibleCount === visible.length) {
+            masterCheck.classList.add("checked");
+            masterCheck.innerHTML = `<i data-lucide="check" style="width: 12px; height: 12px; stroke-width: 3;"></i>`;
+          } else if (selectedVisibleCount > 0) {
+            masterCheck.classList.add("indeterminate");
+            masterCheck.innerHTML = `<i data-lucide="minus" style="width: 12px; height: 12px; stroke-width: 3;"></i>`;
+          } else {
+            masterCheck.innerHTML = "";
+          }
+        }
+
+        // Grid / List / Empty visibility
+        const gridEl = document.getElementById("files-grid");
+        const listWrap = document.getElementById("vd-list-view");
+        const listTbody = document.getElementById("vd-list-tbody");
+        const emptyEl = document.getElementById("vault-empty-state");
+        const emptyTitle = document.getElementById("vd-empty-title");
+        const emptyDesc = document.getElementById("vd-empty-desc");
+        const emptyActions = document.getElementById("vd-empty-actions");
+        const emptyClearBtn = document.getElementById("vd-empty-clear-search-btn");
+        const sortRow = document.getElementById("vd-sort-row");
+
+        if (visible.length === 0) {
+          gridEl.classList.add("hidden");
+          listWrap.classList.add("hidden");
+          emptyEl.classList.remove("hidden");
+          if (sortRow) sortRow.classList.toggle("hidden", !vaultState.searchQuery && vaultState.typeFilter === "all");
+
+          if (vaultState.searchQuery) {
+            if (emptyTitle) emptyTitle.textContent = `No results for "${vaultState.searchQuery}"`;
+            if (emptyDesc) emptyDesc.textContent = "Try a different keyword or switch search scope to the entire File Vault.";
+            if (emptyActions) emptyActions.classList.add("hidden");
+            if (emptyClearBtn) emptyClearBtn.classList.remove("hidden");
+          } else if (vaultState.typeFilter !== "all") {
+            if (emptyTitle) emptyTitle.textContent = `No ${vaultState.typeFilter} in this folder`;
+            if (emptyDesc) emptyDesc.textContent = "Switch back to All items or upload new files into this folder.";
+            if (emptyActions) emptyActions.classList.remove("hidden");
+            if (emptyClearBtn) emptyClearBtn.classList.add("hidden");
+          } else {
+            if (emptyTitle) emptyTitle.textContent = "Drag and drop your files here";
+            if (emptyDesc) emptyDesc.textContent = "This folder is empty. Keep something safe inside your private encrypted vault.";
+            if (emptyActions) emptyActions.classList.remove("hidden");
+            if (emptyClearBtn) emptyClearBtn.classList.add("hidden");
+          }
+
+          if (vaultState.inspectorOpen) renderVaultInspector();
+          lucide.createIcons();
+          return;
+        }
+
+        emptyEl.classList.add("hidden");
+        if (sortRow) sortRow.classList.toggle("hidden", !vaultState.sortRowVisible);
+
+        if (vaultState.viewMode === "grid") {
+          listWrap.classList.add("hidden");
+          gridEl.classList.remove("hidden");
+          gridEl.classList.toggle("has-selection", vaultState.selectedIds.size > 0);
+          renderVaultGrid(gridEl, visible);
+        } else {
+          gridEl.classList.add("hidden");
+          listWrap.classList.remove("hidden");
+          renderVaultList(listTbody, visible);
+        }
+
+        if (vaultState.inspectorOpen) renderVaultInspector();
+        lucide.createIcons();
+      }
+
+      function renderVaultBreadcrumbs() {
+        const container = document.getElementById("vd-breadcrumbs");
+        if (!container) return;
+
+        const ancestors = getFolderAncestors(vaultState.currentFolderId);
+        let html = `
+          <button type="button" class="vd-crumb-btn ${ancestors.length === 0 ? "active" : ""}" onclick="navigateVaultFolder('')">
+            <span>File Vault</span>
+          </button>
+        `;
+
+        ancestors.forEach((folder, idx) => {
+          const isLast = idx === ancestors.length - 1;
+          html += `<i data-lucide="chevron-right" class="vd-crumb-sep"></i>`;
+          if (isLast) {
+            html += `
+              <button type="button" class="vd-crumb-btn active vd-crumb-menu-trigger" onclick="openVaultItemContextMenu('${folder.id}', event)" title="Folder actions">
+                <span>${escapeVaultHtml(folder.name)}</span>
+                <i data-lucide="chevron-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+              </button>
+            `;
+          } else {
+            html += `
+              <button type="button" class="vd-crumb-btn" onclick="navigateVaultFolder('${folder.id}')">
+                <span>${escapeVaultHtml(folder.name)}</span>
+              </button>
+            `;
+          }
+        });
+
+        container.innerHTML = html;
+      }
+
+      function renderVaultGrid(gridEl, items) {
+        gridEl.innerHTML = "";
+        const isSearching = Boolean(vaultState.searchQuery);
+
+        items.forEach(item => {
+          const isSelected = vaultState.selectedIds.has(item.id);
+          const card = document.createElement("div");
+          card.className = `vd-card${isSelected ? " selected" : ""}`;
+          card.draggable = true;
+          card.dataset.id = item.id;
+
+          const isImage = !item.isFolder && (item.type || "").startsWith("image/") && (item.base64 || item.hasChunks);
+          const showShareBadge = Boolean(item.shared || (item.externalLink && !item.base64));
+          const safeName = escapeVaultHtml(item.name);
+
+          let stageContent = "";
+          if (item.isFolder) {
+            const stats = getVaultFolderStats(item.id);
+            stageContent = `
+              ${getVaultFolderIconSvg(74)}
+              <span class="vd-folder-count-hint">${stats.directCount} item${stats.directCount !== 1 ? "s" : ""}</span>
+            `;
+          } else if (isImage) {
+            const cachedUri = vaultThumbCache.get(item.id);
+            stageContent = `
+              <img class="vd-card-thumb" data-thumb-id="${item.id}" src="${cachedUri || ""}" alt="${safeName}" referrerPolicy="no-referrer" style="${cachedUri ? "" : "opacity: 0;"}" />
+              <div class="vd-card-file-graphic vd-thumb-fallback" style="${cachedUri ? "display:none;" : "position:absolute;"}">
+                <i data-lucide="image" style="width: 34px; height: 34px; color: #a855f7;"></i>
+                <span class="vd-file-ext-tag">${escapeVaultHtml(getFileExtensionBadge(item))}</span>
+              </div>
+            `;
+          } else {
+            const vis = getFileVisualAccent(item);
+            stageContent = `
+              <div class="vd-card-file-graphic">
+                <i data-lucide="${vis.icon}" style="width: 40px; height: 40px; color: ${vis.color};"></i>
+                <span class="vd-file-ext-tag">${escapeVaultHtml(getFileExtensionBadge(item))}</span>
+              </div>
+            `;
+          }
+
+          const subText = isSearching
+            ? getVaultLocationPath(getVaultItemParentId(item))
+            : (item.isFolder ? "" : formatResourceSizeLabel(item.size));
+
+          card.innerHTML = `
+            <div class="vd-card-stage">
+              <button type="button" class="vd-card-check" aria-label="Select ${safeName}">
+                ${isSelected ? `<i data-lucide="check" style="width: 13px; height: 13px; stroke-width: 3;"></i>` : ""}
+              </button>
+              ${showShareBadge ? `<span class="vd-card-share-indicator" title="Shared / External link"><i data-lucide="link-2" style="width: 13px; height: 13px;"></i></span>` : ""}
+              ${stageContent}
+            </div>
+            <div class="vd-card-footer">
+              <div class="vd-card-name-wrap">
+                <div class="vd-card-name" title="${safeName}">${safeName}</div>
+                ${subText ? `<div class="vd-card-sub" title="${escapeVaultHtml(subText)}">${escapeVaultHtml(subText)}</div>` : ""}
+              </div>
+              <button type="button" class="vd-card-more" aria-label="More actions for ${safeName}" title="More options">
+                <i data-lucide="more-vertical" style="width: 16px; height: 16px;"></i>
+              </button>
+            </div>
+          `;
+
+          // Wire card event listeners
+          const checkBtn = card.querySelector(".vd-card-check");
+          checkBtn.addEventListener("click", (e) => toggleVaultItemSelection(item.id, e));
+
+          const moreBtn = card.querySelector(".vd-card-more");
+          moreBtn.addEventListener("click", (e) => openVaultItemContextMenu(item.id, e));
+
+          card.addEventListener("click", (e) => {
+            if (e.target.closest(".vd-card-check") || e.target.closest(".vd-card-more")) return;
+            handleVaultItemClick(item.id, e);
+          });
+          card.addEventListener("dblclick", (e) => {
+            if (e.target.closest(".vd-card-check") || e.target.closest(".vd-card-more")) return;
+            handleVaultItemDoubleClick(item.id);
+          });
+          card.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            openVaultItemContextMenu(item.id, e);
+          });
+
+          // Drag-and-drop move onto folder card
+          card.addEventListener("dragstart", (e) => {
+            if (vaultState.selectedIds.has(item.id)) {
+              vaultState.draggedItemIds = Array.from(vaultState.selectedIds);
+            } else {
+              vaultState.draggedItemIds = [item.id];
+            }
+            e.dataTransfer.setData("text/plain", item.id);
+            e.dataTransfer.effectAllowed = "move";
+          });
+          card.addEventListener("dragend", () => {
+            vaultState.draggedItemIds = [];
+            document.querySelectorAll(".vd-card.drag-target").forEach(el => el.classList.remove("drag-target"));
+          });
+
+          if (item.isFolder) {
+            card.addEventListener("dragover", (e) => {
+              if (vaultState.draggedItemIds.length === 0) return;
+              if (vaultState.draggedItemIds.includes(item.id)) return;
+              e.preventDefault();
+              card.classList.add("drag-target");
+            });
+            card.addEventListener("dragleave", () => card.classList.remove("drag-target"));
+            card.addEventListener("drop", async (e) => {
+              if (vaultState.draggedItemIds.length === 0) return;
+              e.preventDefault();
+              e.stopPropagation();
+              card.classList.remove("drag-target");
+              await moveVaultItemsToFolder(vaultState.draggedItemIds, item.id);
+              vaultState.draggedItemIds = [];
+            });
+          }
+
+          // Hydrate image thumbnail if needed
+          if (isImage) {
+            const imgEl = card.querySelector("img.vd-card-thumb");
+            const fallbackEl = card.querySelector(".vd-thumb-fallback");
+            if (imgEl) {
+              imgEl.onload = () => {
+                imgEl.style.opacity = "1";
+                if (fallbackEl) fallbackEl.style.display = "none";
+              };
+              imgEl.onerror = () => {
+                imgEl.style.opacity = "0";
+                if (fallbackEl) fallbackEl.style.display = "flex";
+              };
+              if (!vaultThumbCache.has(item.id)) {
+                hydrateVaultImageThumb(item, imgEl);
+              }
+            }
+          }
+
+          gridEl.appendChild(card);
+        });
+      }
+
+      function renderVaultList(tbody, items) {
+        tbody.innerHTML = "";
+        items.forEach(item => {
+          const isSelected = vaultState.selectedIds.has(item.id);
+          const tr = document.createElement("tr");
+          if (isSelected) tr.classList.add("selected");
+
+          const safeName = escapeVaultHtml(item.name);
+          const vis = getFileVisualAccent(item);
+          const dateStr = item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "—";
+          const sizeStr = item.isFolder
+            ? `${getVaultFolderStats(item.id).directCount} items`
+            : formatResourceSizeLabel(item.size);
+          const typeLabel = item.isFolder ? "Folder" : getFileExtensionBadge(item);
+
+          tr.innerHTML = `
+            <td>
+              <button type="button" class="vd-master-check ${isSelected ? "checked" : ""}" aria-label="Select ${safeName}">
+                ${isSelected ? `<i data-lucide="check" style="width: 12px; height: 12px; stroke-width: 3;"></i>` : ""}
+              </button>
+            </td>
+            <td>
+              <div class="vd-list-name-cell">
+                ${item.isFolder
+                  ? getVaultFolderIconSvg(22)
+                  : `<i data-lucide="${vis.icon}" style="width: 18px; height: 18px; color: ${vis.color}; flex-shrink: 0;"></i>`
+                }
+                <span class="vd-list-name-text" title="${safeName}">${safeName}</span>
+                ${(item.shared || (item.externalLink && !item.base64)) ? `<i data-lucide="link-2" style="width: 13px; height: 13px; color: var(--text-muted); flex-shrink: 0;" title="Shared / Link"></i>` : ""}
+              </div>
+            </td>
+            <td style="color: var(--text-secondary);">${escapeVaultHtml(typeLabel)}</td>
+            <td class="vd-num-col" style="text-align: right;">${escapeVaultHtml(sizeStr)}</td>
+            <td class="vd-num-col">${escapeVaultHtml(dateStr)}</td>
+            <td>
+              <button type="button" class="vd-card-more" title="More options">
+                <i data-lucide="more-vertical" style="width: 16px; height: 16px;"></i>
+              </button>
+            </td>
+          `;
+
+          tr.querySelector(".vd-master-check").addEventListener("click", (e) => toggleVaultItemSelection(item.id, e));
+          tr.querySelector(".vd-card-more").addEventListener("click", (e) => openVaultItemContextMenu(item.id, e));
+          tr.addEventListener("click", (e) => {
+            if (e.target.closest("button")) return;
+            handleVaultItemClick(item.id, e);
+          });
+          tr.addEventListener("dblclick", (e) => {
+            if (e.target.closest("button")) return;
+            handleVaultItemDoubleClick(item.id);
+          });
+          tr.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            openVaultItemContextMenu(item.id, e);
+          });
+
+          tbody.appendChild(tr);
+        });
+      }
+
+      // ── Context Menu (3-dot & Right-click) ──
+
+      window.openVaultItemContextMenu = function(id, evt) {
+        if (evt) evt.stopPropagation();
+        const item = files.find(f => f.id === id);
+        if (!item) return;
+
+        closeVaultMenus();
+        const menu = document.getElementById("vd-context-menu");
+        if (!menu) return;
+
+        const isFolder = Boolean(item.isFolder);
+        const hasDownload = !isFolder && (item.base64 || item.hasChunks);
+        const hasExtLink = !isFolder && Boolean(item.externalLink);
+
+        menu.innerHTML = `
+          <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); handleVaultItemDoubleClick('${item.id}')">
+            <i data-lucide="${isFolder ? "folder-open" : "eye"}" style="width: 15px; height: 15px;"></i>
+            <span>${isFolder ? "Open folder" : "Preview"}</span>
+          </button>
+          ${hasDownload ? `
+            <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); runAnchorDownload('${item.id}')">
+              <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+              <span>Download</span>
+            </button>
+          ` : ""}
+          ${hasExtLink ? `
+            <a href="${escapeVaultHtml(item.externalLink)}" target="_blank" rel="noopener noreferrer" class="vd-dropdown-item" onclick="closeVaultMenus()">
+              <i data-lucide="external-link" style="width: 15px; height: 15px;"></i>
+              <span>Open link</span>
+            </a>
+          ` : ""}
+          <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); toggleVaultItemShare('${item.id}')">
+            <i data-lucide="link-2" style="width: 15px; height: 15px;"></i>
+            <span>${item.shared ? "Remove share mark" : "Share / Copy link"}</span>
+          </button>
+          <div class="vd-dropdown-divider"></div>
+          <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); openVaultRenameModal('${item.id}')">
+            <i data-lucide="pencil" style="width: 15px; height: 15px;"></i>
+            <span>Rename</span>
+          </button>
+          <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); openVaultMoveModal(['${item.id}'])">
+            <i data-lucide="move" style="width: 15px; height: 15px;"></i>
+            <span>Move to...</span>
+          </button>
+          <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); inspectVaultItem('${item.id}')">
+            <i data-lucide="info" style="width: 15px; height: 15px;"></i>
+            <span>Details & Info</span>
+          </button>
+          <div class="vd-dropdown-divider"></div>
+          <button type="button" class="vd-dropdown-item danger" onclick="closeVaultMenus(); runDeleteVaultFile('${item.id}')">
+            <i data-lucide="trash-2" style="width: 15px; height: 15px;"></i>
+            <span>Delete</span>
+          </button>
+        `;
+
+        menu.classList.remove("hidden");
+        lucide.createIcons();
+
+        // Smart viewport-bounded positioning
+        const menuW = 204;
+        const menuH = menu.offsetHeight || 280;
+        let x = evt.clientX || 120;
+        let y = evt.clientY || 120;
+        if (evt.currentTarget && evt.currentTarget.getBoundingClientRect && evt.type === "click") {
+          const rect = evt.currentTarget.getBoundingClientRect();
+          x = rect.left;
+          y = rect.bottom + 6;
+        }
+        if (x + menuW > window.innerWidth - 12) x = window.innerWidth - menuW - 12;
+        if (y + menuH > window.innerHeight - 12) y = Math.max(12, y - menuH - 36);
+        menu.style.left = `${Math.max(12, x)}px`;
+        menu.style.top = `${Math.max(12, y)}px`;
+      };
+
+      // ── Details Inspector Drawer ──
+
+      window.inspectVaultItem = function(id) {
+        vaultState.selectedIds.clear();
+        vaultState.selectedIds.add(id);
+        toggleVaultInspector(true);
+        renderVaultFilesComponent();
+      };
+
+      function renderVaultInspector() {
+        const body = document.getElementById("vd-inspector-body");
+        const titleEl = document.getElementById("vd-inspector-title");
+        if (!body || !titleEl) return;
+
+        const selectedArr = Array.from(vaultState.selectedIds)
+          .map(sid => files.find(f => f.id === sid))
+          .filter(Boolean);
+
+        if (selectedArr.length === 1) {
+          const item = selectedArr[0];
+          titleEl.textContent = item.name;
+          const isFolder = Boolean(item.isFolder);
+          const isImage = !isFolder && (item.type || "").startsWith("image/") && (item.base64 || item.hasChunks);
+          const vis = getFileVisualAccent(item);
+          const stats = isFolder ? getVaultFolderStats(item.id) : null;
+          const cachedThumb = isImage ? vaultThumbCache.get(item.id) : "";
+
+          body.innerHTML = `
+            <div class="vd-inspector-preview">
+              ${isFolder
+                ? getVaultFolderIconSvg(76)
+                : (isImage && cachedThumb
+                    ? `<img src="${cachedThumb}" alt="${escapeVaultHtml(item.name)}" referrerPolicy="no-referrer" />`
+                    : `<div class="vd-card-file-graphic"><i data-lucide="${vis.icon}" style="width: 44px; height: 44px; color: ${vis.color};"></i><span class="vd-file-ext-tag">${escapeVaultHtml(getFileExtensionBadge(item))}</span></div>`
+                  )
+              }
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="vd-btn-secondary" style="flex: 1; height: 34px; font-size: 12.5px; padding: 0 10px;" onclick="handleVaultItemDoubleClick('${item.id}')">
+                <i data-lucide="${isFolder ? "folder-open" : "eye"}" style="width: 14px; height: 14px;"></i>
+                <span>${isFolder ? "Open" : "Preview"}</span>
+              </button>
+              ${!isFolder && (item.base64 || item.hasChunks) ? `
+                <button type="button" class="vd-btn-secondary" style="flex: 1; height: 34px; font-size: 12.5px; padding: 0 10px;" onclick="runAnchorDownload('${item.id}')">
+                  <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+                  <span>Download</span>
+                </button>
+              ` : ""}
+            </div>
+
+            <div class="vd-inspector-meta-list">
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Type</span>
+                <span class="vd-inspector-meta-val">${escapeVaultHtml(isFolder ? "Folder" : getFileExtensionBadge(item))}</span>
+              </div>
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Size</span>
+                <span class="vd-inspector-meta-val">${escapeVaultHtml(formatResourceSizeLabel(getItemEffectiveSize(item)))}</span>
+              </div>
+              ${isFolder ? `
+                <div class="vd-inspector-meta-row">
+                  <span class="vd-inspector-meta-label">Contents</span>
+                  <span class="vd-inspector-meta-val">${stats.folderCount} folders · ${stats.fileCount} files</span>
+                </div>
+              ` : ""}
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Location</span>
+                <span class="vd-inspector-meta-val" title="${escapeVaultHtml(getVaultLocationPath(getVaultItemParentId(item)))}">${escapeVaultHtml(getVaultLocationPath(getVaultItemParentId(item)))}</span>
+              </div>
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Added</span>
+                <span class="vd-inspector-meta-val">${item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "—"}</span>
+              </div>
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Shared</span>
+                <span class="vd-inspector-meta-val">${item.shared ? "Yes" : "Private"}</span>
+              </div>
+            </div>
+
+            <form class="vd-inspector-form" onsubmit="saveVaultInspectorDetails(event, '${item.id}')">
+              <div>
+                <label class="vd-field-label" for="vd-insp-cat">Category</label>
+                <select id="vd-insp-cat" class="vd-input">
+                  ${["Personal", "Work", "Study", "Finance", "Health", "Other"].map(c =>
+                    `<option value="${c}" ${(item.category || "Personal") === c ? "selected" : ""}>${c}</option>`
+                  ).join("")}
+                </select>
+              </div>
+              <div>
+                <label class="vd-field-label" for="vd-insp-prio">Priority</label>
+                <select id="vd-insp-prio" class="vd-input">
+                  ${["Low", "Medium", "High"].map(p =>
+                    `<option value="${p}" ${(item.priority || "Medium") === p ? "selected" : ""}>${p}</option>`
+                  ).join("")}
+                </select>
+              </div>
+              <div>
+                <label class="vd-field-label" for="vd-insp-tags">Tags (comma separated)</label>
+                <input type="text" id="vd-insp-tags" class="vd-input" value="${escapeVaultHtml(Array.isArray(item.tags) ? item.tags.join(", ") : "")}" placeholder="work, urgent, archive" />
+              </div>
+              ${!isFolder ? `
+                <div>
+                  <label class="vd-field-label" for="vd-insp-link">External link</label>
+                  <input type="url" id="vd-insp-link" class="vd-input" value="${escapeVaultHtml(item.externalLink || "")}" placeholder="https://..." />
+                </div>
+              ` : ""}
+              <div>
+                <label class="vd-field-label" for="vd-insp-notes">Notes</label>
+                <textarea id="vd-insp-notes" class="vd-input" rows="3" placeholder="Add notes about this item...">${escapeVaultHtml(item.notes || "")}</textarea>
+              </div>
+              <button type="submit" class="vd-btn-primary" style="height: 36px; width: 100%; font-size: 13px;">Save details</button>
+            </form>
+          `;
+        } else if (selectedArr.length > 1) {
+          const totalBytes = selectedArr.reduce((acc, it) => acc + getItemEffectiveSize(it), 0);
+          const fCount = selectedArr.filter(it => it.isFolder).length;
+          const fileCount = selectedArr.length - fCount;
+          titleEl.textContent = `${selectedArr.length} items selected`;
+          body.innerHTML = `
+            <div class="vd-inspector-preview">
+              <div class="vd-card-file-graphic">
+                <i data-lucide="layers" style="width: 42px; height: 42px; color: var(--accent-color);"></i>
+                <span class="vd-file-ext-tag">${selectedArr.length} SELECTED</span>
+              </div>
+            </div>
+            <div class="vd-inspector-meta-list">
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Folders</span>
+                <span class="vd-inspector-meta-val">${fCount}</span>
+              </div>
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Files</span>
+                <span class="vd-inspector-meta-val">${fileCount}</span>
+              </div>
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Total size</span>
+                <span class="vd-inspector-meta-val">${formatResourceSizeLabel(totalBytes)}</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+              <button type="button" class="vd-btn-secondary" style="height: 36px; font-size: 13px;" onclick="openVaultMoveModalForSelected()">
+                <i data-lucide="move" style="width: 14px; height: 14px;"></i>
+                <span>Move selected</span>
+              </button>
+              <button type="button" class="vd-btn-secondary" style="height: 36px; font-size: 13px; color: #ef4444;" onclick="deleteSelectedVaultItems()">
+                <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                <span>Delete selected</span>
+              </button>
+            </div>
+          `;
+        } else {
+          const currentFolder = vaultState.currentFolderId
+            ? files.find(f => f.id === vaultState.currentFolderId)
+            : null;
+          const folderStats = vaultState.currentFolderId
+            ? getVaultFolderStats(vaultState.currentFolderId)
+            : {
+                folderCount: files.filter(f => f.isFolder).length,
+                fileCount: files.filter(f => !f.isFolder).length,
+                totalSize: files.filter(f => !f.isFolder).reduce((a, f) => a + (Number(f.size) || 0), 0)
+              };
+          titleEl.textContent = currentFolder ? currentFolder.name : "File Vault";
+          body.innerHTML = `
+            <div class="vd-inspector-preview">
+              ${getVaultFolderIconSvg(74)}
+            </div>
+            <div class="vd-inspector-meta-list">
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Location</span>
+                <span class="vd-inspector-meta-val">${escapeVaultHtml(getVaultLocationPath(vaultState.currentFolderId))}</span>
+              </div>
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Folders</span>
+                <span class="vd-inspector-meta-val">${folderStats.folderCount}</span>
+              </div>
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Files</span>
+                <span class="vd-inspector-meta-val">${folderStats.fileCount}</span>
+              </div>
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Total size</span>
+                <span class="vd-inspector-meta-val">${formatResourceSizeLabel(folderStats.totalSize)}</span>
+              </div>
+              <div class="vd-inspector-meta-row">
+                <span class="vd-inspector-meta-label">Storage</span>
+                <span class="vd-inspector-meta-val">${isFirebaseReady ? "Cloud Synced" : "Local Browser"}</span>
+              </div>
+            </div>
+            <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin-top: 6px;">
+              Select any file or folder to view and edit its tags, notes, category, and sharing status.
+            </p>
+          `;
+        }
+
+        lucide.createIcons();
+      }
+
+      window.saveVaultInspectorDetails = async function(evt, id) {
+        evt.preventDefault();
+        const item = files.find(f => f.id === id);
+        if (!item) return;
+
+        const category = document.getElementById("vd-insp-cat")?.value || "Personal";
+        const priority = document.getElementById("vd-insp-prio")?.value || "Medium";
+        const tagsRaw = document.getElementById("vd-insp-tags")?.value || "";
+        const tags = tagsRaw.split(",").map(t => t.trim()).filter(Boolean);
+        const notes = document.getElementById("vd-insp-notes")?.value.trim() || "";
+        const linkEl = document.getElementById("vd-insp-link");
+        const externalLink = linkEl ? linkEl.value.trim() : (item.externalLink || "");
+        const updatedAt = new Date().toISOString();
+
+        const patch = { category, priority, tags, notes, externalLink, updatedAt };
+        try {
+          await dbService.updateFileMeta(currentUser, id, patch);
+          Object.assign(item, patch);
+          showToast("Details updated", "success");
+          renderVaultFilesComponent();
+        } catch (err) {
+          showToast("Failed to update details: " + err.message, "error");
+        }
+      };
+
+      // ── New Folder Modal ──
+
+      window.openVaultFolderModal = function() {
+        closeVaultMenus();
+        const m = document.getElementById("vd-folder-modal");
+        const inp = document.getElementById("vd-folder-name-input");
+        if (inp) inp.value = "";
+        if (m) m.classList.remove("hidden");
+        setTimeout(() => inp && inp.focus(), 40);
+      };
+
+      window.closeVaultFolderModal = function() {
+        const m = document.getElementById("vd-folder-modal");
+        if (m) m.classList.add("hidden");
+      };
+
+      window.submitVaultNewFolder = async function(evt) {
+        evt.preventDefault();
+        const inp = document.getElementById("vd-folder-name-input");
+        const name = inp ? inp.value.trim() : "";
+        if (!name) return;
+
+        const duplicate = files.some(f =>
+          f.isFolder &&
+          getVaultItemParentId(f) === vaultState.currentFolderId &&
+          f.name.toLowerCase() === name.toLowerCase()
+        );
+        if (duplicate) {
+          showToast(`A folder named "${name}" already exists here`, "warn");
+          return;
+        }
+
+        const fId = "folder-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6);
+        const now = new Date().toISOString();
+        const folderModel = {
+          name,
+          type: "inode/directory",
+          size: 0,
+          base64: "",
+          externalLink: "",
+          notes: "",
+          category: "Personal",
+          priority: "Medium",
+          tags: [],
+          isFolder: true,
+          parentId: vaultState.currentFolderId || "",
+          shared: false,
+          createdAt: now,
+          updatedAt: now
+        };
+
+        try {
+          await dbService.writeFile(currentUser, fId, folderModel);
+          files.push({ id: fId, ...folderModel });
+          closeVaultFolderModal();
+          renderVaultFilesComponent();
+          showToast(`Created folder "${name}"`, "success");
+        } catch (err) {
+          showToast("Failed to create folder: " + err.message, "error");
+        }
+      };
+
+      // ── Rename Modal ──
+
+      window.openVaultRenameModal = function(id) {
+        const item = files.find(f => f.id === id);
+        if (!item) return;
+        vaultState.renameTargetId = id;
+        const m = document.getElementById("vd-rename-modal");
+        const inp = document.getElementById("vd-rename-input");
+        if (inp) inp.value = item.name;
+        if (m) m.classList.remove("hidden");
+        setTimeout(() => {
+          if (inp) {
+            inp.focus();
+            inp.select();
+          }
+        }, 40);
+      };
+
+      window.renameSingleSelectedVaultItem = function() {
+        if (vaultState.selectedIds.size !== 1) return;
+        const id = Array.from(vaultState.selectedIds)[0];
+        openVaultRenameModal(id);
+      };
+
+      window.closeVaultRenameModal = function() {
+        vaultState.renameTargetId = null;
+        const m = document.getElementById("vd-rename-modal");
+        if (m) m.classList.add("hidden");
+      };
+
+      window.submitVaultRename = async function(evt) {
+        evt.preventDefault();
+        const id = vaultState.renameTargetId;
+        const item = files.find(f => f.id === id);
+        const inp = document.getElementById("vd-rename-input");
+        const newName = inp ? inp.value.trim() : "";
+        if (!item || !newName) return;
+
+        if (newName === item.name) {
+          closeVaultRenameModal();
+          return;
+        }
+
+        const updatedAt = new Date().toISOString();
+        try {
+          await dbService.updateFileMeta(currentUser, id, { name: newName, updatedAt });
+          item.name = newName;
+          item.updatedAt = updatedAt;
+          closeVaultRenameModal();
+          renderVaultFilesComponent();
+          showToast(`Renamed to "${newName}"`, "success");
+        } catch (err) {
+          showToast("Rename failed: " + err.message, "error");
+        }
+      };
+
+      // ── Move Modal & Folder Move Logic ──
+
+      window.openVaultMoveModalForSelected = function() {
+        if (vaultState.selectedIds.size === 0) return;
+        openVaultMoveModal(Array.from(vaultState.selectedIds));
+      };
+
+      window.openVaultMoveModal = function(targetIds) {
+        closeVaultMenus();
+        vaultState.moveTargetIds = [...targetIds];
+        vaultState.moveSelectedDest = "";
+
+        const blocked = new Set(targetIds);
+        targetIds.forEach(tid => {
+          const it = files.find(f => f.id === tid);
+          if (it && it.isFolder) {
+            getVaultDescendantIds(tid).forEach(d => blocked.add(d));
+          }
+        });
+
+        const subtitle = document.getElementById("vd-move-subtitle");
+        if (subtitle) {
+          subtitle.textContent = `Choose a destination for ${targetIds.length} item${targetIds.length !== 1 ? "s" : ""}.`;
+        }
+
+        const listEl = document.getElementById("vd-move-list");
+        if (listEl) {
+          const rows = [{ id: "", name: "File Vault (Root)", depth: 0, disabled: false }];
+
+          function appendFolderTree(parentId, depth) {
+            const children = files
+              .filter(f => f.isFolder && getVaultItemParentId(f) === parentId)
+              .sort((a, b) => a.name.localeCompare(b.name));
+            children.forEach(ch => {
+              rows.push({
+                id: ch.id,
+                name: ch.name,
+                depth,
+                disabled: blocked.has(ch.id)
+              });
+              appendFolderTree(ch.id, depth + 1);
+            });
+          }
+          appendFolderTree("", 1);
+
+          listEl.innerHTML = rows.map(r => `
+            <button type="button" class="vd-move-option ${r.id === vaultState.moveSelectedDest ? "selected" : ""}" data-dest-id="${r.id}" ${r.disabled ? "disabled" : ""} style="padding-left: ${10 + r.depth * 18}px;" onclick="selectVaultMoveDestination('${r.id}')">
+              <i data-lucide="${r.id === "" ? "hard-drive" : "folder"}" style="width: 15px; height: 15px; color: ${r.id === "" ? "var(--accent-color)" : "#f5a600"}; flex-shrink: 0;"></i>
+              <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeVaultHtml(r.name)}</span>
+            </button>
+          `).join("");
+        }
+
+        const m = document.getElementById("vd-move-modal");
+        if (m) m.classList.remove("hidden");
+        lucide.createIcons();
+      };
+
+      window.selectVaultMoveDestination = function(destId) {
+        vaultState.moveSelectedDest = destId;
+        document.querySelectorAll("#vd-move-list .vd-move-option").forEach(btn => {
+          btn.classList.toggle("selected", btn.getAttribute("data-dest-id") === destId);
+        });
+      };
+
+      window.closeVaultMoveModal = function() {
+        const m = document.getElementById("vd-move-modal");
+        if (m) m.classList.add("hidden");
+        vaultState.moveTargetIds = [];
+      };
+
+      window.confirmVaultMove = async function() {
+        const ids = [...vaultState.moveTargetIds];
+        const dest = vaultState.moveSelectedDest;
+        closeVaultMoveModal();
+        await moveVaultItemsToFolder(ids, dest);
+      };
+
+      async function moveVaultItemsToFolder(itemIds, destFolderId) {
+        const blocked = new Set();
+        itemIds.forEach(id => {
+          const it = files.find(f => f.id === id);
+          if (it && it.isFolder) {
+            blocked.add(id);
+            getVaultDescendantIds(id).forEach(d => blocked.add(d));
+          }
+        });
+        if (destFolderId && blocked.has(destFolderId)) {
+          showToast("Cannot move a folder into itself or its subfolder", "warn");
+          return;
+        }
+
+        const updatedAt = new Date().toISOString();
+        let moved = 0;
+        for (const id of itemIds) {
+          const it = files.find(f => f.id === id);
+          if (!it || getVaultItemParentId(it) === destFolderId) continue;
+          try {
+            await dbService.updateFileMeta(currentUser, id, { parentId: destFolderId, updatedAt });
+            it.parentId = destFolderId;
+            it.updatedAt = updatedAt;
+            moved++;
+          } catch (err) {
+            console.error("Move failed for", id, err);
+          }
+        }
+
+        if (moved > 0) {
+          vaultState.selectedIds.clear();
+          const destName = destFolderId
+            ? (files.find(f => f.id === destFolderId)?.name || "folder")
+            : "File Vault";
+          showToast(`Moved ${moved} item${moved !== 1 ? "s" : ""} to "${destName}"`, "success");
+          renderVaultFilesComponent();
+        }
+      }
+
+      // ── External Link / Large File Modal ──
+
+      window.openVaultLinkModal = function(preset) {
+        closeVaultMenus();
+        vaultState.pendingLargeFile = preset || null;
+        const titleEl = document.getElementById("vd-link-modal-title");
+        const descEl = document.getElementById("vd-link-modal-desc");
+        const nameEl = document.getElementById("vd-link-name");
+        const urlEl = document.getElementById("vd-link-url");
+        const notesEl = document.getElementById("vd-link-notes");
+
+        if (titleEl) titleEl.textContent = preset?.title || "Add external link";
+        if (descEl) descEl.textContent = preset?.desc || "Save a cloud link (Google Drive, Dropbox, GitHub, etc.) inside the current folder.";
+        if (nameEl) nameEl.value = preset?.name || "";
+        if (urlEl) urlEl.value = "";
+        if (notesEl) notesEl.value = "";
+
+        const m = document.getElementById("vd-link-modal");
+        if (m) m.classList.remove("hidden");
+        setTimeout(() => (preset?.name ? urlEl : nameEl)?.focus(), 40);
+      };
+
+      window.closeVaultLinkModal = function() {
+        vaultState.pendingLargeFile = null;
+        const m = document.getElementById("vd-link-modal");
+        if (m) m.classList.add("hidden");
+      };
+
+      window.submitVaultExternalLink = async function(evt) {
+        evt.preventDefault();
+        const name = document.getElementById("vd-link-name")?.value.trim() || "";
+        const url = document.getElementById("vd-link-url")?.value.trim() || "";
+        const category = document.getElementById("vd-link-category")?.value || "Personal";
+        const priority = document.getElementById("vd-link-priority")?.value || "Medium";
+        const notes = document.getElementById("vd-link-notes")?.value.trim() || "";
+        if (!name || !url) return;
+
+        const fId = "file-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6);
+        const now = new Date().toISOString();
+        const model = {
+          name,
+          type: vaultState.pendingLargeFile?.mimeType || "text/uri-list",
+          size: vaultState.pendingLargeFile?.size || 0,
+          base64: "",
+          externalLink: url,
+          notes,
+          category,
+          priority,
+          tags: [],
+          isFolder: false,
+          parentId: vaultState.currentFolderId || "",
+          shared: true,
+          createdAt: now,
+          updatedAt: now
+        };
+
+        try {
+          await dbService.writeFile(currentUser, fId, { ...model });
+          files.push({ id: fId, ...model });
+          closeVaultLinkModal();
+          renderVaultFilesComponent();
+          showToast(`Saved link "${name}"`, "success");
+        } catch (err) {
+          showToast("Failed to save link: " + err.message, "error");
+        }
+      };
+
+      // ── Share / Copy Link ──
+
+      window.toggleVaultItemShare = async function(id) {
+        const item = files.find(f => f.id === id);
+        if (!item) return;
+        const nextShared = !item.shared;
+        const updatedAt = new Date().toISOString();
+        try {
+          await dbService.updateFileMeta(currentUser, id, { shared: nextShared, updatedAt });
+          item.shared = nextShared;
+          item.updatedAt = updatedAt;
+
+          if (nextShared && navigator.clipboard) {
+            const shareText = item.externalLink || `${item.name} (${getVaultLocationPath(getVaultItemParentId(item))})`;
+            navigator.clipboard.writeText(shareText).catch(() => {});
+            showToast(item.externalLink ? "Link copied to clipboard" : `Marked "${item.name}" as shared & copied reference`, "success");
+          } else {
+            showToast(nextShared ? `Marked "${item.name}" as shared` : `Removed share mark from "${item.name}"`, "info");
+          }
+          renderVaultFilesComponent();
+        } catch (err) {
+          showToast("Share update failed: " + err.message, "error");
+        }
+      };
+
+      window.shareSelectedVaultItems = async function() {
+        const ids = Array.from(vaultState.selectedIds);
+        if (ids.length === 0) return;
+        const selectedItems = ids.map(id => files.find(f => f.id === id)).filter(Boolean);
+        const allShared = selectedItems.every(it => it.shared);
+        const nextShared = !allShared;
+        const updatedAt = new Date().toISOString();
+
+        for (const it of selectedItems) {
+          try {
+            await dbService.updateFileMeta(currentUser, it.id, { shared: nextShared, updatedAt });
+            it.shared = nextShared;
+            it.updatedAt = updatedAt;
+          } catch (err) {
+            console.error("Share toggle error:", err);
+          }
+        }
+        if (nextShared && navigator.clipboard) {
+          const summary = selectedItems.map(it => it.externalLink || it.name).join("\n");
+          navigator.clipboard.writeText(summary).catch(() => {});
+        }
+        showToast(nextShared ? `Shared ${selectedItems.length} item${selectedItems.length !== 1 ? "s" : ""}` : `Cleared share mark on ${selectedItems.length} item${selectedItems.length !== 1 ? "s" : ""}`, "success");
+        renderVaultFilesComponent();
+      };
+
+      window.triggerVaultShareCurrentOrSelected = function() {
+        if (vaultState.selectedIds.size > 0) {
+          shareSelectedVaultItems();
+        } else if (vaultState.currentFolderId) {
+          toggleVaultItemShare(vaultState.currentFolderId);
+        }
+      };
+
+      // ── File Preview Lightbox Modal ──
+
+      window.openVaultPreviewModal = async function(id) {
+        const item = files.find(f => f.id === id);
+        if (!item || item.isFolder) return;
+
+        const modal = document.getElementById("vd-preview-modal");
+        const titleEl = document.getElementById("vd-preview-title");
+        const metaEl = document.getElementById("vd-preview-meta");
+        const bodyEl = document.getElementById("vd-preview-body");
+        const dlBtn = document.getElementById("vd-preview-download-btn");
+        if (!modal || !bodyEl) return;
+
+        titleEl.textContent = item.name;
+        metaEl.textContent = `${getFileExtensionBadge(item)} · ${formatResourceSizeLabel(item.size)} · ${item.createdAt ? new Date(item.createdAt).toLocaleDateString() : ""}`;
+
+        if (dlBtn) {
+          const canDownload = Boolean(item.base64 || item.hasChunks);
+          dlBtn.classList.toggle("hidden", !canDownload);
+          dlBtn.onclick = () => runAnchorDownload(item.id);
+        }
+
+        bodyEl.innerHTML = `<div style="color: var(--text-muted); font-size: 13.5px;">Loading preview...</div>`;
+        modal.classList.remove("hidden");
+        lucide.createIcons();
+
+        if (item.externalLink && !item.base64 && !item.hasChunks) {
+          bodyEl.innerHTML = `
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 28px;">
+              <i data-lucide="external-link" style="width: 48px; height: 48px; color: #38bdf8;"></i>
+              <div style="font-size: 15px; font-weight: 600; color: var(--text-primary);">External Cloud Reference</div>
+              <div style="font-size: 13px; color: var(--text-secondary); word-break: break-all; max-width: 520px;">${escapeVaultHtml(item.externalLink)}</div>
+              <a href="${escapeVaultHtml(item.externalLink)}" target="_blank" rel="noopener noreferrer" class="vd-btn-primary" style="margin-top: 4px;">
+                <i data-lucide="external-link" style="width: 15px; height: 15px;"></i>
+                <span>Open external URL</span>
+              </a>
             </div>
           `;
           lucide.createIcons();
           return;
         }
 
-        collection.forEach(f => {
-          const card = document.createElement("div");
-          card.className = "file-vault-card";
-          
-          const iconRef = getFileIconFromMime(f.type);
-          const weightFormatted = formatResourceSizeLabel(f.size);
-          const dateCreatedStr = new Date(f.createdAt).toLocaleDateString();
-
-          card.innerHTML = `
-            <div class="priority-indicator-bar priority-${f.priority.toLowerCase()}"></div>
-            
-            <div class="card-file-identity">
-              <div class="file-class-icon">
-                <i data-lucide="${iconRef}"></i>
-              </div>
-              <div class="file-name-meta">
-                <div class="file-title-text" title="${f.name}">${f.name}</div>
-                <div class="file-spec-sub">${weightFormatted} • ${dateCreatedStr}</div>
-              </div>
+        const base64 = await resolveVaultFileBase64(item);
+        if (!base64) {
+          bodyEl.innerHTML = `
+            <div style="text-align: center; color: var(--text-secondary); padding: 24px;">
+              <p>Preview unavailable for this file.</p>
             </div>
+          `;
+          return;
+        }
 
-            <div class="metadata-badges-strip">
-              <span class="badge badge-category">${f.category}</span>
-              <span class="badge badge-priority ${f.priority.toLowerCase()}">⚡ ${f.priority} Priority</span>
-            </div>
+        const mime = (item.type || "").toLowerCase();
+        const dataUri = `data:${item.type || "application/octet-stream"};base64,${base64}`;
 
-            ${f.notes ? `<div class="file-notes-section">${f.notes}</div>` : ""}
-
-            ${f.tags && f.tags.length > 0 ? `
-              <div class="file-tags-container">
-                ${f.tags.map(t => `<span class="tag-bubble">#${t}</span>`).join("")}
-              </div>
-            ` : ""}
-
-            <div class="file-card-actions">
-              ${f.base64 ? `
-                <button class="file-action-trigger" onclick="runAnchorDownload('${f.id}')">
-                  <i data-lucide="download-cloud" style="width: 14px;"></i> Download
-                </button>
-              ` : `
-                <a href="${f.externalLink}" target="_blank" class="file-action-trigger" style="text-decoration:none;">
-                  <i data-lucide="external-link" style="width: 14px;"></i> Open URL
-                </a>
-              `}
-              <button class="file-action-trigger file-delete-trigger" onclick="runDeleteVaultFile('${f.id}')">
-                <i data-lucide="trash-2" style="width: 14px;"></i> Erase
+        if (mime.startsWith("image/")) {
+          vaultThumbCache.set(item.id, dataUri);
+          bodyEl.innerHTML = `<img src="${dataUri}" alt="${escapeVaultHtml(item.name)}" referrerPolicy="no-referrer" />`;
+        } else if (mime.includes("pdf")) {
+          bodyEl.innerHTML = `<iframe src="${dataUri}" style="width: 100%; height: 68vh; border: none; border-radius: 8px; background: #ffffff;" title="${escapeVaultHtml(item.name)}"></iframe>`;
+        } else if (mime.startsWith("video/")) {
+          bodyEl.innerHTML = `<video controls style="max-width: 100%; max-height: 68vh; border-radius: 8px;" src="${dataUri}"></video>`;
+        } else if (mime.startsWith("audio/")) {
+          bodyEl.innerHTML = `<audio controls style="width: 100%; max-width: 480px;" src="${dataUri}"></audio>`;
+        } else if (mime.startsWith("text/") || mime.includes("json") || mime.includes("xml") || mime.includes("javascript") || (item.name || "").match(/\.(txt|md|json|js|ts|tsx|css|html|csv|py|log)$/i)) {
+          try {
+            const binaryStr = atob(base64);
+            const bytes = Uint8Array.from(binaryStr, c => c.charCodeAt(0));
+            const decoded = new TextDecoder("utf-8").decode(bytes);
+            bodyEl.innerHTML = `<pre class="vd-preview-text">${escapeVaultHtml(decoded)}</pre>`;
+          } catch {
+            bodyEl.innerHTML = `<div style="color: var(--text-secondary);">Binary file — click Download above to open locally.</div>`;
+          }
+        } else {
+          const vis = getFileVisualAccent(item);
+          bodyEl.innerHTML = `
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 28px;">
+              <i data-lucide="${vis.icon}" style="width: 52px; height: 52px; color: ${vis.color};"></i>
+              <div style="font-size: 15px; font-weight: 600; color: var(--text-primary);">${escapeVaultHtml(item.name)}</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">Direct inline preview is not available for ${escapeVaultHtml(getFileExtensionBadge(item))} files.</div>
+              <button type="button" class="vd-btn-primary" onclick="runAnchorDownload('${item.id}')">
+                <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+                <span>Download file</span>
               </button>
             </div>
           `;
-          
-          grid.appendChild(card);
-        });
-
-        lucide.createIcons();
-      }
-
-      window.handleFilterGridTrigger = function() {
-        renderVaultFilesComponent();
+          lucide.createIcons();
+        }
       };
+
+      window.closeVaultPreviewModal = function() {
+        const modal = document.getElementById("vd-preview-modal");
+        const bodyEl = document.getElementById("vd-preview-body");
+        if (modal) modal.classList.add("hidden");
+        if (bodyEl) bodyEl.innerHTML = "";
+      };
+
+      // ── Download & Delete (Single + Batch + Recursive Folder) ──
 
       window.runAnchorDownload = async function(id) {
         const match = files.find(f => f.id === id);
-        if (!match) return;
-        
-        // Try to get full file data from IndexedDB first for instant access
-        let base64 = await idbService.get(id);
-        
-        // Fallback to fetching chunks from Firestore if not cached locally
-        if (!base64) {
-          if (match.hasChunks) {
-            try {
-              showToast("Retrieving large file from cloud database...", "info");
-              const querySnapshot = await getDocs(collection(db, `userData/${currentUser}/files/${id}/chunks`));
-              const chunksArr = [];
-              querySnapshot.forEach(d => {
-                chunksArr.push(d.data());
-              });
-              chunksArr.sort((a, b) => a.index - b.index);
-              base64 = chunksArr.map(c => c.data).join("");
-              
-              // Cache it locally
-              await idbService.save(id, base64);
-            } catch (err) {
-              showToast("Error retrieving file chunks: " + err.message, "error");
-              return;
-            }
-          } else if (match.base64 && match.base64 !== "HAS_CHUNKS") {
-            base64 = match.base64;
-          }
-        }
-        
-        if (!base64) {
-          showToast("File binary data not found in cache or cloud database.", "error");
+        if (!match || match.isFolder) return;
+
+        if (!match.base64 && !match.hasChunks && match.externalLink) {
+          const linkEl = document.createElement("a");
+          linkEl.href = match.externalLink;
+          linkEl.target = "_blank";
+          linkEl.rel = "noopener noreferrer";
+          linkEl.click();
           return;
         }
-        
-        const blobUri = `data:${match.type};base64,${base64}`;
+
+        if (match.hasChunks && !(await idbService.get(id))) {
+          showToast("Retrieving file from cloud storage...", "info");
+        }
+        const base64 = await resolveVaultFileBase64(match);
+        if (!base64) {
+          showToast("File data not found in cache or cloud database.", "error");
+          return;
+        }
+
+        const blobUri = `data:${match.type || "application/octet-stream"};base64,${base64}`;
         const clicker = document.createElement("a");
         clicker.href = blobUri;
         clicker.download = match.name;
@@ -4560,20 +7057,97 @@
         showToast(`Downloaded: ${match.name}`, "success");
       };
 
+      window.downloadSelectedVaultItems = async function() {
+        const selected = Array.from(vaultState.selectedIds)
+          .map(id => files.find(f => f.id === id))
+          .filter(Boolean);
+
+        const downloadableFiles = [];
+        for (const it of selected) {
+          if (it.isFolder) {
+            const descIds = getVaultDescendantIds(it.id);
+            descIds.forEach(did => {
+              const child = files.find(f => f.id === did && !f.isFolder);
+              if (child) downloadableFiles.push(child);
+            });
+          } else {
+            downloadableFiles.push(it);
+          }
+        }
+
+        if (downloadableFiles.length === 0) {
+          showToast("No downloadable files inside selection", "warn");
+          return;
+        }
+
+        for (const f of downloadableFiles) {
+          await runAnchorDownload(f.id);
+        }
+      };
+
       window.runDeleteVaultFile = async function(id) {
         const target = files.find(f => f.id === id);
         if (!target) return;
-        
-        const verify = await customConfirmPrompt("Erase Document Reference", `Are you sure you want to permanently delete "${target.name}"?`);
+
+        const descIds = target.isFolder ? getVaultDescendantIds(id) : [];
+        const msg = target.isFolder && descIds.length > 0
+          ? `Permanently delete folder "${target.name}" and all ${descIds.length} nested item${descIds.length !== 1 ? "s" : ""}?`
+          : `Are you sure you want to permanently delete "${target.name}"?`;
+
+        const verify = await customConfirmPrompt(target.isFolder ? "Delete Folder" : "Delete File", msg);
+        if (!verify) return;
+
+        const idsToDelete = [...descIds, id];
+        try {
+          for (const delId of idsToDelete) {
+            await dbService.removeFile(currentUser, delId);
+            vaultThumbCache.delete(delId);
+            vaultState.selectedIds.delete(delId);
+          }
+          const delSet = new Set(idsToDelete);
+          files = files.filter(f => !delSet.has(f.id));
+
+          if (delSet.has(vaultState.currentFolderId)) {
+            vaultState.currentFolderId = getVaultItemParentId(target);
+          }
+
+          showToast(`Deleted "${target.name}"`, "success");
+          renderVaultFilesComponent();
+        } catch (e) {
+          showToast("Delete failed: " + e.message, "error");
+        }
+      };
+
+      window.deleteSelectedVaultItems = async function() {
+        const ids = Array.from(vaultState.selectedIds);
+        if (ids.length === 0) return;
+
+        const allIds = new Set();
+        ids.forEach(id => {
+          allIds.add(id);
+          const it = files.find(f => f.id === id);
+          if (it && it.isFolder) {
+            getVaultDescendantIds(id).forEach(d => allIds.add(d));
+          }
+        });
+
+        const verify = await customConfirmPrompt(
+          "Delete Selected Items",
+          `Permanently delete ${ids.length} selected item${ids.length !== 1 ? "s" : ""}${allIds.size > ids.length ? ` (including ${allIds.size - ids.length} nested item${allIds.size - ids.length !== 1 ? "s" : ""})` : ""}?`
+        );
         if (!verify) return;
 
         try {
-          await dbService.removeFile(currentUser, id);
-          files = files.filter(f => f.id !== id);
-          showToast(`Erased: ${target.name}`, "success");
+          for (const delId of allIds) {
+            await dbService.removeFile(currentUser, delId);
+            vaultThumbCache.delete(delId);
+          }
+          files = files.filter(f => !allIds.has(f.id));
+          vaultState.selectedIds.clear();
+          showToast(`Deleted ${ids.length} item${ids.length !== 1 ? "s" : ""}`, "success");
           renderVaultFilesComponent();
-        } catch (e) {
-          showToast("Operation failure: " + e.message, "error");
+        } catch (err) {
+          showToast("Batch delete failed: " + err.message, "error");
         }
       };
 
@@ -4589,11 +7163,12 @@
       }
 
       function formatResourceSizeLabel(bytes) {
-        if (bytes === 0) return "0 Bytes";
+        const num = Number(bytes) || 0;
+        if (num <= 0) return "0 Bytes";
         const k = 1024;
-        const sizes = ["Bytes", "KB", "MB"];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+        const sizes = ["Bytes", "KB", "MB", "GB"];
+        const i = Math.min(sizes.length - 1, Math.floor(Math.log(num) / Math.log(k)));
+        return parseFloat((num / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
       }
 
       // ==========================================
@@ -5840,9 +8415,22 @@
           items.push({ text: `Note Tab: "${t.title}"`, type: "note", icon: "file-text", action: () => { switchMainSection("notes"); activeTabId = t.id; renderNotesTabsComponent(); } });
         });
 
-        // Add dynamically indexed items: Files
+        // Add dynamically indexed items: Files & Folders
         files.forEach(f => {
-          items.push({ text: `Vault File: "${f.name}"`, type: "file", icon: "folder", action: () => { switchMainSection("vault"); renderVaultFilesComponent(); } });
+          items.push({
+            text: `${f.isFolder ? "Vault Folder" : "Vault File"}: "${f.name}"`,
+            type: f.isFolder ? "folder" : "file",
+            icon: f.isFolder ? "folder" : "file",
+            action: () => {
+              switchMainSection("vault");
+              if (f.isFolder) {
+                navigateVaultFolder(f.id);
+              } else {
+                navigateVaultFolder(getVaultItemParentId(f));
+                inspectVaultItem(f.id);
+              }
+            }
+          });
         });
 
         // Filter items
