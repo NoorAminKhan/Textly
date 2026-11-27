@@ -1,40 +1,138 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Helper: validate document & path IDs against oversized/malformed strings
+    function isValidId(id) {
+      return id is string
+        && id.size() >= 1
+        && id.size() <= 128
+        && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Helper: enforce new account username rule — 4..32 chars, only letters/numbers/_/-,
+    // and MUST contain at least 4 English alphabetic letters (numbers alone rejected).
+    function isValidNewUsername(username) {
+      return username is string
+        && username.size() >= 4
+        && username.size() <= 32
+        && username.matches('^[a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*$');
+    }
+
+    // Helper: validate User document schema on account creation
+    function isValidUserDoc(data, username) {
+      return data.keys().hasAll(['username', 'passwordHash', 'createdAt'])
+        && data.keys().hasOnly(['username', 'passwordHash', 'createdAt'])
+        && data.username == username
+        && data.passwordHash is string
+        && data.passwordHash.size() == 64
+        && data.passwordHash.matches('^[a-fA-F0-9]{64}$')
+        && data.createdAt is string
+        && data.createdAt.size() >= 10
+        && data.createdAt.size() <= 40;
+    }
+
+    // Helper: validate User document update (only passwordHash may change)
+    function isValidUserUpdate(incoming, existing, username) {
+      return incoming.keys().hasAll(['username', 'passwordHash', 'createdAt'])
+        && incoming.keys().hasOnly(['username', 'passwordHash', 'createdAt'])
+        && incoming.username == existing.username
+        && incoming.username == username
+        && incoming.createdAt == existing.createdAt
+        && incoming.passwordHash is string
+        && incoming.passwordHash.size() == 64
+        && incoming.passwordHash.matches('^[a-fA-F0-9]{64}$');
+    }
+
+    // Helper: verify parent user record exists (blocks flooding arbitrary userData buckets)
+    function userExists(username) {
+      return exists(/databases/$(database)/documents/users/$(username));
+    }
+
+    // Helper: basic payload size / key count guard against spam documents
+    function isBoundedDoc(data, maxKeys) {
+      return data.keys().size() >= 1 && data.keys().size() <= maxKeys;
+    }
+
     // Test connection document
     match /test/connection {
-      allow read: if true;
+      allow get: if true;
+      allow list, write: if false;
     }
 
-    // User authentication registry
+    // User authentication registry — block `list` to prevent scraping all accounts
     match /users/{username} {
-      allow read, write: if true;
+      allow get: if isValidId(username);
+      allow list: if false;
+      allow create: if isValidNewUsername(username) && isValidUserDoc(request.resource.data, username);
+      allow update: if isValidId(username) && isValidUserUpdate(request.resource.data, resource.data, username);
+      allow delete: if isValidId(username);
     }
 
-    // User structured contents
+    // User structured contents (tabs, files, chunks, tasks, projects, goals)
     match /userData/{username}/tabs/{tabId} {
-      allow read, write: if true;
+      allow get: if isValidId(username) && isValidId(tabId);
+      allow list: if isValidId(username) && userExists(username);
+      allow create, update: if isValidId(username) && isValidId(tabId)
+        && userExists(username)
+        && isBoundedDoc(request.resource.data, 20);
+      allow delete: if isValidId(username) && isValidId(tabId);
     }
 
     match /userData/{username}/files/{fileId} {
-      allow read, write: if true;
+      allow get: if isValidId(username) && isValidId(fileId);
+      allow list: if isValidId(username) && userExists(username);
+      allow create, update: if isValidId(username) && isValidId(fileId)
+        && userExists(username)
+        && isBoundedDoc(request.resource.data, 30);
+      allow delete: if isValidId(username) && isValidId(fileId);
 
       match /chunks/{chunkId} {
-        allow read, write: if true;
+        allow get: if isValidId(username) && isValidId(fileId) && isValidId(chunkId);
+        allow list: if isValidId(username) && isValidId(fileId) && userExists(username);
+        allow create, update: if isValidId(username) && isValidId(fileId) && isValidId(chunkId)
+          && userExists(username)
+          && request.resource.data.keys().hasAll(['index', 'data'])
+          && request.resource.data.keys().hasOnly(['index', 'data'])
+          && request.resource.data.index is int
+          && request.resource.data.index >= 0
+          && request.resource.data.index <= 500
+          && request.resource.data.data is string
+          && request.resource.data.data.size() <= 700000;
+        allow delete: if isValidId(username) && isValidId(fileId) && isValidId(chunkId);
       }
     }
 
-    // New productivity components
+    // Productivity components
     match /userData/{username}/tasks/{taskId} {
-      allow read, write: if true;
+      allow get: if isValidId(username) && isValidId(taskId);
+      allow list: if isValidId(username) && userExists(username);
+      allow create, update: if isValidId(username) && isValidId(taskId)
+        && userExists(username)
+        && isBoundedDoc(request.resource.data, 25);
+      allow delete: if isValidId(username) && isValidId(taskId);
     }
 
     match /userData/{username}/projects/{projectId} {
-      allow read, write: if true;
+      allow get: if isValidId(username) && isValidId(projectId);
+      allow list: if isValidId(username) && userExists(username);
+      allow create, update: if isValidId(username) && isValidId(projectId)
+        && userExists(username)
+        && isBoundedDoc(request.resource.data, 25);
+      allow delete: if isValidId(username) && isValidId(projectId);
     }
 
     match /userData/{username}/goals/{goalId} {
-      allow read, write: if true;
+      allow get: if isValidId(username) && isValidId(goalId);
+      allow list: if isValidId(username) && userExists(username);
+      allow create, update: if isValidId(username) && isValidId(goalId)
+        && userExists(username)
+        && isBoundedDoc(request.resource.data, 25);
+      allow delete: if isValidId(username) && isValidId(goalId);
+    }
+
+    // Default deny everything else
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

@@ -5,9 +5,14 @@
       "description": "User credential profiles",
       "type": "object",
       "properties": {
-        "username": { "type": "string" },
-        "passwordHash": { "type": "string" },
-        "createdAt": { "type": "string", "format": "date-time" }
+        "username": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 32,
+          "pattern": "^[a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*$"
+        },
+        "passwordHash": { "type": "string", "minLength": 64, "maxLength": 64 },
+        "createdAt": { "type": "string", "format": "date-time", "maxLength": 40 }
       },
       "required": ["username", "passwordHash", "createdAt"]
     },

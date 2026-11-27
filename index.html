@@ -185,131 +185,421 @@
         min-height: 100vh;
       }
 
-      /* Auth Screen */
+      /* Auth Front Page — Refined Minimalist Studio Card */
       .auth-screen {
         display: flex;
         justify-content: center;
         align-items: center;
         flex: 1;
-        padding: 24px;
-        background: radial-gradient(circle at top right, var(--accent-light), transparent), var(--bg-primary);
+        min-height: 100vh;
+        padding: 24px 16px;
+        background-color: var(--vd-canvas);
+        background-image:
+          radial-gradient(560px 360px at 50% 18%, rgba(56, 189, 248, 0.08), transparent 70%),
+          radial-gradient(460px 320px at 50% 88%, rgba(139, 92, 246, 0.06), transparent 72%);
+      }
+      [data-theme="light"] .auth-screen {
+        background-image:
+          radial-gradient(600px 380px at 50% 14%, rgba(2, 132, 199, 0.07), transparent 70%),
+          radial-gradient(460px 320px at 50% 90%, rgba(139, 92, 246, 0.05), transparent 72%);
       }
       .auth-card {
-        background-color: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
-        padding: 40px;
+        position: relative;
         width: 100%;
-        max-width: 440px;
-        box-shadow: var(--shadow-lg);
-        animation: fadeIn 0.4s ease-out;
+        max-width: 396px;
+        padding: 36px 32px 28px;
+        background-color: var(--vd-surface);
+        border: 1px solid var(--vd-border-strong);
+        border-radius: 20px;
+        box-shadow: 0 28px 68px rgba(0, 0, 0, 0.44), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      [data-theme="light"] .auth-card {
+        background-color: #ffffff;
+        border-color: rgba(15, 23, 42, 0.1);
+        box-shadow: 0 22px 54px rgba(15, 23, 42, 0.08), 0 2px 10px rgba(15, 23, 42, 0.04);
       }
       .auth-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 28px;
       }
-      .auth-brand {
+      .auth-brand-lockup {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        color: var(--accent-color);
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 8px;
+        gap: 13px;
+        margin-bottom: 12px;
       }
-      .auth-brand i {
-        stroke-width: 2.5px;
+      .auth-brand-lockup svg {
+        filter: drop-shadow(0 6px 14px rgba(37, 99, 235, 0.22));
+        flex-shrink: 0;
       }
-      .auth-header p {
-        color: var(--text-secondary);
-        font-size: 13px;
-        opacity: 0.8;
-      }
-      .auth-tabs {
-        display: flex;
-        background-color: var(--bg-primary);
-        padding: 4px;
-        border-radius: 12px;
-        margin-bottom: 24px;
-        gap: 6px;
-        border: 1px solid var(--border-color);
-      }
-      .auth-tab {
-        flex: 1;
-        background: none;
-        border: none;
-        padding: 10px 14px;
-        color: var(--text-muted);
-        font-weight: 600;
-        font-size: 13px;
-        cursor: pointer;
-        text-align: center;
-        border-radius: 8px;
-        transition: var(--transition);
-      }
-      .auth-tab:hover {
-        color: var(--text-secondary);
-      }
-      .auth-tab.active {
+      .auth-brand-wordmark {
+        font-size: 40px;
+        line-height: 1;
+        font-weight: 800;
+        letter-spacing: -0.015em;
+        font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', Georgia, serif;
         color: var(--text-primary);
-        background-color: var(--bg-tertiary);
-        box-shadow: var(--shadow-sm);
+        display: inline-flex;
+        align-items: baseline;
+      }
+      .auth-brand-wordmark .brand-t {
+        background: linear-gradient(135deg, #2563eb, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        padding-right: 1px;
+      }
+      .auth-subtitle {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.45;
       }
       .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 16px;
       }
       .form-label {
         display: block;
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 8px;
+        font-size: 12.5px;
+        font-weight: 600;
+        margin-bottom: 7px;
         color: var(--text-secondary);
+      }
+      .auth-input-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .auth-input-icon {
+        position: absolute;
+        left: 14px;
+        color: var(--text-muted);
+        pointer-events: none;
+        display: inline-flex;
+        align-items: center;
+      }
+      .auth-input-icon svg {
+        width: 16px;
+        height: 16px;
       }
       .form-control {
         width: 100%;
-        padding: 11px 15px;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        background-color: var(--bg-primary);
+        height: 44px;
+        padding: 10px 14px;
+        border-radius: 11px;
+        border: 1px solid var(--vd-border-strong);
+        background-color: var(--vd-search-bg);
         color: var(--text-primary);
-        font-size: 14px;
-        transition: var(--transition);
+        font-size: 14.5px;
+        font-family: var(--font-sans);
+        transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+      }
+      .form-control.has-leading-icon {
+        padding-left: 41px;
+      }
+      .form-control.has-trailing-btn {
+        padding-right: 44px;
+      }
+      .form-control::placeholder {
+        color: var(--text-muted);
       }
       .form-control:focus {
-        border-color: var(--accent-color);
-        background-color: var(--bg-secondary);
-        box-shadow: 0 0 0 2px var(--accent-light);
+        outline: none;
+        border-color: #38bdf8;
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+      }
+      [data-theme="light"] .form-control:focus {
+        border-color: #0284c7;
+        box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.14);
+      }
+      .auth-field-hint {
+        font-size: 11.5px;
+        color: var(--text-muted);
+        margin-top: 7px;
+        line-height: 1.4;
+        transition: color 0.15s ease;
+      }
+      .auth-field-hint.is-valid {
+        color: #34d399;
+      }
+      [data-theme="light"] .auth-field-hint.is-valid {
+        color: #059669;
+      }
+      .auth-field-hint.is-invalid {
+        color: #f87171;
+      }
+      [data-theme="light"] .auth-field-hint.is-invalid {
+        color: #dc2626;
+      }
+      /* Hidden bot honeypot — visually & interactively unreachable for humans */
+      .auth-hp-field {
+        position: absolute !important;
+        left: -9999px !important;
+        width: 1px !important;
+        height: 1px !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+      /* Adaptive Anti-DDoS / Bot Challenge (hidden unless suspicious flood occurs) */
+      .auth-challenge-box {
+        display: none;
+        margin-bottom: 14px;
+        padding: 12px 13px;
+        border-radius: 11px;
+        background-color: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.25);
+      }
+      [data-theme="light"] .auth-challenge-box {
+        background-color: #f0f9ff;
+        border-color: #bae6fd;
+      }
+      .auth-challenge-box.is-visible {
+        display: block;
+      }
+      .auth-challenge-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+      }
+      .auth-challenge-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .auth-challenge-prompt {
+        font-size: 13.5px;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        color: #38bdf8;
+        white-space: nowrap;
+        padding: 7px 11px;
+        border-radius: 8px;
+        background-color: var(--vd-surface);
+        border: 1px solid var(--vd-border-strong);
+      }
+      [data-theme="light"] .auth-challenge-prompt {
+        color: #0369a1;
+        background-color: #ffffff;
+      }
+      .auth-challenge-input {
+        height: 36px;
+        padding: 6px 10px;
+        font-size: 13.5px;
       }
       .auth-btn {
         width: 100%;
-        background-color: var(--accent-color);
-        color: #ffffff;
-        border: none;
-        padding: 12px;
-        border-radius: 8px;
+        height: 45px;
+        background-color: var(--vd-btn-primary-bg);
+        color: var(--vd-btn-primary-text);
+        border: 1px solid transparent;
+        padding: 0 18px;
+        border-radius: 11px;
         cursor: pointer;
         font-weight: 600;
-        font-size: 14px;
-        transition: var(--transition);
-        margin-top: 10px;
-        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        font-size: 14.5px;
+        font-family: var(--font-sans);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 4px;
+        transition: background-color 0.16s ease, transform 0.16s ease, opacity 0.16s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
       }
-      .auth-btn:hover {
-        background-color: var(--accent-hover);
+      .auth-btn:hover:not(:disabled) {
+        background-color: var(--vd-btn-primary-hover);
         transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+      }
+      .auth-btn:active:not(:disabled) {
+        transform: translateY(0);
+      }
+      .auth-btn:disabled {
+        opacity: 0.68;
+        cursor: not-allowed;
       }
       .auth-inline-error {
-        color: var(--priority-high);
-        font-size: 13px;
-        margin-top: 12px;
+        color: #f87171;
+        font-size: 12.5px;
+        margin-top: 13px;
         display: none;
-        padding: 10px;
-        border-radius: 6px;
+        padding: 10px 12px;
+        border-radius: 10px;
         background-color: rgba(239, 68, 68, 0.1);
-        border: 1px solid var(--priority-high);
+        border: 1px solid rgba(239, 68, 68, 0.28);
+        line-height: 1.45;
+      }
+      [data-theme="light"] .auth-inline-error {
+        color: #b91c1c;
+        background-color: #fef2f2;
+        border-color: #fecaca;
+      }
+      .auth-card-foot {
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid var(--vd-border);
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-muted);
+        letter-spacing: 0.02em;
+      }
+
+      /* Progressive Password / Registration Modal — Minimalist Studio Style */
+      .auth-modal-box {
+        background-color: var(--vd-surface);
+        border: 1px solid var(--vd-border-strong);
+        border-radius: 18px;
+        width: 100%;
+        max-width: 396px;
+        overflow: hidden;
+        box-shadow: 0 28px 64px rgba(0, 0, 0, 0.48);
+        animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      [data-theme="light"] .auth-modal-box {
+        background-color: #ffffff;
+        box-shadow: 0 24px 54px rgba(15, 23, 42, 0.15);
+      }
+      .auth-modal-body {
+        padding: 26px 24px 20px;
+      }
+      .auth-modal-head {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+      .auth-modal-icon-tile {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        background-color: rgba(56, 189, 248, 0.11);
+        border: 1px solid rgba(56, 189, 248, 0.22);
+        color: #38bdf8;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+      }
+      [data-theme="light"] .auth-modal-icon-tile {
+        background-color: #f0f9ff;
+        border-color: #bae6fd;
+        color: #0284c7;
+      }
+      .auth-modal-title {
+        font-family: var(--font-display);
+        font-size: 19px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0 0 4px 0;
+        line-height: 1.3;
+        letter-spacing: -0.015em;
+      }
+      .auth-modal-user-sub {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        display: block;
+        margin-top: 3px;
+      }
+      .auth-modal-user-name {
+        color: #38bdf8;
+        font-weight: 700;
+      }
+      [data-theme="light"] .auth-modal-user-name {
+        color: #0284c7;
+      }
+      .auth-modal-user-name.is-new {
+        color: #34d399;
+      }
+      [data-theme="light"] .auth-modal-user-name.is-new {
+        color: #059669;
+      }
+      .auth-modal-desc {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .auth-pw-toggle {
+        position: absolute;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        border-radius: 7px;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.15s ease, background-color 0.15s ease;
+      }
+      .auth-pw-toggle:hover {
+        color: var(--text-primary);
+        background-color: var(--vd-surface-hover);
+      }
+      .auth-modal-footer {
+        padding: 15px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        background-color: var(--vd-canvas);
+        border-top: 1px solid var(--vd-border);
+      }
+      .auth-modal-back-btn {
+        height: 39px;
+        padding: 0 15px;
+        border-radius: 9px;
+        background-color: var(--vd-btn-sec-bg);
+        color: var(--vd-btn-sec-text);
+        border: 1px solid var(--vd-border-strong);
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+      }
+      .auth-modal-back-btn:hover {
+        background-color: var(--vd-btn-sec-hover);
+      }
+      .auth-modal-submit-btn {
+        height: 39px;
+        padding: 0 20px;
+        border-radius: 9px;
+        background-color: var(--vd-btn-primary-bg);
+        color: var(--vd-btn-primary-text);
+        border: 1px solid transparent;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: background-color 0.15s ease, opacity 0.15s ease;
+      }
+      .auth-modal-submit-btn:hover:not(:disabled) {
+        background-color: var(--vd-btn-primary-hover);
+      }
+      .auth-modal-submit-btn:disabled {
+        opacity: 0.68;
+        cursor: not-allowed;
+      }
+
+      @media (max-width: 480px) {
+        .auth-card {
+          padding: 30px 22px 24px;
+          border-radius: 16px;
+        }
       }
 
       /* Main Layout Panels */
@@ -2412,62 +2702,140 @@
         cursor: not-allowed;
       }
 
-      /* Secure Notes -> File Vault Export Menu Enhancements */
+      /* Secure Notes -> File Vault Export Menu (Theme-Matched Studio Surface) */
+      .sn-export-trigger-btn {
+        height: 34px;
+        padding: 0 12px;
+        font-size: 13px;
+        background-color: rgba(56, 189, 248, 0.12);
+        border-color: rgba(56, 189, 248, 0.28);
+        color: #e0f2fe;
+      }
+      .sn-export-trigger-btn:hover {
+        background-color: rgba(56, 189, 248, 0.2);
+        border-color: rgba(56, 189, 248, 0.42);
+      }
+      [data-theme="light"] .sn-export-trigger-btn {
+        background-color: #f0f9ff;
+        border-color: #bae6fd;
+        color: #0369a1;
+      }
+      [data-theme="light"] .sn-export-trigger-btn:hover {
+        background-color: #e0f2fe;
+        border-color: #7dd3fc;
+      }
       .sn-export-menu {
-        min-width: 276px;
+        min-width: 286px;
         padding: 8px;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #171f2f 0%, #111723 100%);
+        border: 1px solid rgba(148, 163, 184, 0.26);
+        box-shadow: 0 22px 50px rgba(0, 0, 0, 0.54), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      }
+      [data-theme="light"] .sn-export-menu {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #cbd5e1;
+        box-shadow: 0 20px 44px rgba(15, 23, 42, 0.14), 0 2px 8px rgba(15, 23, 42, 0.06);
+      }
+      .sn-export-group-vault {
+        background-color: rgba(56, 189, 248, 0.07);
+        border: 1px solid rgba(56, 189, 248, 0.18);
+        border-radius: 10px;
+        padding: 6px;
+        margin-bottom: 8px;
+      }
+      [data-theme="light"] .sn-export-group-vault {
+        background-color: #f0f9ff;
+        border-color: #bae6fd;
+      }
+      .sn-export-group-device {
+        background-color: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        border-radius: 10px;
+        padding: 6px;
+      }
+      [data-theme="light"] .sn-export-group-device {
+        background-color: #f8fafc;
+        border-color: #e2e8f0;
       }
       .sn-export-section-label {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 4px 10px 6px 10px;
-        font-size: 10.5px;
+        padding: 4px 8px 6px 8px;
+        font-size: 11px;
         font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: var(--text-muted);
+        letter-spacing: 0.02em;
+        color: var(--text-secondary);
+      }
+      .sn-export-group-vault .sn-export-section-label {
+        color: #e0f2fe;
+      }
+      [data-theme="light"] .sn-export-group-vault .sn-export-section-label {
+        color: #0c4a6e;
       }
       .sn-export-vault-badge {
         display: inline-flex;
         align-items: center;
         gap: 4px;
-        color: var(--accent-color);
-        font-size: 10.5px;
-        font-weight: 700;
-        text-transform: none;
-        letter-spacing: 0;
+        color: #38bdf8;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      [data-theme="light"] .sn-export-vault-badge {
+        color: #0284c7;
       }
       .sn-export-dest-row {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 6px 10px 8px 10px;
+        padding: 5px 8px 8px 8px;
         margin-bottom: 4px;
-        border-bottom: 1px solid var(--vd-border);
+        border-bottom: 1px solid rgba(56, 189, 248, 0.16);
+      }
+      [data-theme="light"] .sn-export-dest-row {
+        border-bottom-color: #bae6fd;
       }
       .sn-export-dest-row label {
         font-size: 11.5px;
-        color: var(--text-muted);
+        color: var(--text-secondary);
         white-space: nowrap;
-        font-weight: 500;
+        font-weight: 600;
       }
       .sn-export-dest-select {
         flex: 1;
         min-width: 0;
-        height: 28px;
+        height: 29px;
         padding: 0 8px;
-        border-radius: 6px;
-        border: 1px solid var(--vd-border-strong);
-        background-color: var(--vd-surface);
-        color: var(--text-primary);
+        border-radius: 7px;
+        border: 1px solid rgba(56, 189, 248, 0.28);
+        background-color: #0d1320;
+        color: #f8fafc;
         font-size: 12px;
         font-weight: 500;
         font-family: var(--font-sans);
         cursor: pointer;
       }
+      [data-theme="light"] .sn-export-dest-select {
+        background-color: #ffffff;
+        border-color: #7dd3fc;
+        color: #0f172a;
+      }
       .sn-export-vault-item {
         justify-content: space-between;
+        border-radius: 8px;
+      }
+      .sn-export-group-vault .sn-export-vault-item:hover {
+        background-color: rgba(56, 189, 248, 0.14);
+      }
+      [data-theme="light"] .sn-export-group-vault .sn-export-vault-item:hover {
+        background-color: #e0f2fe;
+      }
+      .sn-export-group-device .sn-export-vault-item:hover {
+        background-color: rgba(148, 163, 184, 0.13);
+      }
+      [data-theme="light"] .sn-export-group-device .sn-export-vault-item:hover {
+        background-color: #eef2f7;
       }
       .sn-export-vault-left {
         display: inline-flex;
@@ -3832,12 +4200,12 @@
         <button class="banner-close-btn" onclick="toggleSandboxBanner(false)">×</button>
       </div>
 
-      <!-- Section 1: Non-logged in viewport panel -->
+      <!-- Section 1: Non-logged in minimalist viewport -->
       <div id="auth-screen" class="auth-screen">
         <div class="auth-card">
           <div class="auth-header">
-            <div class="auth-brand" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; gap: 12px; margin-bottom: 24px;">
-              <svg width="180" height="180" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));">
+            <div class="auth-brand-lockup">
+              <svg width="64" height="64" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <defs>
                   <linearGradient id="bluePurpleGradient" x1="120" y1="150" x2="380" y2="400" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stop-color="#2563eb" />
@@ -3848,108 +4216,174 @@
                     <stop offset="100%" stop-color="#7c3aed" />
                   </linearGradient>
                 </defs>
-                
-                <path d="M 120 150 
-                         L 210 150 
-                         L 290 350
-                         C 305 385, 275 400, 250 400
-                         L 180 400 
-                         C 140 400, 120 370, 120 350
-                         Z" fill="url(#bluePurpleGradient)" />
-                         
-                <rect x="250" y="180" width="112" height="152" rx="14" fill="#ffffff" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));" />
+                <path d="M 120 150 L 210 150 L 290 350 C 305 385, 275 400, 250 400 L 180 400 C 140 400, 120 370, 120 350 Z" fill="url(#bluePurpleGradient)" />
+                <rect x="250" y="180" width="112" height="152" rx="14" fill="#ffffff" />
                 <line x1="274" y1="220" x2="338" y2="220" stroke="#8b5cf6" stroke-width="10" stroke-linecap="round" />
                 <line x1="274" y1="255" x2="338" y2="255" stroke="#2563eb" stroke-width="10" stroke-linecap="round" />
                 <line x1="274" y1="290" x2="314" y2="290" stroke="#2563eb" stroke-width="10" stroke-linecap="round" />
-
-                <path d="M 252 300
-                         L 380 180
-                         C 400 160, 420 180, 400 210
-                         L 300 370
-                         C 290 385, 275 360, 260 340
-                         Z" fill="url(#innerFoldGradient)" style="filter: drop-shadow(-4px 0 6px rgba(0,0,0,0.1));" />
+                <path d="M 252 300 L 380 180 C 400 160, 420 180, 400 210 L 300 370 C 290 385, 275 360, 260 340 Z" fill="url(#innerFoldGradient)" />
               </svg>
-              
-              <div style="font-size: 56px; line-height: 1; font-weight: 800; letter-spacing: -0.01em; font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', Georgia, serif; display: flex; align-items: center; justify-content: center; margin-top: 12px; margin-bottom: 4px;">
-                <span style="background: linear-gradient(135deg, #2563eb, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding-right: 1px;">T</span><span style="color: var(--text-primary); display: inline-block;">extly</span>
-              </div>
-              
-              <div style="display: flex; align-items: center; justify-content: center; width: 100%; gap: 10px; margin-top: 4px;">
-                <div style="width: 24px; height: 1px; background-color: var(--border-color);"></div>
-                <span style="width: 5px; height: 5px; border-radius: 50%; background-color: #6366f1; display: inline-block;"></span>
-                <span style="font-size: 13px; font-weight: 600; font-family: 'Outfit', sans-serif; color: var(--text-secondary); letter-spacing: 0.05em;">
-                  Write. Organize. Store. <span style="color: #6366f1;">Secure.</span>
-                </span>
-                <span style="width: 5px; height: 5px; border-radius: 50%; background-color: #6366f1; display: inline-block;"></span>
-                <div style="width: 24px; height: 1px; background-color: var(--border-color);"></div>
-              </div>
+              <span class="auth-brand-wordmark">
+                <span class="brand-t">T</span><span>extly</span>
+              </span>
             </div>
+            <p class="auth-subtitle">Private Notes &amp; File Vault</p>
           </div>
-          <form id="auth-username-form" onsubmit="handleUsernameSubmit(event)">
-            <div class="form-group" style="margin-bottom: 24px;">
-              <label class="form-label" for="auth-username" style="font-weight: 600; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 0.05em;">Username</label>
-              <input type="text" id="auth-username" class="form-control" placeholder="Type your username..." required autocomplete="username" style="width: 100%; height: 46px; font-size: 15px; border-radius: 8px;" />
+
+          <form id="auth-username-form" onsubmit="handleUsernameSubmit(event)" novalidate>
+            <!-- Hidden bot honeypot (never visible or focusable by users) -->
+            <input
+              type="text"
+              id="auth-hp-field"
+              name="website_url"
+              class="auth-hp-field"
+              tabindex="-1"
+              aria-hidden="true"
+              autocomplete="off"
+            />
+
+            <div class="form-group">
+              <label class="form-label" for="auth-username">Username</label>
+              <div class="auth-input-wrap">
+                <span class="auth-input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8.5" r="3.6" />
+                    <path d="M5.5 19.5c1.2-3.2 3.8-4.8 6.5-4.8s5.3 1.6 6.5 4.8" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  id="auth-username"
+                  class="form-control has-leading-icon"
+                  placeholder="Enter username"
+                  maxlength="32"
+                  required
+                  autocomplete="username"
+                  oninput="updateUsernameRuleHint()"
+                />
+              </div>
             </div>
-            
-            <button type="submit" id="auth-username-btn" class="auth-btn" style="width: 100%; height: 46px; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #2563eb, #8b5cf6); font-weight: 600; border-radius: 8px; font-size: 14px; border: none; cursor: pointer; color: #ffffff; transition: var(--transition);">
+
+            <!-- Adaptive anti-abuse verification (hidden unless rapid/bot activity triggers) -->
+            <div id="auth-challenge-box" class="auth-challenge-box" aria-live="polite">
+              <div class="auth-challenge-head">
+                <span>Quick security check</span>
+              </div>
+              <div class="auth-challenge-row">
+                <span id="auth-challenge-prompt" class="auth-challenge-prompt"></span>
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  id="auth-challenge-input"
+                  class="form-control auth-challenge-input"
+                  placeholder="Answer"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <button type="submit" id="auth-username-btn" class="auth-btn">
               <span>Continue</span>
               <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
             </button>
-            <div id="auth-error-output" class="auth-inline-error" style="margin-top: 14px; display: none;"></div>
+
+            <div id="auth-error-output" class="auth-inline-error" role="alert"></div>
           </form>
+
+          <div class="auth-card-foot">Write · Store · Secure</div>
         </div>
       </div>
 
       <!-- Password Prompt Modal for Progressive Auth -->
       <div id="auth-password-modal" class="modal-fullscreen-overlay hidden">
-        <div class="overlay-modal-box" style="border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
-          <div class="modal-body-panel" style="padding: 28px 24px;">
-            
-            <!-- Logo & Header -->
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 24px;">
-              <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                <i id="auth-modal-icon" data-lucide="key-round" style="color: #6366f1; width: 22px; height: 22px;"></i>
+        <div class="auth-modal-box">
+          <form id="auth-password-form" onsubmit="handlePasswordSubmit(event)">
+            <div class="auth-modal-body">
+              <div class="auth-modal-head">
+                <div class="auth-modal-icon-tile">
+                  <i id="auth-modal-icon" data-lucide="key-round" style="width: 19px; height: 19px;"></i>
+                </div>
+                <h3 id="auth-modal-title" class="auth-modal-title">Enter Password</h3>
+                <p id="auth-modal-desc" class="auth-modal-desc">
+                  Enter your password to continue.
+                </p>
               </div>
-              <h3 id="auth-modal-title" style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; line-height: 1.4;">Enter Password</h3>
-              <p id="auth-modal-desc" style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; padding: 0 8px;">
-                Please enter your password to authorize your session.
-              </p>
-            </div>
 
-            <form id="auth-password-form" onsubmit="handlePasswordSubmit(event)">
               <!-- Password Field -->
-              <div class="form-group" style="margin-bottom: 16px;">
-                <label id="auth-modal-pw-label" class="form-label" for="auth-modal-password" style="font-weight: 600; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.05em;">Password</label>
-                <div style="position: relative; display: flex; align-items: center;">
-                  <input type="password" id="auth-modal-password" class="form-control" style="padding-right: 44px; width: 100%; height: 44px; font-size: 15px;" placeholder="••••••••" required autocomplete="current-password" />
-                  <button type="button" onclick="togglePasswordVisibility('auth-modal-password', 'toggle-modal-pw-icon')" style="position: absolute; right: 12px; background: none; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px;" title="Toggle Password Visibility">
-                    <i id="toggle-modal-pw-icon" data-lucide="eye" style="width: 18px; height: 18px;"></i>
+              <div class="form-group">
+                <label id="auth-modal-pw-label" class="form-label" for="auth-modal-password">Password</label>
+                <div class="auth-input-wrap">
+                  <input
+                    type="password"
+                    id="auth-modal-password"
+                    class="form-control has-trailing-btn"
+                    placeholder="Enter password"
+                    required
+                    autocomplete="current-password"
+                  />
+                  <button
+                    type="button"
+                    class="auth-pw-toggle"
+                    onclick="togglePasswordVisibility('auth-modal-password', 'toggle-modal-pw-icon')"
+                    aria-label="Toggle password visibility"
+                    title="Toggle Password Visibility"
+                  >
+                    <i id="toggle-modal-pw-icon" data-lucide="eye" style="width: 17px; height: 17px;"></i>
                   </button>
                 </div>
               </div>
 
               <!-- Confirm Password (hidden by default, shown for register flow) -->
-              <div id="auth-modal-confirm-group" class="form-group" style="margin-bottom: 16px; display: none;">
-                <label class="form-label" for="auth-modal-confirm-password" style="font-weight: 600; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.05em;">Confirm Password</label>
-                <div style="position: relative; display: flex; align-items: center;">
-                  <input type="password" id="auth-modal-confirm-password" class="form-control" style="padding-right: 44px; width: 100%; height: 44px; font-size: 15px;" placeholder="Type your password again..." autocomplete="new-password" />
-                  <button type="button" onclick="togglePasswordVisibility('auth-modal-confirm-password', 'toggle-modal-confirm-pw-icon')" style="position: absolute; right: 12px; background: none; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px;" title="Toggle Password Visibility">
-                    <i id="toggle-modal-confirm-pw-icon" data-lucide="eye" style="width: 18px; height: 18px;"></i>
+              <div id="auth-modal-confirm-group" class="form-group" style="display: none;">
+                <label class="form-label" for="auth-modal-confirm-password">Confirm Password</label>
+                <div class="auth-input-wrap">
+                  <input
+                    type="password"
+                    id="auth-modal-confirm-password"
+                    class="form-control has-trailing-btn"
+                    placeholder="Re-enter password"
+                    autocomplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    class="auth-pw-toggle"
+                    onclick="togglePasswordVisibility('auth-modal-confirm-password', 'toggle-modal-confirm-pw-icon')"
+                    aria-label="Toggle confirm password visibility"
+                    title="Toggle Password Visibility"
+                  >
+                    <i id="toggle-modal-confirm-pw-icon" data-lucide="eye" style="width: 17px; height: 17px;"></i>
                   </button>
                 </div>
               </div>
 
-              <!-- Inline Errors -->
-              <div id="auth-modal-error" style="color: var(--priority-high); font-size: 13px; margin-bottom: 16px; padding: 10px; border-radius: 6px; background-color: rgba(239, 68, 68, 0.08); border: 1px solid var(--priority-high); display: none; line-height: 1.4;"></div>
-
-              <!-- Actions footer -->
-              <div class="modal-footer-panel" style="margin-left: -24px; margin-right: -24px; margin-bottom: -24px; margin-top: 24px; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-tertiary); border-top: 1px solid var(--border-color);">
-                <button type="button" class="btn-secondary" onclick="closeAuthPasswordModal()" style="height: 38px; font-size: 13px; padding: 0 16px; font-weight: 600;">Back</button>
-                <button type="submit" id="auth-modal-submit-btn" class="btn-primary" style="height: 38px; font-size: 13px; padding: 0 16px; font-weight: 600; background: linear-gradient(135deg, #2563eb, #8b5cf6); border: none; box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);">Continue</button>
+              <!-- Adaptive anti-brute-force challenge inside modal (hidden unless repeated failures) -->
+              <div id="auth-modal-challenge-box" class="auth-challenge-box" aria-live="polite">
+                <div class="auth-challenge-head">
+                  <span>Security verification</span>
+                </div>
+                <div class="auth-challenge-row">
+                  <span id="auth-modal-challenge-prompt" class="auth-challenge-prompt"></span>
+                  <input
+                    type="text"
+                    inputmode="numeric"
+                    id="auth-modal-challenge-input"
+                    class="form-control auth-challenge-input"
+                    placeholder="Answer"
+                    autocomplete="off"
+                  />
+                </div>
               </div>
-            </form>
 
-          </div>
+              <!-- Inline Errors -->
+              <div id="auth-modal-error" class="auth-inline-error" style="margin-top: 4px;" role="alert"></div>
+            </div>
+
+            <!-- Actions footer -->
+            <div class="auth-modal-footer">
+              <button type="button" class="auth-modal-back-btn" onclick="closeAuthPasswordModal()">Back</button>
+              <button type="submit" id="auth-modal-submit-btn" class="auth-modal-submit-btn">Continue</button>
+            </div>
+          </form>
         </div>
       </div>
 
@@ -4114,78 +4548,81 @@
                   </div>
 
                   <div class="vd-btn-group">
-                    <button type="button" class="vd-btn-secondary" style="height: 34px; padding: 0 12px; font-size: 13px;" onclick="toggleNotesDropdown('sn-export-menu', event)">
+                    <button type="button" class="vd-btn-secondary sn-export-trigger-btn" onclick="toggleNotesDropdown('sn-export-menu', event)">
                       <i data-lucide="download" style="width: 14px; height: 14px;"></i>
                       <span>Export</span>
                       <i data-lucide="chevron-down" style="width: 13px; height: 13px; opacity: 0.75;"></i>
                     </button>
                     <div id="sn-export-menu" class="vd-dropdown-menu sn-export-menu align-right hidden" onclick="event.stopPropagation()">
-                      <div class="sn-export-section-label">
-                        <span>Direct to File Vault</span>
-                        <span class="sn-export-vault-badge">
-                          <i data-lucide="folder-lock" style="width: 12px; height: 12px;"></i>
-                          Save Directly
-                        </span>
+                      <div class="sn-export-group-vault">
+                        <div class="sn-export-section-label">
+                          <span>Direct to File Vault</span>
+                          <span class="sn-export-vault-badge">
+                            <i data-lucide="folder-lock" style="width: 12px; height: 12px;"></i>
+                            Save Directly
+                          </span>
+                        </div>
+
+                        <div class="sn-export-dest-row">
+                          <label for="sn-vault-folder-select">Save to</label>
+                          <select id="sn-vault-folder-select" class="sn-export-dest-select" title="Choose destination folder in File Vault">
+                            <option value="">File Vault (Root)</option>
+                            <option value="__exported_notes__">Exported Notes</option>
+                          </select>
+                        </div>
+
+                        <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="exportActiveTabToVault('pdf')">
+                          <span class="sn-export-vault-left">
+                            <i data-lucide="file-text" style="width: 15px; height: 15px; color: #ef4444;"></i>
+                            <span>Export PDF to Vault</span>
+                          </span>
+                          <span class="sn-export-ext-hint">.pdf</span>
+                        </button>
+
+                        <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="exportActiveTabToVault('docx')">
+                          <span class="sn-export-vault-left">
+                            <i data-lucide="file-type" style="width: 15px; height: 15px; color: #3b82f6;"></i>
+                            <span>Export Word to Vault</span>
+                          </span>
+                          <span class="sn-export-ext-hint">.docx</span>
+                        </button>
+
+                        <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="exportActiveTabToVault('txt')">
+                          <span class="sn-export-vault-left">
+                            <i data-lucide="file-down" style="width: 15px; height: 15px; color: #10b981;"></i>
+                            <span>Export Text to Vault</span>
+                          </span>
+                          <span class="sn-export-ext-hint">.txt</span>
+                        </button>
                       </div>
 
-                      <div class="sn-export-dest-row">
-                        <label for="sn-vault-folder-select">Save to</label>
-                        <select id="sn-vault-folder-select" class="sn-export-dest-select" title="Choose destination folder in File Vault">
-                          <option value="">File Vault (Root)</option>
-                          <option value="__exported_notes__">Exported Notes</option>
-                        </select>
+                      <div class="sn-export-group-device">
+                        <div class="sn-export-section-label">
+                          <span>Device Only</span>
+                        </div>
+
+                        <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="closeNotesMenus(); exportActiveTabPdf()">
+                          <span class="sn-export-vault-left">
+                            <i data-lucide="file-text" style="width: 15px; height: 15px; color: #ef4444;"></i>
+                            <span>Download PDF</span>
+                          </span>
+                          <span class="sn-export-ext-hint">.pdf</span>
+                        </button>
+                        <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="closeNotesMenus(); exportActiveTabDocx()">
+                          <span class="sn-export-vault-left">
+                            <i data-lucide="file-type" style="width: 15px; height: 15px; color: #3b82f6;"></i>
+                            <span>Download Word</span>
+                          </span>
+                          <span class="sn-export-ext-hint">.docx</span>
+                        </button>
+                        <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="closeNotesMenus(); exportActiveTabTxt()">
+                          <span class="sn-export-vault-left">
+                            <i data-lucide="file-down" style="width: 15px; height: 15px; color: #10b981;"></i>
+                            <span>Download Text</span>
+                          </span>
+                          <span class="sn-export-ext-hint">.txt</span>
+                        </button>
                       </div>
-
-                      <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="exportActiveTabToVault('pdf')">
-                        <span class="sn-export-vault-left">
-                          <i data-lucide="file-text" style="width: 15px; height: 15px; color: #ef4444;"></i>
-                          <span>Export PDF to Vault</span>
-                        </span>
-                        <span class="sn-export-ext-hint">.pdf</span>
-                      </button>
-
-                      <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="exportActiveTabToVault('docx')">
-                        <span class="sn-export-vault-left">
-                          <i data-lucide="file-type" style="width: 15px; height: 15px; color: #3b82f6;"></i>
-                          <span>Export Word to Vault</span>
-                        </span>
-                        <span class="sn-export-ext-hint">.docx</span>
-                      </button>
-
-                      <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="exportActiveTabToVault('txt')">
-                        <span class="sn-export-vault-left">
-                          <i data-lucide="file-down" style="width: 15px; height: 15px; color: #10b981;"></i>
-                          <span>Export Text to Vault</span>
-                        </span>
-                        <span class="sn-export-ext-hint">.txt</span>
-                      </button>
-
-                      <div class="vd-dropdown-divider"></div>
-                      <div class="sn-export-section-label">
-                        <span>Device Only</span>
-                      </div>
-
-                      <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="closeNotesMenus(); exportActiveTabPdf()">
-                        <span class="sn-export-vault-left">
-                          <i data-lucide="file-text" style="width: 15px; height: 15px; color: #ef4444;"></i>
-                          <span>Download PDF</span>
-                        </span>
-                        <span class="sn-export-ext-hint">.pdf</span>
-                      </button>
-                      <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="closeNotesMenus(); exportActiveTabDocx()">
-                        <span class="sn-export-vault-left">
-                          <i data-lucide="file-type" style="width: 15px; height: 15px; color: #3b82f6;"></i>
-                          <span>Download Word</span>
-                        </span>
-                        <span class="sn-export-ext-hint">.docx</span>
-                      </button>
-                      <button type="button" class="vd-dropdown-item sn-export-vault-item" onclick="closeNotesMenus(); exportActiveTabTxt()">
-                        <span class="sn-export-vault-left">
-                          <i data-lucide="file-down" style="width: 15px; height: 15px; color: #10b981;"></i>
-                          <span>Download Text</span>
-                        </span>
-                        <span class="sn-export-ext-hint">.txt</span>
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -4398,11 +4835,6 @@
                   <i data-lucide="folder-down" style="width: 16px; height: 16px;"></i>
                   <span>Download folder</span>
                 </button>
-
-                <button type="button" id="vd-header-share-btn" class="vd-btn-secondary hidden" onclick="triggerVaultShareCurrentOrSelected()">
-                  <i data-lucide="share" style="width: 16px; height: 16px;"></i>
-                  <span>Share</span>
-                </button>
               </div>
 
               <!-- 3. Breadcrumb Location Header -->
@@ -4424,9 +4856,6 @@
                     <span class="vd-toolbar-divider"></span>
                     <button type="button" class="vd-icon-btn" onclick="downloadSelectedVaultItems()" title="Download selected">
                       <i data-lucide="arrow-down-circle" style="width: 18px; height: 18px;"></i>
-                    </button>
-                    <button type="button" class="vd-icon-btn" onclick="shareSelectedVaultItems()" title="Toggle share link">
-                      <i data-lucide="link-2" style="width: 18px; height: 18px;"></i>
                     </button>
                     <button type="button" class="vd-icon-btn" onclick="openVaultMoveModalForSelected()" title="Move selected">
                       <i data-lucide="move" style="width: 18px; height: 18px;"></i>
@@ -4508,7 +4937,6 @@
                   <button type="button" class="vd-filter-tab active" data-vd-filter="all" onclick="setVaultTypeFilter('all')">All</button>
                   <button type="button" class="vd-filter-tab" data-vd-filter="folders" onclick="setVaultTypeFilter('folders')">Folders</button>
                   <button type="button" class="vd-filter-tab" data-vd-filter="files" onclick="setVaultTypeFilter('files')">Files</button>
-                  <button type="button" class="vd-filter-tab" data-vd-filter="shared" onclick="setVaultTypeFilter('shared')">Shared</button>
                 </div>
               </div>
 
@@ -5473,6 +5901,9 @@
         },
 
         async writeTab(username, tabId, tabData) {
+          if (typeof securityShield !== "undefined" && !securityShield.checkWriteBurst()) {
+            throw new Error("Too many rapid save requests. Please wait a few seconds.");
+          }
           if (isFirebaseReady) {
             try {
               await setDoc(doc(db, `userData/${username}/tabs`, tabId), tabData, { merge: true });
@@ -5515,6 +5946,9 @@
         },
 
         async writeFile(username, fileId, fileData) {
+          if (typeof securityShield !== "undefined" && !securityShield.checkWriteBurst()) {
+            throw new Error("Too many rapid upload requests. Please wait a few seconds.");
+          }
           const base64Data = fileData.base64;
           
           if (fileData.size > 400 * 1024) {
@@ -5773,16 +6207,13 @@
         async deleteUserAccount(username) {
           if (isFirebaseReady) {
             try {
-              // 1. Delete user profile
-              await deleteDoc(doc(db, "users", username));
-
-              // 2. Clear tabs
+              // 1. Clear tabs while user doc still exists for Firestore rules
               const tabsSnap = await getDocs(collection(db, `userData/${username}/tabs`));
               for (const tabDoc of tabsSnap.docs) {
                 await deleteDoc(doc(db, `userData/${username}/tabs`, tabDoc.id));
               }
 
-              // 3. Clear files and chunks
+              // 2. Clear files and chunks
               const filesSnap = await getDocs(collection(db, `userData/${username}/files`));
               for (const fileDoc of filesSnap.docs) {
                 try {
@@ -5799,7 +6230,7 @@
                 await deleteDoc(doc(db, `userData/${username}/files`, fileDoc.id));
               }
 
-              // 4. Clear tasks
+              // 3. Clear tasks
               try {
                 const tasksSnap = await getDocs(collection(db, `userData/${username}/tasks`));
                 for (const taskDoc of tasksSnap.docs) {
@@ -5807,7 +6238,7 @@
                 }
               } catch (_) {}
 
-              // 5. Clear projects
+              // 4. Clear projects
               try {
                 const projectsSnap = await getDocs(collection(db, `userData/${username}/projects`));
                 for (const projDoc of projectsSnap.docs) {
@@ -5815,13 +6246,16 @@
                 }
               } catch (_) {}
 
-              // 6. Clear goals
+              // 5. Clear goals
               try {
                 const goalsSnap = await getDocs(collection(db, `userData/${username}/goals`));
                 for (const goalDoc of goalsSnap.docs) {
                   await deleteDoc(doc(db, `userData/${username}/goals`, goalDoc.id));
                 }
               } catch (_) {}
+
+              // 6. Delete user profile last after subcollections are cleared
+              await deleteDoc(doc(db, "users", username));
 
             } catch (err) {
               console.error("deleteUserAccount online error:", err);
@@ -5940,6 +6374,339 @@
       let currentProgressiveUsername = "";
       let isProgressiveUserExists = false;
 
+      // Multi-Layered Anti-DDoS, Rate-Limiting & Brute-Force Shield
+      const securityShield = (() => {
+        const STORE_KEY = "textly_sec_shield_v1";
+        const LOOKUP_WINDOW_MS = 60 * 1000;
+        const MAX_LOOKUPS_PER_MIN = 8;
+        const MIN_SUBMIT_GAP_MS = 850;
+        const REGISTER_WINDOW_MS = 60 * 60 * 1000;
+        const MAX_REGISTERS_PER_HOUR = 3;
+        const PW_WINDOW_MS = 15 * 60 * 1000;
+        const MAX_PW_FAILS = 5;
+        const WRITE_WINDOW_MS = 60 * 1000;
+        const MAX_WRITES_PER_MIN = 45;
+        const BACKOFF_STEPS_SEC = [15, 45, 120, 300];
+
+        let inFlightAuth = false;
+        let lastSubmitAt = 0;
+        let lastReloadAt = 0;
+        let activeCountdownTimer = null;
+        let writeTimestamps = [];
+        let activeChallenges = {
+          username: null,
+          password: null
+        };
+
+        function readState() {
+          try {
+            const raw = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+            return {
+              lookups: Array.isArray(raw.lookups) ? raw.lookups : [],
+              registers: Array.isArray(raw.registers) ? raw.registers : [],
+              lookupViolations: Number(raw.lookupViolations) || 0,
+              lookupLockedUntil: Number(raw.lookupLockedUntil) || 0,
+              pwFails: raw.pwFails && typeof raw.pwFails === "object" ? raw.pwFails : {},
+              pwLockedUntil: raw.pwLockedUntil && typeof raw.pwLockedUntil === "object" ? raw.pwLockedUntil : {},
+              pwViolations: raw.pwViolations && typeof raw.pwViolations === "object" ? raw.pwViolations : {}
+            };
+          } catch (_) {
+            return {
+              lookups: [],
+              registers: [],
+              lookupViolations: 0,
+              lookupLockedUntil: 0,
+              pwFails: {},
+              pwLockedUntil: {},
+              pwViolations: {}
+            };
+          }
+        }
+
+        function saveState(st) {
+          try {
+            localStorage.setItem(STORE_KEY, JSON.stringify(st));
+          } catch (_) {}
+        }
+
+        function formatSecs(ms) {
+          const secs = Math.max(1, Math.ceil(ms / 1000));
+          if (secs >= 60) {
+            const m = Math.floor(secs / 60);
+            const s = secs % 60;
+            return s > 0 ? `${m}m ${s}s` : `${m}m`;
+          }
+          return `${secs}s`;
+        }
+
+        function startCooldownNotice(errEl, btnEl, untilTs, prefixText) {
+          if (activeCountdownTimer) {
+            clearInterval(activeCountdownTimer);
+            activeCountdownTimer = null;
+          }
+          const update = () => {
+            const rem = untilTs - Date.now();
+            if (rem <= 0) {
+              clearInterval(activeCountdownTimer);
+              activeCountdownTimer = null;
+              if (errEl) errEl.style.display = "none";
+              if (btnEl) btnEl.disabled = false;
+              return;
+            }
+            if (errEl) {
+              errEl.textContent = `${prefixText} Try again in ${formatSecs(rem)}.`;
+              errEl.style.display = "block";
+            }
+            if (btnEl) btnEl.disabled = true;
+          };
+          update();
+          activeCountdownTimer = setInterval(update, 1000);
+        }
+
+        function createChallenge(scope) {
+          const a = 3 + Math.floor(Math.random() * 9);
+          const b = 2 + Math.floor(Math.random() * 8);
+          activeChallenges[scope] = { prompt: `${a} + ${b} =`, answer: String(a + b) };
+          const boxId = scope === "username" ? "auth-challenge-box" : "auth-modal-challenge-box";
+          const promptId = scope === "username" ? "auth-challenge-prompt" : "auth-modal-challenge-prompt";
+          const inputId = scope === "username" ? "auth-challenge-input" : "auth-modal-challenge-input";
+          const box = document.getElementById(boxId);
+          const promptEl = document.getElementById(promptId);
+          const inputEl = document.getElementById(inputId);
+          if (promptEl) promptEl.textContent = activeChallenges[scope].prompt;
+          if (inputEl) inputEl.value = "";
+          if (box) box.classList.add("is-visible");
+        }
+
+        function hideChallenge(scope) {
+          activeChallenges[scope] = null;
+          const boxId = scope === "username" ? "auth-challenge-box" : "auth-modal-challenge-box";
+          const inputId = scope === "username" ? "auth-challenge-input" : "auth-modal-challenge-input";
+          const box = document.getElementById(boxId);
+          const inputEl = document.getElementById(inputId);
+          if (box) box.classList.remove("is-visible");
+          if (inputEl) inputEl.value = "";
+        }
+
+        function verifyChallengeIfActive(scope) {
+          const ch = activeChallenges[scope];
+          if (!ch) return { ok: true };
+          const inputId = scope === "username" ? "auth-challenge-input" : "auth-modal-challenge-input";
+          const inputEl = document.getElementById(inputId);
+          const val = (inputEl ? inputEl.value : "").trim();
+          if (val !== ch.answer) {
+            createChallenge(scope);
+            return { ok: false, message: "Please solve the quick security check to continue." };
+          }
+          hideChallenge(scope);
+          return { ok: true };
+        }
+
+        async function adaptiveThrottle(recentCount) {
+          if (recentCount < 4) return;
+          // Lightweight adaptive SHA-256 micro-work to slow scripted floods without hurting humans
+          const rounds = Math.min(250, (recentCount - 3) * 45);
+          let seed = `textly_pow_${Date.now()}_${Math.random()}`;
+          for (let i = 0; i < rounds; i++) {
+            seed = await deriveSHA256Hash(seed);
+          }
+        }
+
+        function checkLookupGuard(errEl, btnEl) {
+          const now = Date.now();
+          if (inFlightAuth) {
+            return { allowed: false, message: "Request already in progress." };
+          }
+          const hp = document.getElementById("auth-hp-field");
+          if (hp && hp.value.trim().length > 0) {
+            const st = readState();
+            st.lookupViolations += 1;
+            st.lookupLockedUntil = now + 60 * 1000;
+            saveState(st);
+            startCooldownNotice(errEl, btnEl, st.lookupLockedUntil, "Automated request blocked.");
+            return { allowed: false, silent: true };
+          }
+          const st = readState();
+          if (st.lookupLockedUntil > now) {
+            startCooldownNotice(errEl, btnEl, st.lookupLockedUntil, "Too many requests.");
+            return { allowed: false, silent: true };
+          }
+          if (now - lastSubmitAt < MIN_SUBMIT_GAP_MS) {
+            return { allowed: false, message: "Please wait a moment before trying again." };
+          }
+
+          st.lookups = st.lookups.filter(ts => now - ts < LOOKUP_WINDOW_MS);
+          const recent30s = st.lookups.filter(ts => now - ts < 30 * 1000).length;
+
+          // Activate invisible-by-default human check if rapid requests are detected
+          if (recent30s >= 4 && !activeChallenges.username) {
+            createChallenge("username");
+            return { allowed: false, message: "Rapid activity detected. Complete the quick security check below." };
+          }
+          const challengeCheck = verifyChallengeIfActive("username");
+          if (!challengeCheck.ok) {
+            return { allowed: false, message: challengeCheck.message };
+          }
+
+          if (st.lookups.length >= MAX_LOOKUPS_PER_MIN) {
+            const penaltySec = BACKOFF_STEPS_SEC[Math.min(st.lookupViolations, BACKOFF_STEPS_SEC.length - 1)];
+            st.lookupViolations += 1;
+            st.lookupLockedUntil = now + penaltySec * 1000;
+            saveState(st);
+            startCooldownNotice(errEl, btnEl, st.lookupLockedUntil, "Too many requests.");
+            return { allowed: false, silent: true };
+          }
+
+          st.lookups.push(now);
+          lastSubmitAt = now;
+          saveState(st);
+          return { allowed: true, recentCount: st.lookups.length };
+        }
+
+        function checkPasswordGuard(username, isNewAccount, errEl, btnEl) {
+          const now = Date.now();
+          if (inFlightAuth) {
+            return { allowed: false, message: "Verification already in progress." };
+          }
+          const st = readState();
+          if (isNewAccount) {
+            st.registers = st.registers.filter(ts => now - ts < REGISTER_WINDOW_MS);
+            if (st.registers.length >= MAX_REGISTERS_PER_HOUR) {
+              saveState(st);
+              return { allowed: false, message: "Account creation limit reached for this hour. Please try again later." };
+            }
+          } else {
+            const lockedUntil = Number(st.pwLockedUntil[username]) || 0;
+            if (lockedUntil > now) {
+              startCooldownNotice(errEl, btnEl, lockedUntil, "Too many failed password attempts.");
+              return { allowed: false, silent: true };
+            }
+            const fails = (st.pwFails[username] || []).filter(ts => now - ts < PW_WINDOW_MS);
+            if (fails.length >= 3 && !activeChallenges.password) {
+              createChallenge("password");
+              return { allowed: false, message: "Multiple failed attempts detected. Complete the security check below." };
+            }
+            const chCheck = verifyChallengeIfActive("password");
+            if (!chCheck.ok) {
+              return { allowed: false, message: chCheck.message };
+            }
+          }
+          return { allowed: true };
+        }
+
+        function recordPasswordFailure(username, errEl, btnEl) {
+          const now = Date.now();
+          const st = readState();
+          const fails = (st.pwFails[username] || []).filter(ts => now - ts < PW_WINDOW_MS);
+          fails.push(now);
+          st.pwFails[username] = fails;
+          if (fails.length >= MAX_PW_FAILS) {
+            const v = Number(st.pwViolations[username]) || 0;
+            const penaltySec = BACKOFF_STEPS_SEC[Math.min(v + 1, BACKOFF_STEPS_SEC.length - 1)];
+            st.pwViolations[username] = v + 1;
+            st.pwLockedUntil[username] = now + penaltySec * 1000;
+            st.pwFails[username] = [];
+            saveState(st);
+            hideChallenge("password");
+            startCooldownNotice(errEl, btnEl, st.pwLockedUntil[username], "Too many failed attempts.");
+            return true;
+          }
+          if (fails.length >= 3) {
+            createChallenge("password");
+          }
+          saveState(st);
+          return false;
+        }
+
+        function recordAuthSuccess(username, isNewAccount) {
+          const now = Date.now();
+          const st = readState();
+          if (isNewAccount) {
+            st.registers = st.registers.filter(ts => now - ts < REGISTER_WINDOW_MS);
+            st.registers.push(now);
+          }
+          delete st.pwFails[username];
+          delete st.pwLockedUntil[username];
+          delete st.pwViolations[username];
+          st.lookupViolations = 0;
+          saveState(st);
+          hideChallenge("username");
+          hideChallenge("password");
+          if (activeCountdownTimer) {
+            clearInterval(activeCountdownTimer);
+            activeCountdownTimer = null;
+          }
+        }
+
+        function checkWriteBurst() {
+          const now = Date.now();
+          writeTimestamps = writeTimestamps.filter(ts => now - ts < WRITE_WINDOW_MS);
+          if (writeTimestamps.length >= MAX_WRITES_PER_MIN) {
+            return false;
+          }
+          writeTimestamps.push(now);
+          return true;
+        }
+
+        function checkReloadThrottle() {
+          const now = Date.now();
+          if (now - lastReloadAt < 2500) {
+            return false;
+          }
+          lastReloadAt = now;
+          return true;
+        }
+
+        function setInFlight(flag) {
+          inFlightAuth = flag;
+        }
+
+        return {
+          checkLookupGuard,
+          checkPasswordGuard,
+          recordPasswordFailure,
+          recordAuthSuccess,
+          adaptiveThrottle,
+          hideChallenge,
+          checkWriteBurst,
+          checkReloadThrottle,
+          setInFlight
+        };
+      })();
+
+      // Username Validation: Minimum 4 English letters (A-Z). Numbers/hyphens/underscores allowed alongside, but numbers alone rejected.
+      function validateAccountUsername(raw) {
+        const cleaned = String(raw || "").trim();
+        if (!cleaned) {
+          return { valid: false, reason: "Please enter a username." };
+        }
+        if (cleaned.length > 32) {
+          return { valid: false, reason: "Username cannot exceed 32 characters." };
+        }
+        if (!/^[a-zA-Z0-9_-]+$/.test(cleaned)) {
+          return { valid: false, reason: "Use only English letters, numbers, hyphens, or underscores." };
+        }
+        const englishLetterCount = (cleaned.match(/[a-zA-Z]/g) || []).length;
+        if (englishLetterCount === 0) {
+          return { valid: false, reason: "Numbers alone cannot create an account. Add at least 4 English letters (A–Z)." };
+        }
+        if (englishLetterCount < 4) {
+          return { valid: false, reason: `Include at least 4 English letters (A–Z) — currently ${englishLetterCount}. Numbers can be added alongside them.` };
+        }
+        return { valid: true, letterCount: englishLetterCount };
+      }
+
+      window.updateUsernameRuleHint = function() {
+        const inputEl = document.getElementById("auth-username");
+        const errEl = document.getElementById("auth-error-output");
+        if (!inputEl || !errEl) return;
+
+        const val = inputEl.value.trim();
+        if (val && validateAccountUsername(val).valid && errEl.style.display === "block" && !errEl.textContent.includes("Try again")) {
+          errEl.style.display = "none";
+        }
+      };
+
       // Progressive step 1: Username search & toggle modal state
       window.handleUsernameSubmit = async function(e) {
         if (e) e.preventDefault();
@@ -5947,20 +6714,35 @@
         const formErr = document.getElementById("auth-error-output");
         const btn = document.getElementById("auth-username-btn");
 
-        if (!/^[a-zA-Z0-9_\-]+$/.test(userIn)) {
-          formErr.textContent = "Letters, numbers, hyphens & underscores only.";
+        // Validate username rule before touching network / Firestore
+        const usernameCheck = validateAccountUsername(userIn);
+        if (!usernameCheck.valid) {
+          formErr.textContent = usernameCheck.reason;
           formErr.style.display = "block";
+          updateUsernameRuleHint();
+          return;
+        }
+
+        // Anti-DDoS & rate-limit check
+        const guard = securityShield.checkLookupGuard(formErr, btn);
+        if (!guard.allowed) {
+          if (!guard.silent && guard.message) {
+            formErr.textContent = guard.message;
+            formErr.style.display = "block";
+          }
           return;
         }
 
         formErr.style.display = "none";
+        securityShield.setInFlight(true);
         
         // Button loading indicators
         const originalBtnText = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = `<span style="border: 2px solid #ffffff; border-top: 2px solid transparent; border-radius: 50%; width: 16px; height: 16px; display: inline-block; animation: spin 1s linear infinite; margin-right: 8px;"></span>Verifying...`;
+        btn.innerHTML = `<span style="border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; width: 15px; height: 15px; display: inline-block; animation: spin 0.9s linear infinite;"></span><span>Checking...</span>`;
 
         try {
+          await securityShield.adaptiveThrottle(guard.recentCount || 0);
           const lookup = await dbService.fetchUser(userIn);
           currentProgressiveUsername = userIn;
           
@@ -5975,12 +6757,13 @@
           document.getElementById("auth-modal-password").value = "";
           confirmInput.value = "";
           document.getElementById("auth-modal-error").style.display = "none";
+          securityShield.hideChallenge("password");
 
           if (lookup) {
             // User exists! Prompts for password to login
             isProgressiveUserExists = true;
-            modalTitle.innerHTML = `Enter Password <span style="font-size: 13px; font-weight: normal; color: var(--text-secondary); display: block; margin-top: 4px;">(Password for <strong style="color: #6366f1;">${userIn}</strong>)</span>`;
-            modalDesc.textContent = "Your username is already registered. Enter your password to unlock your workspace .";
+            modalTitle.innerHTML = `Welcome back<span class="auth-modal-user-sub">Signing in as <span class="auth-modal-user-name">${escapeNoteHtml(userIn)}</span></span>`;
+            modalDesc.textContent = "Enter your password to unlock your workspace.";
             modalSubmitBtn.textContent = "Sign In";
             confirmGroup.style.display = "none";
             confirmInput.required = false;
@@ -5988,9 +6771,9 @@
           } else {
             // User doesn't exist! Prompts for new registration
             isProgressiveUserExists = false;
-            modalTitle.innerHTML = `Create New textly <span style="font-size: 13px; font-weight: normal; color: var(--text-secondary); display: block; margin-top: 4px;">(Set password for <strong style="color: #10b981;">${userIn}</strong>)</span>`;
-            modalDesc.textContent = "This username is available. Setup a password to initialize your personal isolated encrypted workspace.";
-            modalSubmitBtn.textContent = "Register";
+            modalTitle.innerHTML = `Create account<span class="auth-modal-user-sub">Setting up <span class="auth-modal-user-name is-new">${escapeNoteHtml(userIn)}</span></span>`;
+            modalDesc.textContent = "Username is available. Set a password to create your workspace.";
+            modalSubmitBtn.textContent = "Create Account";
             confirmGroup.style.display = "block";
             confirmInput.required = true;
             if (modalIcon) modalIcon.setAttribute("data-lucide", "key-round");
@@ -6007,6 +6790,7 @@
           formErr.textContent = "Error occurred: " + error.message;
           formErr.style.display = "block";
         } finally {
+          securityShield.setInFlight(false);
           btn.disabled = false;
           btn.innerHTML = originalBtnText;
         }
@@ -6017,6 +6801,7 @@
         document.getElementById("auth-modal-password").value = "";
         document.getElementById("auth-modal-confirm-password").value = "";
         document.getElementById("auth-modal-error").style.display = "none";
+        securityShield.hideChallenge("password");
       };
 
       // Progressive step 2: Password check or account creation submit
@@ -6028,6 +6813,16 @@
         const submitBtn = document.getElementById("auth-modal-submit-btn");
 
         modalErr.style.display = "none";
+
+        // Re-validate username rule strictly before account creation
+        if (!isProgressiveUserExists) {
+          const usernameRecheck = validateAccountUsername(currentProgressiveUsername);
+          if (!usernameRecheck.valid) {
+            modalErr.textContent = usernameRecheck.reason;
+            modalErr.style.display = "block";
+            return;
+          }
+        }
 
         if (!passIn || passIn.length < 4) {
           modalErr.textContent = "Password must be at least 4 characters.";
@@ -6043,10 +6838,22 @@
           }
         }
 
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span style="border: 2px solid #ffffff; border-top: 2px solid transparent; border-radius: 50%; width: 14px; height: 14px; display: inline-block; animation: spin 1s linear infinite; margin-right: 6px;"></span>Saving...`;
+        // Anti-DDoS / brute-force / registration spam guard
+        const pwGuard = securityShield.checkPasswordGuard(currentProgressiveUsername, !isProgressiveUserExists, modalErr, submitBtn);
+        if (!pwGuard.allowed) {
+          if (!pwGuard.silent && pwGuard.message) {
+            modalErr.textContent = pwGuard.message;
+            modalErr.style.display = "block";
+          }
+          return;
+        }
 
+        const originalBtnText = submitBtn.innerHTML;
+        securityShield.setInFlight(true);
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span style="border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; width: 14px; height: 14px; display: inline-block; animation: spin 0.9s linear infinite;"></span><span>Verifying...</span>`;
+
+        let lockedByShield = false;
         try {
           const passHashed = await deriveSHA256Hash(passIn);
 
@@ -6069,7 +6876,8 @@
               createdAt: new Date().toISOString()
             };
             await dbService.saveUser(currentProgressiveUsername, newUserObj);
-            showToast("Structured credential folder initialized!", "success");
+            securityShield.recordAuthSuccess(currentProgressiveUsername, true);
+            showToast("Workspace created successfully!", "success");
             
             closeAuthPasswordModal();
             finalizeAuthorizedUser(currentProgressiveUsername);
@@ -6077,10 +6885,14 @@
             // Existing user verification
             const lookup = await dbService.fetchUser(currentProgressiveUsername);
             if (!lookup || lookup.passwordHash !== passHashed) {
-              modalErr.textContent = "Incorrect password! Click back to change username, or retype password correctly.";
-              modalErr.style.display = "block";
+              lockedByShield = securityShield.recordPasswordFailure(currentProgressiveUsername, modalErr, submitBtn);
+              if (!lockedByShield) {
+                modalErr.textContent = "Incorrect password. Please try again.";
+                modalErr.style.display = "block";
+              }
               return;
             }
+            securityShield.recordAuthSuccess(currentProgressiveUsername, false);
             closeAuthPasswordModal();
             finalizeAuthorizedUser(currentProgressiveUsername);
           }
@@ -6088,8 +6900,11 @@
           modalErr.textContent = "Connection error: " + error.message;
           modalErr.style.display = "block";
         } finally {
-          submitBtn.disabled = false;
+          securityShield.setInFlight(false);
           submitBtn.innerHTML = originalBtnText;
+          if (!lockedByShield) {
+            submitBtn.disabled = false;
+          }
         }
       };
 
@@ -6129,6 +6944,9 @@
         document.getElementById("global-reload-btn").classList.add("hidden");
         document.getElementById("quick-action-fab").classList.add("hidden");
         document.getElementById("auth-username").value = "";
+        updateUsernameRuleHint();
+        const authErrOut = document.getElementById("auth-error-output");
+        if (authErrOut) authErrOut.style.display = "none";
         
         const modalPw = document.getElementById("auth-modal-password");
         const modalConfirm = document.getElementById("auth-modal-confirm-password");
@@ -6170,6 +6988,9 @@
           document.getElementById("main-panel").classList.add("hidden");
           document.getElementById("global-reload-btn").classList.add("hidden");
           document.getElementById("auth-username").value = "";
+          updateUsernameRuleHint();
+          const authErrOut = document.getElementById("auth-error-output");
+          if (authErrOut) authErrOut.style.display = "none";
           
           const modalPw = document.getElementById("auth-modal-password");
           const modalConfirm = document.getElementById("auth-modal-confirm-password");
@@ -6291,6 +7112,10 @@
       let isSoftReloading = false;
       window.triggerSoftPageReload = async function() {
         if (isSoftReloading) return;
+        if (!securityShield.checkReloadThrottle()) {
+          showToast("Please wait a moment before reloading again.", "info");
+          return;
+        }
         isSoftReloading = true;
 
         const reloadBtn = document.getElementById("global-reload-btn");
@@ -9306,15 +10131,10 @@
           }
         }
 
-        // Header Share & Download Folder buttons visibility
+        // Header Download Folder button visibility
         const headerDownloadFolderBtn = document.getElementById("vd-header-download-folder-btn");
         if (headerDownloadFolderBtn) {
           headerDownloadFolderBtn.classList.toggle("hidden", !Boolean(vaultState.currentFolderId));
-        }
-        const headerShareBtn = document.getElementById("vd-header-share-btn");
-        if (headerShareBtn) {
-          const showShare = Boolean(vaultState.currentFolderId) || vaultState.selectedIds.size > 0;
-          headerShareBtn.classList.toggle("hidden", !showShare);
         }
 
         // Breadcrumbs
@@ -9492,7 +10312,7 @@
           card.dataset.id = item.id;
 
           const isImage = !item.isFolder && (item.type || "").startsWith("image/") && (item.base64 || item.hasChunks);
-          const showShareBadge = Boolean(item.shared || (item.externalLink && !item.base64));
+          const showExtLinkBadge = Boolean(item.externalLink && !item.base64);
           const safeName = escapeVaultHtml(item.name);
 
           let stageContent = "";
@@ -9530,7 +10350,7 @@
               <button type="button" class="vd-card-check" aria-label="Select ${safeName}">
                 ${isSelected ? `<i data-lucide="check" style="width: 13px; height: 13px; stroke-width: 3;"></i>` : ""}
               </button>
-              ${showShareBadge ? `<span class="vd-card-share-indicator" title="Shared / External link"><i data-lucide="link-2" style="width: 13px; height: 13px;"></i></span>` : ""}
+              ${showExtLinkBadge ? `<span class="vd-card-share-indicator" title="External link"><i data-lucide="external-link" style="width: 13px; height: 13px;"></i></span>` : ""}
               ${stageContent}
             </div>
             <div class="vd-card-footer">
@@ -9649,7 +10469,7 @@
                   : `<i data-lucide="${vis.icon}" style="width: 18px; height: 18px; color: ${vis.color}; flex-shrink: 0;"></i>`
                 }
                 <span class="vd-list-name-text" title="${safeName}">${safeName}</span>
-                ${(item.shared || (item.externalLink && !item.base64)) ? `<i data-lucide="link-2" style="width: 13px; height: 13px; color: var(--text-muted); flex-shrink: 0;" title="Shared / Link"></i>` : ""}
+                ${(item.externalLink && !item.base64) ? `<i data-lucide="external-link" style="width: 13px; height: 13px; color: var(--text-muted); flex-shrink: 0;" title="External link"></i>` : ""}
               </div>
             </td>
             <td style="color: var(--text-secondary);">${escapeVaultHtml(typeLabel)}</td>
@@ -9718,10 +10538,6 @@
               <span>Open link</span>
             </a>
           ` : ""}
-          <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); toggleVaultItemShare('${item.id}')">
-            <i data-lucide="link-2" style="width: 15px; height: 15px;"></i>
-            <span>${item.shared ? "Remove share mark" : "Share / Copy link"}</span>
-          </button>
           <div class="vd-dropdown-divider"></div>
           <button type="button" class="vd-dropdown-item" onclick="closeVaultMenus(); openVaultRenameModal('${item.id}')">
             <i data-lucide="pencil" style="width: 15px; height: 15px;"></i>
@@ -9839,10 +10655,6 @@
               <div class="vd-inspector-meta-row">
                 <span class="vd-inspector-meta-label">Added</span>
                 <span class="vd-inspector-meta-val">${item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "—"}</span>
-              </div>
-              <div class="vd-inspector-meta-row">
-                <span class="vd-inspector-meta-label">Shared</span>
-                <span class="vd-inspector-meta-val">${item.shared ? "Yes" : "Private"}</span>
               </div>
             </div>
 
